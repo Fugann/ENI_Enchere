@@ -19,4 +19,14 @@
     <servlet-name>test</servlet-name>
     <url-pattern>/test</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PoolConnexion</display-name>
+    <servlet-name>PoolConnexion</servlet-name>
+    <servlet-class>fr.eni.ecole.enchere.PoolConnexion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PoolConnexion</servlet-name>
+    <url-pattern>/PoolConnexion</url-pattern>
+  </servlet-mapping>
 </web-app>
