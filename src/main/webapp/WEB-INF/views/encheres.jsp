@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<a href="/login">Login/register</a>
+	<a href="<%=request.getContextPath()%>/login">Login/register</a>
 	
 	<h1>Test</h1>
 	
