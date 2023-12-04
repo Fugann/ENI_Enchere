@@ -27,9 +27,10 @@ public class register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/register.jsp");
+		
 		String pseudo = request.getParameter("pseudo");
 		String prenom = request.getParameter("prenom");
-		
 		String tel = request.getParameter("tel");
 		String CP = request.getParameter("CP");
 		String psw = request.getParameter("psw");
@@ -39,7 +40,23 @@ public class register extends HttpServlet {
 		String ville = request.getParameter("ville");
 		String pswconfirm = request.getParameter("pswconfirm");
 		
+	 if (psw == null || !psw.equals(pswconfirm)) {
+            request.setAttribute("error", "Le mot de passe ne correspond pas !");
+        } else if (
+                pseudo == null || pseudo.equals("") ||
+                prenom == null || prenom.equals("") ||
+                CP == null || CP.equals("") ||
+                psw == null || psw.equals("") ||
+                nom == null || nom.equals("") ||
+                email == null || email.equals("") ||
+                rue == null || rue.equals("") ||
+                ville == null || ville.equals("")) {
+			
+            request.setAttribute("error", "Veuillez remplir tous les champs !");
+        }
 		
+		rd.forward(request, response);
+
 	}
 
 }

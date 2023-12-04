@@ -12,6 +12,10 @@
 <body>
 
 <p>Mon profil</p>
+
+<%= request.getAttribute("error") %>
+
+
 <form method="post" action="">
 	<div>
 	<label for="pseudo">Pseudo : </label>
