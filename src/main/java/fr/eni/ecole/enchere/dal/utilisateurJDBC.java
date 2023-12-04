@@ -8,7 +8,7 @@ import fr.eni.ecole.enchere.bo.Utilisateur;
 
 public class utilisateurJDBC implements UtilisateurDAO {
 	
-	private static final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEUR(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe) VALUES(?,?,?,?,?,?,?,?,?);";
+	private static final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 	
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -24,6 +24,8 @@ public class utilisateurJDBC implements UtilisateurDAO {
 			pstmt.setString(7, utilisateur.getCode_postal());
 			pstmt.setString(8, utilisateur.getVille());
 			pstmt.setString(9, utilisateur.getMot_de_passe());
+			pstmt.setInt(10, 0);
+			pstmt.setByte(11, (byte) 0);
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
