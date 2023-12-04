@@ -11,7 +11,10 @@
 </head>
 <body>
 
+	<a href="/login">Login/register</a>
+	
 	<h1>Test</h1>
+	
 
 </body>
 </html>
