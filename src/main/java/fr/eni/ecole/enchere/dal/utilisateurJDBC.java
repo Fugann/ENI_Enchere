@@ -34,10 +34,10 @@ public class utilisateurJDBC implements UtilisateurDAO {
  
 			
 			conn.close();
-			System.out.println("Ajout du repas : succes");
+			System.out.println("Ajout de l'utilisateur : succes");
  
 		} catch (Exception e) {
-			System.out.println("Ajout du repas : echec");
+			System.out.println("Ajout de l'utilisateur : echec");
 			e.printStackTrace();
 		}
 
