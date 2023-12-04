@@ -42,8 +42,8 @@
 	<label for="ville">Ville : </label>
 	<input type="text" name="ville" id="ville" />
 	<br />
-	<label for="psw">Confirmation : </label>
-	<input type="password" name="psw" id="psw" />
+	<label for="pswconfirm">Confirmation : </label>
+	<input type="password" name="pswconfirm" id="pswconfirm" />
 	</div>
 	
 	<input type="submit" value="Créer" />

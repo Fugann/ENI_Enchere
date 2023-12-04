@@ -27,6 +27,17 @@ public class register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String pseudo = request.getParameter("pseudo");
+		String prenom = request.getParameter("prenom");
+		
+		String tel = request.getParameter("tel");
+		String CP = request.getParameter("CP");
+		String psw = request.getParameter("psw");
+		String nom = request.getParameter("nom");
+		String email = request.getParameter("email");
+		String rue = request.getParameter("rue");
+		String ville = request.getParameter("ville");
+		String pswconfirm = request.getParameter("pswconfirm");
 		
 		
 	}
