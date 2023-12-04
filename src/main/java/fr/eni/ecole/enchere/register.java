@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import fr.eni.ecole.enchere.bll.UtilisateurManager;
+import fr.eni.ecole.enchere.bo.Utilisateur;
+
 /**
  * Servlet implementation class register
  */
@@ -51,7 +54,9 @@ public class register extends HttpServlet {
 				|| email.equals("") || rue == null || rue.equals("") || ville == null || ville.equals("")) {
 			request.setAttribute("error", "Veuillez remplir tous les champs !");
 		}
-
+		
+		UtilisateurManager u = new UtilisateurManager();
+		u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw);
 		rd.forward(request, response);
 
 	}
