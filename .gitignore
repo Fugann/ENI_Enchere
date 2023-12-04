@@ -2,3 +2,4 @@
 .project
 .classpath
 /.settings/
+/src/main/webapp/META-INF/context.xml
