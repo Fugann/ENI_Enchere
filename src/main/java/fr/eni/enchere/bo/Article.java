@@ -3,7 +3,7 @@ package fr.eni.enchere.bo;
 import java.time.LocalDate;
 
 public class Article {
-	int no_article;
+	Integer no_article;
 	String nom_article;
 	String description;
 	String image;
@@ -14,11 +14,11 @@ public class Article {
 	int no_utilisateur;
 	int no_categorie;
 
-	public int getNo_article() {
+	public Integer getNo_article() {
 		return no_article;
 	}
 
-	public void setNo_article(int no_article) {
+	public void setNo_article(Integer no_article) {
 		this.no_article = no_article;
 	}
 

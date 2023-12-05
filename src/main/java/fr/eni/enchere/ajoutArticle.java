@@ -3,7 +3,6 @@ package fr.eni.enchere;
 import jakarta.servlet.RequestDispatcher;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -62,7 +61,11 @@ public class ajoutArticle extends HttpServlet {
 		ArticleManager am = new ArticleManager();
 		Article a = new Article(article, description, image, debut, fin, Integer.parseInt(prix) , no_utilisateur, Integer.parseInt(categorie));
 		am.insert(a);
-		System.out.println(a.getNo_article());
+		if(a.getNo_article() != null) {
+			request.setAttribute("success", "Article créé avec succès !");
+		} else {
+			request.setAttribute("error", "Une erreur sql c'est produite");
+		}
 		
 		rd.forward(request, response);
 		

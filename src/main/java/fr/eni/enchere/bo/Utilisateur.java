@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Utilisateur {
 
-	private int no_utilisateur;
+	private Integer no_utilisateur;
 	private String pseudo;
 	private String nom;
 	private String prenom;
@@ -18,11 +18,11 @@ public class Utilisateur {
 	private int credit;
 	private byte administrateur;
 
-	public int getNo_utilisateur() {
+	public Integer getNo_utilisateur() {
 		return no_utilisateur;
 	}
 
-	public void setNo_utilisateur(int no_utilisateur) {
+	public void setNo_utilisateur(Integer no_utilisateur) {
 		this.no_utilisateur = no_utilisateur;
 	}
 

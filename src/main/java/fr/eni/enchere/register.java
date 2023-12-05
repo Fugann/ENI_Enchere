@@ -55,9 +55,14 @@ public class register extends HttpServlet {
 				|| email.equals("") || rue == null || rue.equals("") || ville == null || ville.equals("")) {
 			request.setAttribute("error", "Veuillez remplir tous les champs !");
 		}else {
-			UtilisateurManager u = new UtilisateurManager();
-			Utilisateur user = u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
-			request.setAttribute("success", "Utilisateur créé avec succès !");
+			UtilisateurManager um = new UtilisateurManager();
+			Utilisateur u = new Utilisateur(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
+			um.ajouter(u);
+			if(u.getNo_utilisateur() != null) {
+				request.setAttribute("success", "Utilisateur créé avec succès !");
+			} else {
+				request.setAttribute("error", "Une erreur sql c'est produite");
+			}
 			rd = request.getRequestDispatcher("/WEB-INF/views/encheres.jsp");
 		}
 		rd.forward(request, response);

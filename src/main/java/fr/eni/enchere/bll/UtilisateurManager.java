@@ -11,10 +11,7 @@ private UtilisateurDAO utilisateurDAO;
 		this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
 	
-	public Utilisateur ajouter(String pseudo, String nom, String prenom, String email, String tel, String rue, String CP,
-			String ville, String psw, int credit, Byte admin) {
-		Utilisateur u = new Utilisateur(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
+	public void ajouter(Utilisateur u) {
 		this.utilisateurDAO.insert(u);
-		return u;
 	}
 }
