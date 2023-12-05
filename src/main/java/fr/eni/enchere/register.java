@@ -57,8 +57,8 @@ public class register extends HttpServlet {
 		}else {
 			UtilisateurManager u = new UtilisateurManager();
 			Utilisateur user = u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
-			System.out.println(user.getNo_utilisateur());
 			request.setAttribute("success", "Utilisateur créé avec succès !");
+			rd = request.getRequestDispatcher("/WEB-INF/views/encheres.jsp");
 		}
 		
 		rd.forward(request, response);
