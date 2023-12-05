@@ -41,8 +41,8 @@
 				<input type="text" name="CP" id="CP" /> <br /> <label for="ville">Ville</label>
 				<input type="text" name="ville" id="ville" /> <br />
 			</fieldset>
-			<input type="submit" value="Enregistrer" /> <a
-				href="<%=request.getContextPath()%>">Annuler</a>
+			<input type="submit" value="Enregistrer" />
+			<a href="<%=request.getContextPath()%>">Annuler</a>
 
 		</div>
 	</form>
