@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import fr.eni.enchere.bll.UtilisateurManager;
+import fr.eni.enchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class register
@@ -55,7 +56,8 @@ public class register extends HttpServlet {
 			request.setAttribute("error", "Veuillez remplir tous les champs !");
 		}else {
 			UtilisateurManager u = new UtilisateurManager();
-			u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
+			Utilisateur user = u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
+			System.out.println(user.getNo_utilisateur());
 			request.setAttribute("success", "Utilisateur créé avec succès !");
 		}
 		
