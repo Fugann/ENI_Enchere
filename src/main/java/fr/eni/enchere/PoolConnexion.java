@@ -1,7 +1,8 @@
-package fr.eni.ecole.enchere;
+package fr.eni.enchere;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import javax.sql.DataSource;
 /**
  * Servlet implementation class PoolConnexion
  */
+@WebServlet("/Pool")
 public class PoolConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	// Define datasource/connection pool

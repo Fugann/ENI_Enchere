@@ -1,10 +1,10 @@
-package fr.eni.ecole.enchere.dal;
+package fr.eni.enchere.dal;
 
 public abstract class DAOFactory {
 	
 	public static UtilisateurDAO getUtilisateurDAO()
 	{
-		return new utilisateurJDBC();
+		return new utilisateurDAOJDBC();
 	}
 	
 }

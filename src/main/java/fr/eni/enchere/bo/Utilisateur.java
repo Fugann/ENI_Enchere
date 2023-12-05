@@ -1,4 +1,4 @@
-package fr.eni.ecole.enchere.bo;
+package fr.eni.enchere.bo;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -118,7 +118,7 @@ public class Utilisateur {
 	}
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String code_postal, String ville, String mot_de_passe) {
+			String code_postal, String ville, String mot_de_passe, int credit, Byte admin) {
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -128,6 +128,8 @@ public class Utilisateur {
 		this.code_postal = code_postal;
 		this.ville = ville;
 		this.mot_de_passe = hashPwd(mot_de_passe);
+		this.credit = credit;
+		this.administrateur = admin;
 	}
 
 	public static String hashPwd(String motDePasse) {

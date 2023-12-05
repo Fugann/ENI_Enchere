@@ -1,6 +1,6 @@
-package fr.eni.ecole.enchere.dal;
+package fr.eni.enchere.dal;
 
-import fr.eni.ecole.enchere.bo.Utilisateur;
+import fr.eni.enchere.bo.Utilisateur;
 
 public interface UtilisateurDAO {
 	

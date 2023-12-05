@@ -1,4 +1,4 @@
-package fr.eni.ecole.enchere;
+package fr.eni.enchere;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -7,8 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import fr.eni.ecole.enchere.bll.UtilisateurManager;
-import fr.eni.ecole.enchere.bo.Utilisateur;
+import fr.eni.enchere.bll.UtilisateurManager;
 
 /**
  * Servlet implementation class register
@@ -45,6 +44,8 @@ public class register extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String ville = request.getParameter("ville");
 		String pswconfirm = request.getParameter("pswconfirm");
+		int credit = 0;
+		Byte admin = 0;
 
 		if (psw == null || !psw.equals(pswconfirm)) {
 			request.setAttribute("error", "Le mot de passe ne correspond pas !");
@@ -55,7 +56,7 @@ public class register extends HttpServlet {
 		}
 		
 		UtilisateurManager u = new UtilisateurManager();
-		u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw);
+		u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
 		rd.forward(request, response);
 
 	}
