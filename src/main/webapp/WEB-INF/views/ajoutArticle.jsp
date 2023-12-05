@@ -29,14 +29,14 @@
 			<label for="categorie">Catégorie </label>
 			<select name="categorie" id="categorie">
 				<option value="" hidden="hidden">Choisissez une catégorie</option>
-				<option value="valeur2">valeur 2</option>
-				<option value="valeur3">valeur 3</option>
-				<option value="valeur4">valeur 4</option>
+				<option value="2">valeur 2</option>
+				<option value="3">valeur 3</option>
+				<option value="4">valeur 4</option>
 			</select> <br />
-			<label for="photo">Photo de l'article </label>
+			<label for="image">Photo de l'article </label>
 			<button style="display: block; width: 120px; height: 30px;"
-				onclick="document.getElementById('photo').click()">UPLOADER</button>
-			<input type='file' name="photo" id="photo" style="display: none"> <br />
+				onclick="document.getElementById('image').click()">UPLOADER</button>
+			<input type='file' name="image" id="image" style="display: none"> <br />
 			<label for="prix">Mise à prix : </label> <input type="number"
 				name="prix" id="prix" /> <br /> 
 			<label for="debut">Début de l'enchère : </label> <input type="date" name="debut" id="debut" /> <br />

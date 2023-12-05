@@ -6,4 +6,9 @@ public abstract class DAOFactory {
 	{
 		return new UtilisateurDAOJDBC();
 	}
+	
+	public static ArticleDAO getArticleDAO()
+	{
+		return new ArticleDAOJDBC();
+	}
 }

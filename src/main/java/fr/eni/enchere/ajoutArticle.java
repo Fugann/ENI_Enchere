@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import fr.eni.enchere.bll.ArticleManager;
+import fr.eni.enchere.bo.Article;
+
 /**
  * Servlet implementation class ajoutArticle
  */
@@ -39,13 +42,14 @@ public class ajoutArticle extends HttpServlet {
 		String article = request.getParameter("article");
 		String description = request.getParameter("description");
 		String categorie = request.getParameter("categorie");
-		String photo = request.getParameter("photo");
+		String image = request.getParameter("image");
 		String prix = request.getParameter("prix");
 		LocalDate debut = LocalDate.parse(request.getParameter("debut"));
 		LocalDate fin = LocalDate.parse(request.getParameter("fin"));
 		String rue = request.getParameter("rue");
 		String CP = request.getParameter("CP");
 		String ville = request.getParameter("ville");
+		int no_utilisateur = 1;
 
 		if (article == null || article.equals("") || description == null || description.equals("") || categorie == null
 				|| categorie.equals("") || rue == null || rue.equals("") || CP == null || CP.equals("") || ville == null
@@ -54,6 +58,13 @@ public class ajoutArticle extends HttpServlet {
 		} else if (debut.isAfter(fin)) {
 			request.setAttribute("error", "Veuillez saisir une date de début d'enchères inférieure à la date de fin !");
 		}
+		
+		ArticleManager am = new ArticleManager();
+		Article a = new Article(article, description, image, debut, fin, Integer.parseInt(prix) , no_utilisateur, Integer.parseInt(categorie));
+		am.insert(a);
+		System.out.println(a.getNo_article());
+		
 		rd.forward(request, response);
+		
 	}
 }
