@@ -4,7 +4,7 @@ public abstract class DAOFactory {
 	
 	public static UtilisateurDAO getUtilisateurDAO()
 	{
-		return new utilisateurDAOJDBC();
+		return new UtilisateurDAOJDBC();
 	}
 	
 }
