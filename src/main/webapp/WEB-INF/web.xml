@@ -31,4 +31,14 @@
     <servlet-name>register</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ajoutVente</display-name>
+    <servlet-name>ajoutVente</servlet-name>
+    <servlet-class>fr.eni.enchere.ajoutVente</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ajoutVente</servlet-name>
+    <url-pattern>/ajoutVente</url-pattern>
+  </servlet-mapping>
 </web-app>
