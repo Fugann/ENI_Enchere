@@ -56,18 +56,20 @@ public class ajoutArticle extends HttpServlet {
 			request.setAttribute("error", "Veuillez remplir tous les champs !");
 		} else if (debut.isAfter(fin)) {
 			request.setAttribute("error", "Veuillez saisir une date de début d'enchères inférieure à la date de fin !");
-		}
-		
-		ArticleManager am = new ArticleManager();
-		Article a = new Article(article, description, image, debut, fin, Integer.parseInt(prix) , no_utilisateur, Integer.parseInt(categorie));
-		am.insert(a);
-		if(a.getNo_article() != null) {
-			request.setAttribute("success", "Article créé avec succès !");
 		} else {
-			request.setAttribute("error", "Une erreur sql c'est produite");
+			ArticleManager am = new ArticleManager();
+			Article a = new Article(article, description, image, debut, fin, Integer.parseInt(prix), no_utilisateur,
+					Integer.parseInt(categorie));
+			System.out.println(a.getNo_article());
+			am.insert(a);
+			System.out.println(a.getNo_article());
+			if (a.getNo_article() != null) {
+				request.setAttribute("success", "Article créé avec succès !");
+			} else {
+				request.setAttribute("error", "Une erreur sql c'est produite");
+			}
 		}
-		
+
 		rd.forward(request, response);
-		
 	}
 }

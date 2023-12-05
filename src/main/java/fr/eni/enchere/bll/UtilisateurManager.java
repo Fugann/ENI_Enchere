@@ -5,12 +5,13 @@ import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.UtilisateurDAO;
 
 public class UtilisateurManager {
-private UtilisateurDAO utilisateurDAO;
-	
+
+	private UtilisateurDAO utilisateurDAO;
+
 	public UtilisateurManager() {
 		this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
-	
+
 	public void ajouter(Utilisateur u) {
 		this.utilisateurDAO.insert(u);
 	}
