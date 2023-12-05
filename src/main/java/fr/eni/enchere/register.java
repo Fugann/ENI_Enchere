@@ -53,11 +53,14 @@ public class register extends HttpServlet {
 				|| CP.equals("") || psw == null || psw.equals("") || nom == null || nom.equals("") || email == null
 				|| email.equals("") || rue == null || rue.equals("") || ville == null || ville.equals("")) {
 			request.setAttribute("error", "Veuillez remplir tous les champs !");
+		}else {
+			UtilisateurManager u = new UtilisateurManager();
+			u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
+			request.setAttribute("success", "Utilisateur créé avec succès !");
 		}
 		
-		UtilisateurManager u = new UtilisateurManager();
-		u.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
 		rd.forward(request, response);
+		
 
 	}
 }
