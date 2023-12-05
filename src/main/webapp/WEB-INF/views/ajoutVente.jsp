@@ -14,7 +14,7 @@
 			<label for="article">Article : </label> <input type="text"
 				name="article" id="article" value=""> <br /> <label
 				for="description">Description : </label>
-			<textarea name="description" id="description" value=""></textarea>
+			<textarea name="description" id="description" placeholder="Description de l'article"></textarea>
 			<br />
 			<label for="categorie">Catégorie </label> 
 			<select
@@ -23,7 +23,8 @@
 				<option value="valeur2">valeur 2</option>
 				<option value="valeur3">valeur 3</option>
 				<option value="valeur4">valeur 4</option>
-			</select> <br /> <label for="photo">Photo de l'article </label>
+			</select> <br />
+			<label for="photo">Photo de l'article </label>
 			<button style="display: block; width: 120px; height: 30px;"
 				onclick="document.getElementById('photo').click()">UPLOADER</button>
 			<input type='file' name="photo" id="photo" style="display: none"> <br />
