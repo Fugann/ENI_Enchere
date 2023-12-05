@@ -63,7 +63,6 @@ public class register extends HttpServlet {
 			} else {
 				request.setAttribute("error", "Une erreur sql c'est produite");
 			}
-			rd = request.getRequestDispatcher("/WEB-INF/views/encheres.jsp");
 		}
 		rd.forward(request, response);
 	}
