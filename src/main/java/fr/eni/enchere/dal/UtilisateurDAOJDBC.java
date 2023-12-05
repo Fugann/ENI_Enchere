@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 import fr.eni.enchere.bo.Utilisateur;
 
-public class utilisateurDAOJDBC implements UtilisateurDAO {
+public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	
 	private static final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 	
