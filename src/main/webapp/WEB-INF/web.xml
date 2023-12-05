@@ -33,12 +33,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ajoutVente</display-name>
-    <servlet-name>ajoutVente</servlet-name>
-    <servlet-class>fr.eni.enchere.ajoutVente</servlet-class>
+    <display-name>ajoutArticle</display-name>
+    <servlet-name>ajoutArticle</servlet-name>
+    <servlet-class>fr.eni.enchere.ajoutArticle</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ajoutVente</servlet-name>
-    <url-pattern>/ajoutVente</url-pattern>
+    <servlet-name>ajoutArticle</servlet-name>
+    <url-pattern>/ajoutArticle</url-pattern>
   </servlet-mapping>
 </web-app>

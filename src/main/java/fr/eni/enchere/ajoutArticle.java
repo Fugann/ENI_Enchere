@@ -10,11 +10,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
-
 /**
- * Servlet implementation class ajoutVente
+ * Servlet implementation class ajoutArticle
  */
-public class ajoutVente extends HttpServlet {
+public class ajoutArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -23,7 +22,7 @@ public class ajoutVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ajoutVente.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ajoutArticle.jsp");
 		rd.forward(request, response);
 	}
 
@@ -35,8 +34,8 @@ public class ajoutVente extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ajoutVente.jsp");
-		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ajoutArticle.jsp");
+
 		String article = request.getParameter("article");
 		String description = request.getParameter("description");
 		String categorie = request.getParameter("categorie");
@@ -47,15 +46,14 @@ public class ajoutVente extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String CP = request.getParameter("CP");
 		String ville = request.getParameter("ville");
-		System.out.println(debut);
-		System.out.println(fin);
-		
+
 		if (article == null || article.equals("") || description == null || description.equals("") || categorie == null
 				|| categorie.equals("") || rue == null || rue.equals("") || CP == null || CP.equals("") || ville == null
 				|| ville.equals("")) {
 			request.setAttribute("error", "Veuillez remplir tous les champs !");
+		} else if (debut.isAfter(fin)) {
+			request.setAttribute("error", "Veuillez saisir une date de début d'enchères inférieure à la date de fin !");
 		}
-		
-
+		rd.forward(request, response);
 	}
 }
