@@ -16,9 +16,8 @@
 				for="description">Description : </label>
 			<textarea name="description" id="description" placeholder="Description de l'article"></textarea>
 			<br />
-			<label for="categorie">Catégorie </label> 
-			<select
-				name="categorie" id="categorie">
+			<label for="categorie">Catégorie </label>
+			<select name="categorie" id="categorie">
 				<option value="" hidden="hidden">Choisissez une catégorie</option>
 				<option value="valeur2">valeur 2</option>
 				<option value="valeur3">valeur 3</option>
