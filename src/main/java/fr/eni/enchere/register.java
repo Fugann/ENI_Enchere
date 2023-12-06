@@ -47,6 +47,8 @@ public class register extends HttpServlet {
 		String pswconfirm = request.getParameter("pswconfirm");
 		int credit = 0;
 		Byte admin = 0;
+		
+		
 
 		if (psw == null || !psw.equals(pswconfirm)) {
 			request.setAttribute("error", "Le mot de passe ne correspond pas !");

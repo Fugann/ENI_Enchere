@@ -11,4 +11,9 @@ public abstract class DAOFactory {
 	{
 		return new ArticleDAOJDBC();
 	}
+	
+	public static CategorieDAO getCategorieDAO()
+	{
+		return new CategorieDAOJDBC();
+	}
 }
