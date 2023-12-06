@@ -25,64 +25,18 @@ public class login extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
         rd.forward(request, response);
     }
-/*
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
 
-        HttpSession session = request.getSession();
-
-        String userEmail = request.getParameter("identifiant");
-        
-        // The user can login using also the pseudo !!!!! <---- 
-        String password = request.getParameter("psw");
-
-        // Replace "UserManager" with your actual user management class
-        UtilisateurManager userManager = new UtilisateurManager();
-
-        // Retrieve user details from the database
-        Utilisateur userObject = userManager.getUserDetails(userEmail);
-        
-        //String cryptedPasswordInput = Utilisateur.hashPwd(password);
-        //String cryptedPasswordStored = userObject.getMot_de_passe();
-        
-
-        //System.out.println("Input Password: " + password);
-        //System.out.println("Crypted Password (Input): " + cryptedPasswordInput);
-        //System.out.println("Crypted Password (Stored): " + userObject.getMot_de_passe());
-        
-        
-        if (userObject != null && userObject.getMot_de_passe().equals(password)) {
-            // Store user information in the session
-            session.setAttribute("user", userEmail);
-            // Redirect to the home page or any other page after successful login
-            response.sendRedirect(request.getContextPath() + "/");
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
-            out.println("<font color=red>Password is wrong.</font>");
-            rd.include(request, response);
-        }
-
-        out.close();
-    }
-    
-    */
-    
-    
-    
-    
-    
-    
-    
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
-        HttpSession session = request.getSession();
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
 
         String userEmail = request.getParameter("identifiant");
         String password = request.getParameter("psw");
+        
+        Utilisateur requestUser = new Utilisateur(userEmail, password);
 
         // Replace "UserManager" with your actual user management class
         UtilisateurManager userManager = new UtilisateurManager();
@@ -91,26 +45,21 @@ public class login extends HttpServlet {
         Utilisateur userObject = userManager.getUserDetails(userEmail);
 
         if (userObject != null) {
-            String hashedPasswordInput = Utilisateur.hashPwd(password);
-
+            //String hashedPasswordInput = Utilisateur.hashPwd(password);
             // Compare the hashed input password with the hashed password stored in the database
-            if (userObject.getMot_de_passe().equals(hashedPasswordInput)) {
-                // Store user information in the session
-                session.setAttribute("user", userEmail);
-                // Redirect to the home page or any other page after successful login
-                response.sendRedirect(request.getContextPath() + "/");
-            } else {
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
-                out.println("<font color=red>Password is wrong.</font>");
-                rd.include(request, response);
+        	if(requestUser.getMot_de_passe().equals(userObject.getMot_de_passe())) {
+        		HttpSession session = request.getSession();
+        		
+        		//rd = request.getRequestDispatcher("/WEB-INF/views/encheres.jsp");
+        		
+        		response.sendRedirect(request.getContextPath());  
             }
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
-            out.println("<font color=red>User not found.</font>");
-            rd.include(request, response);
+        	
+        }else {
+        	request.setAttribute("error", "Email/pseudo incorrect  !");
+        	rd.forward(request, response);
         }
-
-        out.close();
+       
     }
 
     // Logout method to invalidate the session

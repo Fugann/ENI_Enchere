@@ -57,6 +57,7 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	            if (rs.next()) {
 	                // Populate the Utilisateur object with data from the ResultSet
 	                utilisateur = new Utilisateur(
+	                		rs.getInt("no_utilisateur"),
 	                        rs.getString("pseudo"),
 	                        rs.getString("nom"),
 	                        rs.getString("prenom"),
