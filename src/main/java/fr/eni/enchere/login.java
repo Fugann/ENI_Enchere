@@ -24,7 +24,7 @@ public class login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		RequestDispatcher rd = request.getRequestDispatcher("login");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
 
 		String userEmail = request.getParameter("identifiant");
 		String password = request.getParameter("psw");
@@ -47,13 +47,13 @@ public class login extends HttpServlet {
 				System.out.println("User ID in session: " + session.getAttribute("no_utilisateur"));
 				System.out.println("User ID in session: " + session.getAttribute("prenom"));
 				System.out.println("User ID in session: " + session.getAttribute("pseudo"));
-				response.sendRedirect(request.getContextPath());
+				rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
 			}
 
 		} else {
 			request.setAttribute("error", "Email/pseudo incorrect  !");
-			rd.forward(request, response);
 		}
+		rd.forward(request, response);
 
 	}
 

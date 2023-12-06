@@ -12,6 +12,7 @@
 <body>
 
 	<a href="<%=request.getContextPath()%>/login">Login/register</a>
+	<a href="<%=request.getContextPath()%>/Logout">Logout</a>
 	
 	<main>
 		<div>
