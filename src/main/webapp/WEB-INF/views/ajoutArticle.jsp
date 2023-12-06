@@ -8,11 +8,11 @@
 <title>Nouvelle Vente</title>
 </head>
 <body>
-
+	
+	<!-- Vérification si il y a un attribute success ou error -->
 	<c:if test="${not empty requestScope.error}">
     <p style="color: red;"><c:out value="${requestScope.error}" /></p>
 	</c:if>
-
 	<c:if test="${not empty requestScope.success}">
 	    <p style="color: green;"><c:out value="${requestScope.success}" /></p>
 	</c:if>

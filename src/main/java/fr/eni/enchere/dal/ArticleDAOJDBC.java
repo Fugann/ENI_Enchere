@@ -14,8 +14,10 @@ public class ArticleDAOJDBC implements ArticleDAO {
 	@Override
 	public void insert(Article article) {
 		
+		// récupération d'une connexion du pool de connexion
 		try (Connection conn = ConnectionProvider.getConnection()) {
-			 
+			
+			// préparation de l'ajout dans la bdd
 			PreparedStatement pstmt = conn.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, article.getNom_article());
 			pstmt.setString(2, article.getDescription());
@@ -26,11 +28,14 @@ public class ArticleDAOJDBC implements ArticleDAO {
 			pstmt.setInt(7, article.getNo_utilisateur());
 			pstmt.setInt(8, article.getNo_categorie());
 			pstmt.executeUpdate();
+			// récupération de ce que renvoi la bdd
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
+				// set le numéro de l'article pour la vérification dans le ajoutArticle.java
 				article.setNo_article(rs.getInt(1));
 			}
- 
+			
+			// Fermeture de la connexion
 			conn.close();
 			System.out.println("Ajout de l'article : succes");
  

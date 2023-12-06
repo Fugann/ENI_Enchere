@@ -8,7 +8,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import jakarta.annotation.Resource;
+
 public abstract class ConnectionProvider {
+	@Resource(name = "jdbc/pool_cnx")
 	private static DataSource dataSource;
 
 	static {

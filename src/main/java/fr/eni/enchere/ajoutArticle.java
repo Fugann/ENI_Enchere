@@ -38,6 +38,7 @@ public class ajoutArticle extends HttpServlet {
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ajoutArticle.jsp");
 
+		// Récupération de toutes les données en param
 		String article = request.getParameter("article");
 		String description = request.getParameter("description");
 		String categorie = request.getParameter("categorie");
@@ -49,7 +50,8 @@ public class ajoutArticle extends HttpServlet {
 		String CP = request.getParameter("CP");
 		String ville = request.getParameter("ville");
 		int no_utilisateur = 1;
-
+		
+		// Vérification des données
 		if (article == null || article.equals("") || description == null || description.equals("") || categorie == null
 				|| categorie.equals("") || rue == null || rue.equals("") || CP == null || CP.equals("") || ville == null
 				|| ville.equals("")) {
@@ -57,12 +59,14 @@ public class ajoutArticle extends HttpServlet {
 		} else if (debut.isAfter(fin)) {
 			request.setAttribute("error", "Veuillez saisir une date de début d'enchères inférieure à la date de fin !");
 		} else {
+			// Création d'un article manager
 			ArticleManager am = new ArticleManager();
+			// Création de l'article
 			Article a = new Article(article, description, image, debut, fin, Integer.parseInt(prix), no_utilisateur,
 					Integer.parseInt(categorie));
-			System.out.println(a.getNo_article());
+			// Fonction insert qui fait la relation entre le code et la bdd
 			am.insert(a);
-			System.out.println(a.getNo_article());
+			// Vérification si l'article a bien était crée
 			if (a.getNo_article() != null) {
 				request.setAttribute("success", "Article créé avec succès !");
 			} else {

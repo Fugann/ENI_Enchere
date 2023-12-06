@@ -13,7 +13,8 @@ public class Article {
 	int prix_vente;
 	int no_utilisateur;
 	int no_categorie;
-
+	
+	// get/set
 	public Integer getNo_article() {
 		return no_article;
 	}
@@ -93,7 +94,9 @@ public class Article {
 	public void setNo_categorie(int no_categorie) {
 		this.no_categorie = no_categorie;
 	}
-
+	
+	
+	// Constructor
 	public Article() {
 	}
 
