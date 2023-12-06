@@ -18,6 +18,7 @@ public class UtilisateurManager {
 
 	public Utilisateur getUserDetails(String userEmail) {
 		return this.utilisateurDAO.getUserByEmail(userEmail);
+	}
 	
 	public String selectPseudoByPseudo(String pseudo) {
 		return this.utilisateurDAO.selectPseudoByPseudo(pseudo);
