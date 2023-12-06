@@ -8,7 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import fr.eni.enchere.bll.ArticleManager;
 import fr.eni.enchere.bll.CategorieManager;
+import fr.eni.enchere.bo.Article;
 import fr.eni.enchere.bo.Categorie;
 
 /**
@@ -40,7 +42,12 @@ public class accueil extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
 		
-		request.getParameter("search");
+		String search = request.getParameter("search");
+		String categorie = request.getParameter("categorie");
+		
+		ArticleManager am = new ArticleManager();
+		
+		ArrayList<Article> articles = am.getAllArticlesByCategorie(search, categorie);
 		
 		rd.forward(request, response);
 	}

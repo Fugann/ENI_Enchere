@@ -112,4 +112,20 @@ public class Article {
 		this.no_categorie = no_categorie;
 	}
 
+	public Article(Integer no_article, String nom_article, String description, String image,
+			LocalDate date_debut_encheres, LocalDate date_fin_encheres, int prix_initial, int prix_vente,
+			int no_utilisateur, int no_categorie) {
+		this.no_article = no_article;
+		this.nom_article = nom_article;
+		this.description = description;
+		this.image = image;
+		this.date_debut_encheres = date_debut_encheres;
+		this.date_fin_encheres = date_fin_encheres;
+		this.prix_initial = prix_initial;
+		this.prix_vente = prix_vente;
+		this.no_utilisateur = no_utilisateur;
+		this.no_categorie = no_categorie;
+	}
+	
+
 }

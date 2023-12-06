@@ -1,5 +1,7 @@
 package fr.eni.enchere.bll;
 
+import java.util.ArrayList;
+
 import fr.eni.enchere.bo.Article;
 import fr.eni.enchere.dal.ArticleDAO;
 import fr.eni.enchere.dal.DAOFactory;
@@ -14,5 +16,10 @@ public class ArticleManager {
 
 	public void insert(Article article) {
 		this.articleDAO.insert(article);
+	}
+
+	public ArrayList<Article> getAllArticlesByCategorie(String search, String categorie) {
+		
+		return this.articleDAO.getAllCategories(search, categorie);
 	}
 }
