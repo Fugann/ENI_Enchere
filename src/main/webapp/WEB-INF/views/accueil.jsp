@@ -14,6 +14,8 @@
 	<a href="<%=request.getContextPath()%>/login">Login/register</a>
 	<a href="<%=request.getContextPath()%>/Logout">Logout</a>
 	
+	<p>test 1 = <c:out value="${user.getEmail()}"/></p>
+	
 	<main>
 		<div>
 			<form method="post" action="">

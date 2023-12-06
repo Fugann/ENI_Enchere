@@ -28,6 +28,7 @@ public class accueil extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
+		System.out.println("Accueil get");
 
 		// Récupération de toutes les catégorie
 		CategorieManager cm = new CategorieManager();
@@ -46,6 +47,7 @@ public class accueil extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
+		System.out.println("Accueil post");
 
 		String search = request.getParameter("search");
 		String categorie = request.getParameter("categorie");

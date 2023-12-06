@@ -2,6 +2,7 @@ package fr.eni.enchere;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,31 +41,23 @@ public class login extends HttpServlet {
 		if (userObject != null) {
 			if (requestUser.getMot_de_passe().equals(userObject.getMot_de_passe())) {
 				HttpSession session = request.getSession();
-				session.setAttribute("no_utilisateur", userObject.getNo_utilisateur());
-				session.setAttribute("prenom", userObject.getPrenom());
-				session.setAttribute("pseudo", userObject.getPseudo());
+				session.setMaxInactiveInterval(3600);
+				
+				//add user object dans la session
+				session.setAttribute("user", userObject);
 
-				System.out.println("User ID in session: " + session.getAttribute("no_utilisateur"));
-				System.out.println("User ID in session: " + session.getAttribute("prenom"));
-				System.out.println("User ID in session: " + session.getAttribute("pseudo"));
-				rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
+				// Create a cookie with the user's ID
+				Cookie userIdCookie = new Cookie("no_utilisateur", String.valueOf(userObject.getNo_utilisateur()));
+				userIdCookie.setMaxAge(3600);
+				response.addCookie(userIdCookie);
+				
+				// Redirect to the home page
+				response.sendRedirect(request.getContextPath());
 			}
 
 		} else {
 			request.setAttribute("error", "Email/pseudo incorrect  !");
+			rd.forward(request, response);
 		}
-		rd.forward(request, response);
-
-	}
-
-	// Logout method to invalidate the session
-	protected void doLogout(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.invalidate();
-		}
-		// Redirect to the login page after logout
-		response.sendRedirect(request.getContextPath() + "/login");
 	}
 }
