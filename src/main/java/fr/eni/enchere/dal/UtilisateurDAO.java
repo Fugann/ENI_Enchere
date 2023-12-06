@@ -4,7 +4,11 @@ import fr.eni.enchere.bo.Utilisateur;
 
 public interface UtilisateurDAO {
 	
-	public void insert(Utilisateur utilisateur );
+	public void insert(Utilisateur utilisateur);
+	
+	public String selectPseudoByPseudo(String pseudo);
+	
+	public String selectEmailByEmail(String email);
 
 	//Utilisateur getUserByUsername(String username);
 	

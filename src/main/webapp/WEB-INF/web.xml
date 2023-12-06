@@ -3,12 +3,12 @@
   <display-name>ENI_Enchere</display-name>
   <servlet>
     <description>Liste des enchère disponible</description>
-    <display-name>encheres</display-name>
-    <servlet-name>encheres</servlet-name>
-    <servlet-class>fr.eni.enchere.encheres</servlet-class>
+    <display-name>accueil</display-name>
+    <servlet-name>accueil</servlet-name>
+    <servlet-class>fr.eni.enchere.accueil</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>encheres</servlet-name>
+    <servlet-name>accueil</servlet-name>
     <url-pattern></url-pattern>
   </servlet-mapping>
   <servlet>
