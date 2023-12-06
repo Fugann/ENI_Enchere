@@ -48,13 +48,9 @@ public class register extends HttpServlet {
 		int credit = 0;
 		Byte admin = 0;
 		
-<<<<<<< HEAD
 		UtilisateurManager um = new UtilisateurManager();
 		String pseudoBDD = um.selectPseudoByPseudo(pseudo);
-=======
-		
 
->>>>>>> 1b846bc781042bc5cf2bb6761f39a07a3a2cac39
 		if (psw == null || !psw.equals(pswconfirm)) {
 			request.setAttribute("error", "Le mot de passe ne correspond pas !");
 		} else if (pseudo == null || pseudo.equals("") || prenom == null || prenom.equals("") || CP == null
