@@ -14,9 +14,9 @@
 	<nav>
 		<c:choose>
 			<c:when test="${user != null}">
-				<a href="">Enchères</a>
-				<a href="">Vendre un article</a>
-				<a href="">Mon Profil</a>
+				<a href="<%=request.getContextPath()%>">Enchères</a>
+				<a href="<%=request.getContextPath()%>/ajoutArticle">Vendre un article</a>
+				<a href="<%=request.getContextPath()%>">Mon Profil</a>
 				<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 			</c:when>
 			<c:otherwise>
