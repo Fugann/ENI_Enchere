@@ -13,7 +13,11 @@
 
 	<a href="<%=request.getContextPath()%>/login">Login/register</a>
 	
-	<h1>Test</h1>
+	<a href="<%=request.getContextPath()%>/Logout">Logout</a>
+	
+	<h1>Welcome <%= session.getAttribute("prenom") %></h1>
+	
+	<h1>Your nickname is : <%= session.getAttribute("pseudo") %></h1>
 	
 
 </body>

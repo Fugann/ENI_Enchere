@@ -14,6 +14,23 @@
 <body>
 
 
+<%
+    HttpSession mySession = request.getSession(false);
+    if (mySession != null) {
+        String logoutMessage = (String) mySession.getAttribute("logoutMessage");
+        if (logoutMessage != null && !logoutMessage.isEmpty()) {
+%>
+            <div class="alert alert-success" role="alert">
+                <%= logoutMessage %>
+            </div>
+<%
+            // Clear the message from the session
+            mySession.removeAttribute("logoutMessage");
+        }
+    }
+%>
+
+
 
 	<c:if test="${not empty requestScope.error}">
     	<p style="color: red;"><c:out value="${requestScope.error}" /></p>

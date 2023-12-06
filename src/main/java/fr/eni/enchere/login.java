@@ -2,15 +2,12 @@ package fr.eni.enchere;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Utilisateur;
 
@@ -22,16 +19,15 @@ public class login extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+    	
+    	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
         rd.forward(request, response);
     }
 
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("login");
 
         String userEmail = request.getParameter("identifiant");
         String password = request.getParameter("psw");
@@ -45,13 +41,15 @@ public class login extends HttpServlet {
         Utilisateur userObject = userManager.getUserDetails(userEmail);
 
         if (userObject != null) {
-            //String hashedPasswordInput = Utilisateur.hashPwd(password);
-            // Compare the hashed input password with the hashed password stored in the database
         	if(requestUser.getMot_de_passe().equals(userObject.getMot_de_passe())) {
         		HttpSession session = request.getSession();
+        		session.setAttribute("no_utilisateur", userObject.getNo_utilisateur());
+        		session.setAttribute("prenom", userObject.getPrenom());
+        		session.setAttribute("pseudo", userObject.getPseudo());
         		
-        		//rd = request.getRequestDispatcher("/WEB-INF/views/encheres.jsp");
-        		
+                System.out.println("User ID in session: " + session.getAttribute("no_utilisateur"));
+                System.out.println("User ID in session: " + session.getAttribute("prenom"));
+                System.out.println("User ID in session: " + session.getAttribute("pseudo"));
         		response.sendRedirect(request.getContextPath());  
             }
         	
