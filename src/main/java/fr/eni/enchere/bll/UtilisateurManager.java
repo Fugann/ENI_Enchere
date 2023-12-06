@@ -15,4 +15,8 @@ public class UtilisateurManager {
 	public void ajouter(Utilisateur u) {
 		this.utilisateurDAO.insert(u);
 	}
+	
+	public String selectPseudoByPseudo(String pseudo) {
+		return this.utilisateurDAO.selectPseudoByPseudo(pseudo);
+	}
 }

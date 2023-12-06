@@ -47,15 +47,19 @@ public class register extends HttpServlet {
 		String pswconfirm = request.getParameter("pswconfirm");
 		int credit = 0;
 		Byte admin = 0;
-
+		
+		UtilisateurManager um = new UtilisateurManager();
+		String pseudoBDD = um.selectPseudoByPseudo(pseudo);
 		if (psw == null || !psw.equals(pswconfirm)) {
 			request.setAttribute("error", "Le mot de passe ne correspond pas !");
 		} else if (pseudo == null || pseudo.equals("") || prenom == null || prenom.equals("") || CP == null
 				|| CP.equals("") || psw == null || psw.equals("") || nom == null || nom.equals("") || email == null
 				|| email.equals("") || rue == null || rue.equals("") || ville == null || ville.equals("")) {
 			request.setAttribute("error", "Veuillez remplir tous les champs !");
+		}else if (pseudo.equals(pseudoBDD)) {
+			request.setAttribute("error", "Ce pseudo existe déjà");
 		}else {
-			UtilisateurManager um = new UtilisateurManager();
+			
 			Utilisateur u = new Utilisateur(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
 			um.ajouter(u);
 			if(u.getNo_utilisateur() != null) {
