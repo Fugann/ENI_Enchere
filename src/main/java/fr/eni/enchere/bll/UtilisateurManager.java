@@ -15,6 +15,9 @@ public class UtilisateurManager {
 	public void ajouter(Utilisateur u) {
 		this.utilisateurDAO.insert(u);
 	}
+
+	public Utilisateur getUserDetails(String userEmail) {
+		return this.utilisateurDAO.getUserByEmail(userEmail);
 	
 	public String selectPseudoByPseudo(String pseudo) {
 		return this.utilisateurDAO.selectPseudoByPseudo(pseudo);

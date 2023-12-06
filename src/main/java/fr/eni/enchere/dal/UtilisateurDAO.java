@@ -10,4 +10,9 @@ public interface UtilisateurDAO {
 	
 	public String selectEmailByEmail(String email);
 
+	//Utilisateur getUserByUsername(String username);
+	
+	public Utilisateur getUserByEmail(String userMail);
+	
+	//List<Utilisateur> getAllUsers();
 }
