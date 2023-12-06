@@ -12,7 +12,8 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 
 	private static final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String SELECT_PSEUDO_BY_PSEUDO = "SELECT PSEUDO FROM UTILISATEURS WHERE PSEUDO = ?";
-
+	private static final String SELECT_EMAIL_BY_EMAIL = "SELECT EMAIL FROM UTILISATEURS WHERE EMAIL = ?";
+	
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
@@ -48,8 +49,7 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 
 	@Override
 	public String selectPseudoByPseudo(String pseudo) {
-		try {
-			Connection conn = ConnectionProvider.getConnection();
+		try (Connection conn = ConnectionProvider.getConnection()) {
 
 			PreparedStatement pstmt = conn.prepareStatement(SELECT_PSEUDO_BY_PSEUDO);
 			pstmt.setString(1, pseudo);
@@ -68,5 +68,26 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 		}
 		return null;
 
+	}
+	
+	@Override
+	public String selectEmailByEmail(String email) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+			
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_EMAIL_BY_EMAIL);
+			pstmt.setString(1, email);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getString("email");
+			}
+			System.out.println("comparaison des emails = success");
+			conn.close();
+			
+		} catch (SQLException e) {
+			System.out.println("comparaison des emails = echec");
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

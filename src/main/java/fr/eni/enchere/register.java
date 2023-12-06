@@ -50,6 +50,7 @@ public class register extends HttpServlet {
 		
 		UtilisateurManager um = new UtilisateurManager();
 		String pseudoBDD = um.selectPseudoByPseudo(pseudo);
+		String emailBDD = um.selectEmailByEmail(email);
 
 		if (psw == null || !psw.equals(pswconfirm)) {
 			request.setAttribute("error", "Le mot de passe ne correspond pas !");
@@ -57,8 +58,10 @@ public class register extends HttpServlet {
 				|| CP.equals("") || psw == null || psw.equals("") || nom == null || nom.equals("") || email == null
 				|| email.equals("") || rue == null || rue.equals("") || ville == null || ville.equals("")) {
 			request.setAttribute("error", "Veuillez remplir tous les champs !");
-		}else if (pseudo.equals(pseudoBDD)) {
+		}else if (pseudo.equals(pseudoBDD))  {
 			request.setAttribute("error", "Ce pseudo existe déjà");
+		}else if (email.equals(emailBDD))  {
+			request.setAttribute("error", "Cet email existe déjà");
 		}else {
 			
 			Utilisateur u = new Utilisateur(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
