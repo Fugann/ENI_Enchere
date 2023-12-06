@@ -29,8 +29,26 @@
 			</form>
 		</div>
 		<div class="container">
+			
+			<c:forEach items="${articles}" var="article">
+				<div>
+					<strong><c:out value="${article.getNom_article()}"/></strong>
+					<p>Prix : 
+					<c:choose>
+						<c:when test="${article.getPrix_vente() != '0'}">
+							<c:out value="${article.getPrix_vente()}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${article.getPrix_initial()}"/> (Prix initial)
+						</c:otherwise>
+					</c:choose>
+					 Points</p>
+					<p>Fin de l'enchère : <c:out value="${article.getDate_fin_encheres()}"/></p>
+				</div>
+			</c:forEach>
+		
 			<!-- Contenu de toute la recherche -->
-			<p>Rien</p>
+			<c:if test="${articles.size() == '0'}"><p>Rien</p></c:if>
 		</div>
 	</main>
 
