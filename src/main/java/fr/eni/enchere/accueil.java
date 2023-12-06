@@ -28,7 +28,7 @@ public class accueil extends HttpServlet {
 		CategorieManager cm = new CategorieManager();
 		
 		ArrayList<Categorie> categories = cm.getAllCategories();
-	
+		
 		request.setAttribute("categories", categories);
 		rd.forward(request, response);
 	}
@@ -37,7 +37,12 @@ public class accueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
+		
+		request.getParameter("search");
+		
+		rd.forward(request, response);
 	}
 
 }

@@ -16,7 +16,7 @@
 	<main>
 		<div>
 			<form method="post" action="">
-				<input type="text" name="name" id="name" placeholder="Que rechercher vous ?" />
+				<input type="text" name="search" id="search" placeholder="Que rechercher vous ?" />
 				<br />
 				<label for="categorie">Catégorie :</label>
 				<select name="categorie" id="categorie">
