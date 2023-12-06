@@ -6,12 +6,13 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/src/main/webapp/styles/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accueil</title>
 </head>
 <body>
 	
-	<nav>
+	<nav class="navbar-test">
 		<c:choose>
 			<c:when test="${user != null}">
 				<a href="<%=request.getContextPath()%>">Enchères</a>
