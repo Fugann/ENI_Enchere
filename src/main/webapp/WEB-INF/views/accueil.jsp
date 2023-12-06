@@ -10,9 +10,21 @@
 <title>Accueil</title>
 </head>
 <body>
-
-	<a href="<%=request.getContextPath()%>/login">Login/register</a>
-	<a href="<%=request.getContextPath()%>/Logout">Logout</a>
+	
+	<nav>
+		<c:choose>
+			<c:when test="${user != null}">
+				<a href="">Enchères</a>
+				<a href="">Vendre un article</a>
+				<a href="">Mon Profil</a>
+				<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
+			</c:when>
+			<c:otherwise>
+				<a href="<%=request.getContextPath()%>/login">Login/register</a>
+			</c:otherwise>
+		</c:choose>
+	</nav>
+	
 	
 	<p>test 1 = <c:out value="${user.getEmail()}"/></p>
 	
