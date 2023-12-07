@@ -13,6 +13,9 @@
 <title>Accueil</title>
 </head>
 <body>
+
+	<%-- <p>email : </p>
+	<input type="text" value="<c:out value="${user.rue }"/>" /> --%>
 	
 	<nav>
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
@@ -33,28 +36,24 @@
 	
 	<main class="accueil">
 		<h2>Liste des enchère</h2>
-		<div>
-			<form method="post" action="">
-				<div>
-					<label for="search">Filtres :</label>
-					<div class="search">
-						<input type="text" name="search" id="search" placeholder="Que rechercher vous ?" />
-					</div>
-					<div class="categories">
-						<label for="categorie">Catégorie :</label>
-						<select name="categorie" id="categorie">
-							<option value="">Choisissez une catégorie</option>
-							<c:forEach items="${categories}" var="categorie">
-								<option value="${categorie.getNo_categorie()}"><c:out value="${categorie.getLibelle()}"/></option>
-							</c:forEach>
-						</select>
-					</div>
+		<form method="post" action="">
+			<div>
+				<label for="search">Filtres :</label>
+				<div class="search">
+					<input type="text" name="search" id="search" placeholder="Que rechercher vous ?" />
 				</div>
-				<div>
-				<input type="submit" value="Rechercher" />
+				<div class="categories">
+					<label for="categorie">Catégorie :</label>
+					<select name="categorie" id="categorie">
+						<option value="">Choisissez une catégorie</option>
+						<c:forEach items="${categories}" var="categorie">
+							<option value="${categorie.getNo_categorie()}"><c:out value="${categorie.getLibelle()}"/></option>
+						</c:forEach>
+					</select>
 				</div>
-			</form>
-		</div>
+			</div>
+			<input type="submit" value="Rechercher" />
+		</form>
 		<div class="container">
 			
 			<c:forEach items="${articles}" var="article">
