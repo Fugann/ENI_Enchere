@@ -61,4 +61,14 @@
     <servlet-name>Profile</servlet-name>
     <url-pattern>/Profile</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditProfile</display-name>
+    <servlet-name>EditProfile</servlet-name>
+    <servlet-class>fr.eni.enchere.servlets.EditProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProfile</servlet-name>
+    <url-pattern>/EditProfile</url-pattern>
+  </servlet-mapping>
 </web-app>

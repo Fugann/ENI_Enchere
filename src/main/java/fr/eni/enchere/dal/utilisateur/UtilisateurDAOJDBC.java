@@ -18,6 +18,7 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	private static final String SELECT_EMAIL_BY_EMAIL = "SELECT EMAIL FROM UTILISATEURS WHERE EMAIL = ?";
 	private static final String SELECT_ALL_SAUF_MDP = "SELECT NO_UTILISATEUR, PSEUDO, NOM, PRENOM, EMAIL, TELEPHONE, RUE, CODE_POSTAL, VILLE FROM UTILISATEURS";
 	private static final String GET_USER_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
+	private static final String UPDATE_USER = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -183,5 +184,82 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 
 	    return utilisateur;
 	}
+	
+	
+	@Override
+	public void update(Utilisateur utilisateur) {
+	    try (Connection conn = ConnectionProvider.getConnection()) {
+	        StringBuilder sql = new StringBuilder("UPDATE UTILISATEURS SET ");
 
+	        if (utilisateur.getPseudo() != null) {
+	            sql.append("pseudo=?, ");
+	        }
+	        if (utilisateur.getNom() != null) {
+	            sql.append("nom=?, ");
+	        }
+	        if (utilisateur.getPrenom() != null) {
+	            sql.append("prenom=?, ");
+	        }
+	        if (utilisateur.getEmail() != null) {
+	            sql.append("email=?, ");
+	        }
+	        if (utilisateur.getTelephone() != null) {
+	            sql.append("telephone=?, ");
+	        }
+	        if (utilisateur.getRue() != null) {
+	            sql.append("rue=?, ");
+	        }
+	        if (utilisateur.getCode_postal() != null) {
+	            sql.append("code_postal=?, ");
+	        }
+	        if (utilisateur.getVille() != null) {
+	            sql.append("ville=?, ");
+	        }
+	        if (utilisateur.getMot_de_passe() != null) {
+	            sql.append("mot_de_passe=?, ");
+	        }
+
+	        sql.setLength(sql.length() - 2);
+
+	        sql.append(" WHERE no_utilisateur=?");
+
+	        try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+	            int parameterIndex = 1;
+
+	            if (utilisateur.getPseudo() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getPseudo());
+	            }
+	            if (utilisateur.getNom() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getNom());
+	            }
+	            if (utilisateur.getPrenom() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getPrenom());
+	            }
+	            if (utilisateur.getEmail() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getEmail());
+	            }
+	            if (utilisateur.getTelephone() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getTelephone());
+	            }
+	            if (utilisateur.getRue() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getRue());
+	            }
+	            if (utilisateur.getCode_postal() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getCode_postal());
+	            }
+	            if (utilisateur.getVille() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getVille());
+	            }
+	            if (utilisateur.getMot_de_passe() != null) {
+	                pstmt.setString(parameterIndex++, utilisateur.getMot_de_passe());
+	            }
+
+	            pstmt.setInt(parameterIndex, utilisateur.getNo_utilisateur());
+
+	            pstmt.executeUpdate();
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Handle the exception appropriately
+	    }
+	}
 }
