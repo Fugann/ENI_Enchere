@@ -33,4 +33,8 @@ public class UtilisateurManager {
 	public ArrayList<Utilisateur> selectAllSaufMDP() {
 		return this.utilisateurDAO.selectAllSaufMDP();
 	}
+
+	public Utilisateur getUserById(String userId) {
+		return this.utilisateurDAO.getUserById(userId);
+	}
 }
