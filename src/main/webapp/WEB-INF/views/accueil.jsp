@@ -9,45 +9,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/normalize.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.css">
+<script src="https://cdn.tailwindcss.com"></script>
 <title>Accueil</title>
 </head>
 <body>
 	
-	<nav class="navbar-test">
-		<c:choose>
-			<c:when test="${user != null}">
-				<a href="<%=request.getContextPath()%>">Enchères</a>
-				<a href="<%=request.getContextPath()%>/ajoutArticle">Vendre un article</a>
-				<a href="<%=request.getContextPath()%>">Mon Profil</a>
-				<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
-			</c:when>
-			<c:otherwise>
-				<a href="<%=request.getContextPath()%>/login">Login/register</a>
-			</c:otherwise>
-		</c:choose>
+	<nav>
+		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
+		<div>
+			<c:choose>
+				<c:when test="${user != null}">
+					<a href="<%=request.getContextPath()%>">Enchères</a>
+					<a href="<%=request.getContextPath()%>/ajoutArticle">Vendre un article</a>
+					<a href="<%=request.getContextPath()%>">Mon Profil</a>
+					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
+				</c:when>
+				<c:otherwise>
+					<a href="<%=request.getContextPath()%>/login">Login/register</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</nav>
 	
-	
-	<p>test 1 = <c:out value="${user.getEmail()}"/></p>
-	
-	<main>
+	<main class="accueil">
+		<h2>Liste des enchère</h2>
 		<div>
 			<form method="post" action="">
-				<input type="text" name="search" id="search" placeholder="Que rechercher vous ?" />
-				<br />
-				<label for="categorie">Catégorie :</label>
-				<select name="categorie" id="categorie">
-					<option value="">Choisissez une catégorie</option>
-					<c:forEach items="${categories}" var="categorie">
-						<option value="${categorie.getNo_categorie()}"><c:out value="${categorie.getLibelle()}"/></option>
-					</c:forEach>
-				</select>
+				<div>
+					<label for="search">Filtres :</label>
+					<div class="search">
+						<input type="text" name="search" id="search" placeholder="Que rechercher vous ?" />
+					</div>
+					<div class="categories">
+						<label for="categorie">Catégorie :</label>
+						<select name="categorie" id="categorie">
+							<option value="">Choisissez une catégorie</option>
+							<c:forEach items="${categories}" var="categorie">
+								<option value="${categorie.getNo_categorie()}"><c:out value="${categorie.getLibelle()}"/></option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				<div>
 				<input type="submit" value="Rechercher" />
+				</div>
 			</form>
 		</div>
 		<div class="container">
 			
 			<c:forEach items="${articles}" var="article">
+				<div>
+					<img src="https://cdn.cultura.com/cdn-cgi/image/width=450/media/pim/13_246980_17_110_FR.jpg" alt="Photo introuvable" />
+				</div>
 				<div>
 					<strong><c:out value="${article.getNom_article()}"/></strong>
 					<p>Prix : 
