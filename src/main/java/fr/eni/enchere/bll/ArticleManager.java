@@ -3,6 +3,7 @@ package fr.eni.enchere.bll;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Article;
+import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.ArticleDAO;
 import fr.eni.enchere.dal.DAOFactory;
 
@@ -22,4 +23,7 @@ public class ArticleManager {
 		
 		return this.articleDAO.getAllCategories(search, categorie);
 	}
+	
+
+	
 }

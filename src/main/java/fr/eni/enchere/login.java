@@ -59,5 +59,6 @@ public class login extends HttpServlet {
 			request.setAttribute("error", "Email/pseudo incorrect  !");
 			rd.forward(request, response);
 		}
+
 	}
 }

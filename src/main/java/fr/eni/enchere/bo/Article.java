@@ -126,6 +126,9 @@ public class Article {
 		this.no_utilisateur = no_utilisateur;
 		this.no_categorie = no_categorie;
 	}
+
+
+	
 	
 
 }
