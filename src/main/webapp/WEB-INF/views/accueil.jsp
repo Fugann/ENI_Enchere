@@ -52,7 +52,9 @@
 					</select>
 				</div>
 			</div>
-			<input type="submit" value="Rechercher" />
+			<div>
+				<input type="submit" value="Rechercher" />
+			</div>
 		</form>
 		<div class="container">
 			
