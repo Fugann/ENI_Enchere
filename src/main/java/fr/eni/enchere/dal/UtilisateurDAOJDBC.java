@@ -16,6 +16,7 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	private static final String SELECT_PSEUDO_BY_PSEUDO = "SELECT PSEUDO FROM UTILISATEURS WHERE PSEUDO = ?";
 	private static final String SELECT_EMAIL_BY_EMAIL = "SELECT EMAIL FROM UTILISATEURS WHERE EMAIL = ?";
 	private static final String SELECT_ALL_SAUF_MDP = "SELECT NO_UTILISATEUR, PSEUDO, NOM, PRENOM, EMAIL, TELEPHONE, RUE, CODE_POSTAL, VILLE FROM UTILISATEURS";
+	private static final String GET_USER_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -154,4 +155,32 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 		}
 		return null;
 	}
+
+	@Override
+	public Utilisateur getUserById(String userId) {
+	    Utilisateur utilisateur = null;
+
+	    try (Connection conn = ConnectionProvider.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(GET_USER_BY_ID)) {
+
+	        pstmt.setInt(1, Integer.parseInt(userId));
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            if (rs.next()) {
+	                utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+	                        rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
+	                        rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
+	                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"),
+	                        rs.getByte("administrateur"));
+	            }
+	        }
+
+	    } catch (SQLException | NumberFormatException e) {
+	        // Handle the exception or log it appropriately
+	        e.printStackTrace();
+	    }
+
+	    return utilisateur;
+	}
+
 }

@@ -15,4 +15,6 @@ public interface UtilisateurDAO {
 	public Utilisateur getUserByEmail(String userMail);
 
 	public ArrayList<Utilisateur> selectAllSaufMDP();
+	
+	public Utilisateur getUserById (String userId);
 }
