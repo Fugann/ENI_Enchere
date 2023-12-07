@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>User Profile</h2>
-    <p>Name: ${user.nom}</p>
+	<h2>Here is your profile MTFKER :)</h2>
+	<p>userId: ${user.no_utilisateur}</p>
+    <p>Pseudo: ${user.prenom}</p>
     <p>Email: ${user.email}</p>
 
 </body>
