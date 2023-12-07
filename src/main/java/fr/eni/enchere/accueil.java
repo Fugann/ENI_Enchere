@@ -74,5 +74,4 @@ public class accueil extends HttpServlet {
 
 		rd.forward(request, response);
 	}
-
 }
