@@ -66,9 +66,7 @@ public class accueil extends HttpServlet {
 		
 		UtilisateurManager um = new UtilisateurManager();
 		
-//		for (Article article : articles) {
-//			String pseudo = um.selectPseudoById(categorie);
-//		}
+		
 		
 
 		request.setAttribute("articles", articles);
