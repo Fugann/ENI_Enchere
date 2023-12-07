@@ -61,6 +61,13 @@
 					</c:choose>
 					 Points</p>
 					<p>Fin de l'enchère : <c:out value="${article.getDate_fin_encheres()}"/></p>
+					<p>Vendeur : 
+					<c:forEach items="${users}" var="user">
+						<c:if test="${article.getNo_utilisateur() == user.getNo_utilisateur()}">
+							<c:out value="${user.getPseudo()}"/>
+						</c:if>
+					</c:forEach>
+					</p>
 				</div>
 			</c:forEach>
 		

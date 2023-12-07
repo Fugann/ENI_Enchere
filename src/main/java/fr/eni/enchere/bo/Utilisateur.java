@@ -131,7 +131,7 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = admin;
 	}
-	
+
 	public Utilisateur(Integer no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String code_postal, String ville, String mot_de_passe, int credit, byte administrateur) {
 		this.no_utilisateur = no_utilisateur;
@@ -151,6 +151,19 @@ public class Utilisateur {
 	public Utilisateur(String email, String mot_de_passe) {
 		this.email = email;
 		this.mot_de_passe = hashPwd(mot_de_passe);
+	}
+
+	public Utilisateur(Integer no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String code_postal, String ville) {
+		this.no_utilisateur = no_utilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
 	}
 
 	public static String hashPwd(String motDePasse) {

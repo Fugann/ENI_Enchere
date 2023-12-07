@@ -1,5 +1,7 @@
 package fr.eni.enchere.dal;
 
+import java.util.ArrayList;
+
 import fr.eni.enchere.bo.Utilisateur;
 
 public interface UtilisateurDAO {
@@ -10,9 +12,7 @@ public interface UtilisateurDAO {
 	
 	public String selectEmailByEmail(String email);
 
-	//Utilisateur getUserByUsername(String username);
-	
 	public Utilisateur getUserByEmail(String userMail);
-	
-	//List<Utilisateur> getAllUsers();
+
+	public ArrayList<Utilisateur> selectAllSaufMDP();
 }
