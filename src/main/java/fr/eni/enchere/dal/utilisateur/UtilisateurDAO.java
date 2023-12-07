@@ -17,4 +17,6 @@ public interface UtilisateurDAO {
 	public ArrayList<Utilisateur> selectAllSaufMDP();
 	
 	public Utilisateur getUserById (String userId);
+
+	public void update(Utilisateur user);
 }

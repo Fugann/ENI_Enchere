@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.utilisateur.UtilisateurDAO;
+import fr.eni.enchere.dal.utilisateur.UtilisateurDAOJDBC;
 
 public class UtilisateurManager {
 
@@ -36,5 +37,10 @@ public class UtilisateurManager {
 
 	public Utilisateur getUserById(String userId) {
 		return this.utilisateurDAO.getUserById(userId);
+	}
+	
+	public void updateUser(Utilisateur user) {
+		UtilisateurDAO utilisateurDAO = new UtilisateurDAOJDBC();
+        utilisateurDAO.update(user);
 	}
 }
