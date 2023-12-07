@@ -14,11 +14,10 @@ public class ArticleManager {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 
-	public void insert(Article article, String rue, String CP, String ville) throws BusinessException {
-		
-
+	public Article insert(Article article, String rue, String CP, String ville) throws BusinessException {
 		BusinessException exception = new BusinessException();
 		this.verifNull(article, rue, CP, ville, exception);
+		
 		if (!exception.hasErreurs()) {
 			this.articleDAO.insert(article);
 		}
@@ -26,7 +25,7 @@ public class ArticleManager {
 		if (exception.hasErreurs()) {
 			throw exception;
 		}
-		
+		return article;
 	}
 
 
@@ -39,7 +38,8 @@ public class ArticleManager {
 		if (article.getNom_article() == null || article.getNom_article().equals("") || article.getDescription() == null || article.getDescription().equals("") ||
 				article.getNo_categorie() == 0 || rue == null || rue.equals("") || CP == null || CP.equals("") || ville == null || ville.equals("") ) {
 			exception.ajouterErreur(CodesErrorBLL.INPUT_EMPTY_ERROR);
-		} else if (article.getDate_debut_encheres().isAfter(article.getDate_fin_encheres())){
+		} 
+		if (article.getDate_debut_encheres().isAfter(article.getDate_fin_encheres())){
 			exception.ajouterErreur(CodesErrorBLL.DATE_ERROR);
 		}
 	}

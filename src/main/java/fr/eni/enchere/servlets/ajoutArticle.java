@@ -8,13 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import fr.eni.enchere.bll.ArticleManager;
 import fr.eni.enchere.bll.CategorieManager;
 import fr.eni.enchere.bo.Article;
 import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.error.BusinessException;
-import fr.eni.enchere.error.LecteurMessage;
 
 /**
  * Servlet implementation class ajoutArticle
@@ -69,10 +67,14 @@ public class ajoutArticle extends HttpServlet {
 			Article a = new Article(name, description, image, debut, fin, Integer.parseInt(prix), no_utilisateur,
 					Integer.parseInt(categorie));
 			// Fonction insert dans la bdd
-			am.insert(a, rue, CP, ville);
+			Article article = am.insert(a, rue, CP, ville);
+			
+			request.setAttribute("article", article);
 
 		} catch (BusinessException e) {
 			request.setAttribute("codesError", e.getListeCodesErreur());
+		} catch (NumberFormatException e) {
+			
 		}
 		
 

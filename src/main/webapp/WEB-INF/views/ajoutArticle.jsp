@@ -12,26 +12,28 @@
 <title>Ajouter un article</title>
 </head>
 <body>
+
 	<c:if test="${article != null }">
-	<p>L'article a été ajouté avec succès</p>
+		<p>L'article a été ajouté avec succès</p>
 	</c:if>
+	
 	<c:if test="${codesError != null }">
-	<p>Erreur : L'article n'a pas pu être ajouté : </p>
+		<p>Erreur : L'article n'a pas pu être ajouté : </p>
 	<c:forEach items="${codesError}" var="error">
-	<p>${LecteurMessage.getMessageErreur(error)}
-	</p>
+		<p>${LecteurMessage.getMessageErreur(error)}</p>
 	</c:forEach>
 	</c:if>
+	
 	<h1>Nouvelle Vente</h1>
 	<img src="" alt="photoUploader" />
 	<form method="post" action="">
 		<div>
 			<label for="article">Article : </label> 
-			<input type="text" name="article" id="article" value="<%= request.getAttribute("error") !=null?request.getParameter("article"):""%>" /> 
+			<input type="text" name="article" id="article" value="<%= request.getAttribute("codesError") !=null?request.getParameter("article"):""%>" /> 
 			<br />
 			<label
 				for="description">Description : </label>
-			<textarea name="description" id="description" placeholder="Description de l'article" ><%= request.getAttribute("error") !=null?request.getParameter("description"):""%></textarea>
+			<textarea name="description" id="description" placeholder="Description de l'article" ><%= request.getAttribute("codesError") !=null?request.getParameter("description"):""%></textarea>
 			<br />
 			<label for="categorie">Catégorie </label>
 			<select name="categorie" id="categorie">
@@ -46,13 +48,13 @@
 			<input type='file' name="image" id="image" style="display: none">
 			<br />
 			<label for="prix">Mise à prix : </label>
-			<input type="number" name="prix" id="prix" value="<%= request.getAttribute("error") !=null?request.getParameter("prix"):""%>"/>
+			<input type="number" name="prix" id="prix" value="<%= request.getAttribute("codesError") !=null?request.getParameter("prix"):""%>"/>
 			<br /> 
 			<label for="debut">Début de l'enchère : </label> 
-			<input type="date" name="debut" id="debut" value="<%= request.getAttribute("error") !=null?request.getParameter("debut"):""%>"/>
+			<input type="date" name="debut" id="debut" value="<%= request.getAttribute("codesError") !=null?request.getParameter("debut"):""%>"/>
 			<br />
 			<label for="fin">Fin de l'enchère : </label> 
-			<input type="date" name="fin" id="fin" value="<%= request.getAttribute("error") !=null?request.getParameter("fin"):""%>" />
+			<input type="date" name="fin" id="fin" value="<%= request.getAttribute("codesError") !=null?request.getParameter("fin"):""%>" />
 			<br />
 			<fieldset>
 				<legend>Retrait : </legend>
