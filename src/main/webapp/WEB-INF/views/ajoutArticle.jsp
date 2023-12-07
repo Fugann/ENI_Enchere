@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import ="fr.eni.enchere.error.LecteurMessage" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,15 +12,16 @@
 <title>Ajouter un article</title>
 </head>
 <body>
-	
-	<!-- Vérification si il y a un attribute success ou error -->
-	<c:if test="${not empty requestScope.error}">
-    <p style="color: red;"><c:out value="${requestScope.error}" /></p>
+	<c:if test="${article != null }">
+	<p>L'article a été ajouté avec succès</p>
 	</c:if>
-	<c:if test="${not empty requestScope.success}">
-	    <p style="color: green;"><c:out value="${requestScope.success}" /></p>
+	<c:if test="${codesError != null }">
+	<p>Erreur : L'article n'a pas pu être ajouté : </p>
+	<c:forEach items="${codesError}" var="error">
+	<p>${LecteurMessage.getMessageErreur(error)}
+	</p>
+	</c:forEach>
 	</c:if>
-	
 	<h1>Nouvelle Vente</h1>
 	<img src="" alt="photoUploader" />
 	<form method="post" action="">
