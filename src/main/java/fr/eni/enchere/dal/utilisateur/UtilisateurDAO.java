@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.utilisateur;
 
 import java.util.ArrayList;
 

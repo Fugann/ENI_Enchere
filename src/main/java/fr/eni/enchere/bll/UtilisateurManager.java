@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.DAOFactory;
-import fr.eni.enchere.dal.UtilisateurDAO;
+import fr.eni.enchere.dal.utilisateur.UtilisateurDAO;
 
 public class UtilisateurManager {
 

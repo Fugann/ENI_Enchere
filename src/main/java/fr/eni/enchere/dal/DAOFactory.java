@@ -1,5 +1,12 @@
 package fr.eni.enchere.dal;
 
+import fr.eni.enchere.dal.article.ArticleDAO;
+import fr.eni.enchere.dal.article.ArticleDAOJDBC;
+import fr.eni.enchere.dal.categorie.CategorieDAO;
+import fr.eni.enchere.dal.categorie.CategorieDAOJDBC;
+import fr.eni.enchere.dal.utilisateur.UtilisateurDAO;
+import fr.eni.enchere.dal.utilisateur.UtilisateurDAOJDBC;
+
 public abstract class DAOFactory {
 	
 	public static UtilisateurDAO getUtilisateurDAO()

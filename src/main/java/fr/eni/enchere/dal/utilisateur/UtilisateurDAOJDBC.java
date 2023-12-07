@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.utilisateur;
 
 import java.sql.Connection;
 
@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.dal.ConnectionProvider;
 
 public class UtilisateurDAOJDBC implements UtilisateurDAO {
 

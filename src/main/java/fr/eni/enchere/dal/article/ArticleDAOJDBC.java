@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.article;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Article;
+import fr.eni.enchere.dal.ConnectionProvider;
 
 public class ArticleDAOJDBC implements ArticleDAO {
 

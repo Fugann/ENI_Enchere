@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.categorie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Categorie;
+import fr.eni.enchere.dal.ConnectionProvider;
 
 public class CategorieDAOJDBC implements CategorieDAO {
 	private static final String SELECT_ALL_CATEGORIES = "SELECT * FROM CATEGORIES";
