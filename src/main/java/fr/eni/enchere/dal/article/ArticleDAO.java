@@ -3,7 +3,6 @@ package fr.eni.enchere.dal.article;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Article;
-import fr.eni.enchere.bo.Utilisateur;
 
 public interface ArticleDAO {
 	

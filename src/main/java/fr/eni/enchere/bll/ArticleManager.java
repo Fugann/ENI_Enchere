@@ -3,7 +3,6 @@ package fr.eni.enchere.bll;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Article;
-import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.article.ArticleDAO;
 import fr.eni.enchere.dal.DAOFactory;
 
