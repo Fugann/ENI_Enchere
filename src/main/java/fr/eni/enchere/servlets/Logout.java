@@ -1,4 +1,4 @@
-package fr.eni.enchere;
+package fr.eni.enchere.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
