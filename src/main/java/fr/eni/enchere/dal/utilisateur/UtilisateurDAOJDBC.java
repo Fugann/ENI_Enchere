@@ -325,6 +325,19 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	}
 
 	@Override
+
+	public void delete(int userId) {
+	    try (Connection conn = ConnectionProvider.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement("DELETE FROM UTILISATEURS WHERE no_utilisateur = ?")) {
+
+	        pstmt.setInt(1, userId);
+	        pstmt.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Handle the exception appropriately
+	    }
+	}
+
 	public void setTokenAuth(UtilisateurAuthToken authToken) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 

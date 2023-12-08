@@ -77,6 +77,10 @@ public class UtilisateurManager {
 		}
 	}
 
+  public void deleteUser(int userId) {
+        utilisateurDAO.delete(userId);
+    }
+
 	public void setTokenAuth(String selector, String hashedRawValidator, Integer no_utilisateur) {
 
 		UtilisateurAuthToken authToken = new UtilisateurAuthToken(selector, hashedRawValidator, no_utilisateur);

@@ -24,6 +24,9 @@ public interface UtilisateurDAO {
 
 	public void update(Utilisateur user);
 
+
+	public void delete(int userId);
+
 	public List<UtilisateurAuthToken> findBySelector(String selector);
 
 	public void setTokenAuth(UtilisateurAuthToken authToken);

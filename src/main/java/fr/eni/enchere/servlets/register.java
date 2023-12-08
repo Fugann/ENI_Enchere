@@ -49,15 +49,17 @@ public class register extends HttpServlet {
 			String pswconfirm = request.getParameter("pswconfirm");
 			int credit = 0;
 			Byte admin = 0;
-			
-			
+		
 			UtilisateurManager um = new UtilisateurManager();
 			Utilisateur utilisateur = um.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, pswconfirm, credit, admin);
+      
+      request.getSession().setAttribute("successMessage", "Utilisateur créé avec succès !");
 			
 			request.setAttribute("utilisateur", utilisateur);
 		
 		} catch (BusinessException e) {
 			request.setAttribute("codesError", e.getListeCodesErreur());
+
 		}
 		
 		rd.forward(request, response);
