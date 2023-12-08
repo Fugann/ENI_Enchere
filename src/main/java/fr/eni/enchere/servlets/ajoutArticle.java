@@ -8,11 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import fr.eni.enchere.bll.ArticleManager;
 import fr.eni.enchere.bll.CategorieManager;
 import fr.eni.enchere.bo.Article;
 import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.error.BusinessException;
+
 
 /**
  * Servlet implementation class ajoutArticle
@@ -58,24 +60,30 @@ public class ajoutArticle extends HttpServlet {
 			String CP = request.getParameter("CP");
 			String ville = request.getParameter("ville");
 			int no_utilisateur = 1;
-			LocalDate debut = LocalDate.parse(request.getParameter("debut"));
-			LocalDate fin = LocalDate.parse(request.getParameter("fin"));
+			String debut = request.getParameter("debut");
+			String fin = request.getParameter("fin");
 			
 			// Création d'un article manager
 			ArticleManager am = new ArticleManager();
-			// Création de l'article
-			Article a = new Article(name, description, image, debut, fin, Integer.parseInt(prix), no_utilisateur,
-					Integer.parseInt(categorie));
+			
 			// Fonction insert dans la bdd
-			Article article = am.insert(a, rue, CP, ville);
+			Article article = am.insert(name, description, categorie, image, prix, rue, CP, ville, no_utilisateur, debut, fin);
 			
 			request.setAttribute("article", article);
 
-		} catch (BusinessException e) {
+		} 
+		catch (BusinessException e) {
+			System.out.println("test2");
 			request.setAttribute("codesError", e.getListeCodesErreur());
-		} catch (NumberFormatException e) {
-			
-		}
+		} 
+//		catch(NumberFormatException e)
+//		{	
+//			System.out.println("test1");
+//			BusinessException exception = new BusinessException();
+//			exception.ajouterErreur(CodesErrorServlets.PRICE_EMPTY_ERROR);
+//			request.setAttribute("codesError", exception.getListeCodesErreur());
+//			
+//		}
 		
 
 		// Récupération de toutes les catégorie

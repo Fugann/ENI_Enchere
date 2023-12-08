@@ -8,7 +8,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Article;
+import fr.eni.enchere.dal.CodesErrorDAL;
 import fr.eni.enchere.dal.ConnectionProvider;
+import fr.eni.enchere.error.BusinessException;
 
 public class ArticleDAOJDBC implements ArticleDAO {
 
@@ -16,8 +18,12 @@ public class ArticleDAOJDBC implements ArticleDAO {
 	private static final String SELECT_ALL_ARTICLES_BY_CATEGORIES = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ? AND NOM_ARTICLE LIKE ?";
 	
 	@Override
-	public void insert(Article article) {
-
+	public void insert(Article article) throws BusinessException {
+		if(article == null ) {
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesErrorDAL.INSERT_OBJET_NULL);
+			throw be;
+		}
 		// récupération d'une connexion du pool de connexion
 		try (Connection conn = ConnectionProvider.getConnection()) {
 
@@ -46,6 +52,9 @@ public class ArticleDAOJDBC implements ArticleDAO {
 		} catch (Exception e) {
 			System.out.println("Ajout de l'article : echec");
 			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesErrorDAL.INSERT_OBJET_ECHEC);
+			throw be;
 		}
 
 	}

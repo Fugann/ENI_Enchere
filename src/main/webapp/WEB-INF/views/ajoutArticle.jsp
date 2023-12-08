@@ -19,6 +19,7 @@
 	
 	<c:if test="${codesError != null }">
 		<p>Erreur : L'article n'a pas pu être ajouté : </p>
+		<% System.out.println("test3"); %>
 	<c:forEach items="${codesError}" var="error">
 		<p>${LecteurMessage.getMessageErreur(error)}</p>
 	</c:forEach>
@@ -48,7 +49,7 @@
 			<input type='file' name="image" id="image" style="display: none">
 			<br />
 			<label for="prix">Mise à prix : </label>
-			<input type="number" name="prix" id="prix" value="<%= request.getAttribute("codesError") !=null?request.getParameter("prix"):""%>"/>
+			<input type="text" name="prix" id="prix" value="<%= request.getAttribute("codesError") !=null?request.getParameter("prix"):""%>"/>
 			<br /> 
 			<label for="debut">Début de l'enchère : </label> 
 			<input type="date" name="debut" id="debut" value="<%= request.getAttribute("codesError") !=null?request.getParameter("debut"):""%>"/>
