@@ -67,7 +67,12 @@ public class register extends HttpServlet {
 			Utilisateur u = new Utilisateur(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
 			um.ajouter(u);
 			if(u.getNo_utilisateur() != null) {
-				request.setAttribute("success", "Utilisateur créé avec succès !");
+				//here set the message success
+				request.getSession().setAttribute("successMessage", "Utilisateur créé avec succès !");
+	            
+	            // Redirect to the home page
+	            response.sendRedirect(request.getContextPath() + "");
+	            return;
 			} else {
 				request.setAttribute("error", "Une erreur sql c'est produite");
 			}

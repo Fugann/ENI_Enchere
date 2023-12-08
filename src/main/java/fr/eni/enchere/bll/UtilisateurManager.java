@@ -70,4 +70,8 @@ public class UtilisateurManager {
 			exception.ajouterErreur(CodesErrorBLL.IDENTIFIANT_MDP_ERROR);
 		}
 	}
+	
+	public void deleteUser(int userId) {
+        utilisateurDAO.delete(userId);
+    }
 }

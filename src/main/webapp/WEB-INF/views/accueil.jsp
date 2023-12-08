@@ -14,9 +14,6 @@
 </head>
 <body>
 
-	<%-- <p>email : </p>
-	<input type="text" value="<c:out value="${user.rue }"/>" /> --%>
-	
 	<nav>
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
@@ -33,6 +30,14 @@
 			</c:choose>
 		</div>
 	</nav>
+	
+	
+	<!-- To make the message disappear we need to setup JavaScript and set a timeout -->
+	<c:if test="${not empty sessionScope.successMessage}">
+       <div class="suc-msg">${sessionScope.successMessage}</div>
+       <c:set var="sessionScope.successMessage" value="" scope="session" />
+    </c:if>
+	
 	
 	<main class="accueil">
 		<h2>Liste des enchère</h2>

@@ -19,8 +19,7 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	private static final String SELECT_EMAIL_BY_EMAIL = "SELECT EMAIL FROM UTILISATEURS WHERE EMAIL = ?";
 	private static final String SELECT_ALL_SAUF_MDP = "SELECT NO_UTILISATEUR, PSEUDO, NOM, PRENOM, EMAIL, TELEPHONE, RUE, CODE_POSTAL, VILLE FROM UTILISATEURS";
 	private static final String GET_USER_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
-	private static final String UPDATE_USER = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
-
+	
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
@@ -284,6 +283,19 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 
 	            pstmt.executeUpdate();
 	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Handle the exception appropriately
+	    }
+	}
+
+	@Override
+	public void delete(int userId) {
+	    try (Connection conn = ConnectionProvider.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement("DELETE FROM UTILISATEURS WHERE no_utilisateur = ?")) {
+
+	        pstmt.setInt(1, userId);
+	        pstmt.executeUpdate();
+
 	    } catch (SQLException e) {
 	        e.printStackTrace(); // Handle the exception appropriately
 	    }

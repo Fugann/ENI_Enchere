@@ -22,4 +22,6 @@ public interface UtilisateurDAO {
 
 	public void update(Utilisateur user);
 
+	public void delete(int userId);
+
 }

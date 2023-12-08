@@ -71,4 +71,14 @@
     <servlet-name>EditProfile</servlet-name>
     <url-pattern>/EditProfile</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteAccount</display-name>
+    <servlet-name>DeleteAccount</servlet-name>
+    <servlet-class>fr.eni.enchere.servlets.DeleteAccount</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAccount</servlet-name>
+    <url-pattern>/DeleteAccount</url-pattern>
+  </servlet-mapping>
 </web-app>
