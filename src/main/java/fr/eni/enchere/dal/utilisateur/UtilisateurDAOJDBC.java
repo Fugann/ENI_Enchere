@@ -5,11 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.enchere.bo.Article;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.bo.UtilisateurAuthToken;
 import fr.eni.enchere.dal.ConnectionProvider;
@@ -24,7 +22,6 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	private static final String SELECT_ALL_SAUF_MDP = "SELECT NO_UTILISATEUR, PSEUDO, NOM, PRENOM, EMAIL, TELEPHONE, RUE, CODE_POSTAL, VILLE FROM UTILISATEURS";
 	private static final String GET_USER_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 	private static final String FIND_BY_SELECTOR = "SELECT * FROM UTILISATEURS_AUTH WHERE selector = ?";
-	private static final String UPDATE_USER = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
 	private static final String INSERT_UTILISATEUR_AUTH = "INSERT INTO UTILISATEURS_AUTH (selector, validator, no_utilisateur) VALUES(?,?,?);";
 	
 	@Override
