@@ -148,11 +148,6 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 
-	public Utilisateur(String email, String mot_de_passe) {
-		this.email = email;
-		this.mot_de_passe = hashPwd(mot_de_passe);
-	}
-
 	public Utilisateur(Integer no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String code_postal, String ville) {
 		this.no_utilisateur = no_utilisateur;

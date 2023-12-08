@@ -35,10 +35,64 @@ public class UtilisateurManager {
 		return u;
 	}
 
+		
+	public Utilisateur getUserDetails(String identifiant, String password) throws BusinessException {
+		BusinessException exception = new BusinessException();
+		
+		password = Utilisateur.hashPwd(password);
+		
+		System.out.println("test");
+		Utilisateur user = this.utilisateurDAO.getUserByEmail(identifiant);
+		
+		if (user == null) {
+			System.out.println("test1");
+			user = this.utilisateurDAO.getUserByPseudo(identifiant);
+		}
 
+		this.verifIdentifiant(user,identifiant, password,  exception);
 
-	public Utilisateur getUserDetails(String userEmail) {
-		return this.utilisateurDAO.getUserByEmail(userEmail);
+		if (!exception.hasErreurs()) {
+			System.out.println("test3");
+			return user;
+		} else {
+			throw exception;
+		}
+	}
+
+	public ArrayList<Utilisateur> selectAllSaufMDP() {
+		return this.utilisateurDAO.selectAllSaufMDP();
+	}
+
+	public Utilisateur getUserById(String userId) {
+		return this.utilisateurDAO.getUserById(userId);
+	}
+
+	public void updateUser(Utilisateur user) {
+		UtilisateurDAO utilisateurDAO = new UtilisateurDAOJDBC();
+		utilisateurDAO.update(user);
+	}
+
+	private void verifIdentifiant(Utilisateur user, String identifiant, String password, BusinessException exception) {
+		if (user == null || !password.equals(user.getMot_de_passe())) {
+			System.out.println("test 2");
+			exception.ajouterErreur(CodesErrorBLL.IDENTIFIANT_MDP_ERROR);
+		}
+	}
+	
+	private void VerifSamePassword(String psw, String pswconfirm, BusinessException exception) {
+		if (psw == null || !psw.equals(pswconfirm)) {
+			exception.ajouterErreur(CodesErrorBLL.SAME_PASSWORD_ERROR);
+		}
+	}
+	
+	private void verifNull(String pseudo, String prenom, String CP, String psw, String nom, String email, String rue,
+			String ville, BusinessException exception) {
+		if (pseudo == null || pseudo.equals("") || prenom == null || prenom.equals("") || CP == null || CP.equals("")
+				|| psw == null || psw.equals("") || nom == null || nom.equals("") || email == null || email.equals("")
+				|| rue == null || rue.equals("") || ville == null || ville.equals("") ) {
+			System.out.println("test verifNull");
+			exception.ajouterErreur(CodesErrorBLL.INPUT_EMPTY_ERROR);
+		}		
 	}
 	
 	public void selectPseudoByPseudo(String pseudo, BusinessException exception) {
@@ -58,36 +112,4 @@ public class UtilisateurManager {
 			System.out.println("test CREATE_EMAIL_ERROR");
 			exception.ajouterErreur(CodesErrorBLL.CREATE_EMAIL_ERROR);
 		}
-		
-	}
-
-	public ArrayList<Utilisateur> selectAllSaufMDP() {
-		return this.utilisateurDAO.selectAllSaufMDP();
-	}
-
-	public Utilisateur getUserById(String userId) {
-		return this.utilisateurDAO.getUserById(userId);
-	}
-	
-	public void updateUser(Utilisateur user) {
-		UtilisateurDAO utilisateurDAO = new UtilisateurDAOJDBC();
-        utilisateurDAO.update(user);
-	}
-	
-	private void VerifSamePassword(String psw, String pswconfirm, BusinessException exception) {
-		if (psw == null || !psw.equals(pswconfirm)) {
-			exception.ajouterErreur(CodesErrorBLL.SAME_PASSWORD_ERROR);
-		}
-	}
-	
-	private void verifNull(String pseudo, String prenom, String CP, String psw, String nom, String email, String rue,
-			String ville, BusinessException exception) {
-		if (pseudo == null || pseudo.equals("") || prenom == null || prenom.equals("") || CP == null || CP.equals("")
-				|| psw == null || psw.equals("") || nom == null || nom.equals("") || email == null || email.equals("")
-				|| rue == null || rue.equals("") || ville == null || ville.equals("") ) {
-			System.out.println("test verifNull");
-			exception.ajouterErreur(CodesErrorBLL.INPUT_EMPTY_ERROR);
-		}		
-	}
-	
 }

@@ -14,9 +14,12 @@ public interface UtilisateurDAO {
 
 	public Utilisateur getUserByEmail(String userMail);
 
+	public Utilisateur getUserByPseudo(String identifiant);
+	
 	public ArrayList<Utilisateur> selectAllSaufMDP();
 	
 	public Utilisateur getUserById (String userId);
 
 	public void update(Utilisateur user);
+
 }
