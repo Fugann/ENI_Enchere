@@ -55,12 +55,13 @@ public class register extends HttpServlet {
 			Utilisateur utilisateur = um.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, pswconfirm, credit, admin);
 			
 			request.setAttribute("utilisateur", utilisateur);
+			response.sendRedirect(request.getContextPath() + "/login");
 		
 		} catch (BusinessException e) {
 			System.out.println("test2");
 			request.setAttribute("codesError", e.getListeCodesErreur());
+			rd.forward(request, response);
 		}
 		
-		rd.forward(request, response);
 	}
 }
