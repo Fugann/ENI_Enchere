@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.error.BusinessException;
 
 /**
  * Servlet implementation class register
@@ -35,48 +36,32 @@ public class register extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/register.jsp");
 
-		String pseudo = request.getParameter("pseudo");
-		String prenom = request.getParameter("prenom");
-		String tel = request.getParameter("tel");
-		String CP = request.getParameter("CP");
-		String psw = request.getParameter("psw");
-		String nom = request.getParameter("nom");
-		String email = request.getParameter("email");
-		String rue = request.getParameter("rue");
-		String ville = request.getParameter("ville");
-		String pswconfirm = request.getParameter("pswconfirm");
-		int credit = 0;
-		Byte admin = 0;
+		try {
+			String pseudo = request.getParameter("pseudo");
+			String prenom = request.getParameter("prenom");
+			String tel = request.getParameter("tel");
+			String CP = request.getParameter("CP");
+			String psw = request.getParameter("psw");
+			String nom = request.getParameter("nom");
+			String email = request.getParameter("email");
+			String rue = request.getParameter("rue");
+			String ville = request.getParameter("ville");
+			String pswconfirm = request.getParameter("pswconfirm");
+			int credit = 0;
+			Byte admin = 0;
 		
-		UtilisateurManager um = new UtilisateurManager();
-		String pseudoBDD = um.selectPseudoByPseudo(pseudo);
-		String emailBDD = um.selectEmailByEmail(email);
-
-		if (psw == null || !psw.equals(pswconfirm)) {
-			request.setAttribute("error", "Le mot de passe ne correspond pas !");
-		} else if (pseudo == null || pseudo.equals("") || prenom == null || prenom.equals("") || CP == null
-				|| CP.equals("") || psw == null || psw.equals("") || nom == null || nom.equals("") || email == null
-				|| email.equals("") || rue == null || rue.equals("") || ville == null || ville.equals("")) {
-			request.setAttribute("error", "Veuillez remplir tous les champs !");
-		}else if (pseudo.equals(pseudoBDD))  {
-			request.setAttribute("error", "Ce pseudo existe déjà");
-		}else if (email.equals(emailBDD))  {
-			request.setAttribute("error", "Cet email existe déjà");
-		}else {
+			UtilisateurManager um = new UtilisateurManager();
+			Utilisateur utilisateur = um.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, pswconfirm, credit, admin);
+      
+      request.getSession().setAttribute("successMessage", "Utilisateur créé avec succès !");
 			
-			Utilisateur u = new Utilisateur(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
-			um.ajouter(u);
-			if(u.getNo_utilisateur() != null) {
-				//here set the message success
-				request.getSession().setAttribute("successMessage", "Utilisateur créé avec succès !");
-	            
-	            // Redirect to the home page
-	            response.sendRedirect(request.getContextPath() + "");
-	            return;
-			} else {
-				request.setAttribute("error", "Une erreur sql c'est produite");
-			}
+			request.setAttribute("utilisateur", utilisateur);
+		
+		} catch (BusinessException e) {
+			request.setAttribute("codesError", e.getListeCodesErreur());
+
 		}
+		
 		rd.forward(request, response);
 	}
 }

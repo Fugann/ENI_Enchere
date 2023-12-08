@@ -23,4 +23,20 @@ public abstract class CodesErrorBLL {
 	 * Echec Identifiant ou password incorrect
 	 */
 	public static final int IDENTIFIANT_MDP_ERROR = 20003;
+	
+	/**
+	 * Echec quand les 2 mots de passe saisis ne correspondent pas 
+	 */
+	public static final int SAME_PASSWORD_ERROR = 20004;
+	
+	/**
+	 * Echec quand le pseudo est déjà créé
+	 */
+	public static final int CREATE_PSEUDO_ERROR = 20005;
+	
+	/**
+	 * Echec quand l'email est déjà créé
+	 */
+	public static final int CREATE_EMAIL_ERROR = 20006;
+	
 }
