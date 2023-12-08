@@ -26,7 +26,6 @@ public class ArticleDAOJDBC implements ArticleDAO {
 		}
 		// récupération d'une connexion du pool de connexion
 		try (Connection conn = ConnectionProvider.getConnection()) {
-
 			// préparation de l'ajout dans la bdd
 			PreparedStatement pstmt = conn.prepareStatement(INSERT_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, article.getNom_article());
@@ -56,7 +55,6 @@ public class ArticleDAOJDBC implements ArticleDAO {
 			be.ajouterErreur(CodesErrorDAL.INSERT_OBJET_ECHEC);
 			throw be;
 		}
-
 	}
 
 	@Override
