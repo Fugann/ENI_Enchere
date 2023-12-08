@@ -57,7 +57,6 @@ public class register extends HttpServlet {
 			request.setAttribute("utilisateur", utilisateur);
 		
 		} catch (BusinessException e) {
-			System.out.println("test2");
 			request.setAttribute("codesError", e.getListeCodesErreur());
 		}
 		

@@ -43,18 +43,15 @@ public class UtilisateurManager {
 
 		password = Utilisateur.hashPwd(password);
 
-		System.out.println("test");
 		Utilisateur user = this.utilisateurDAO.getUserByEmail(identifiant);
 
 		if (user == null) {
-			System.out.println("test1");
 			user = this.utilisateurDAO.getUserByPseudo(identifiant);
 		}
 
 		this.verifIdentifiant(user, identifiant, password, exception);
 
 		if (!exception.hasErreurs()) {
-			System.out.println("test3");
 			return user;
 		} else {
 			throw exception;
@@ -76,7 +73,6 @@ public class UtilisateurManager {
 
 	private void verifIdentifiant(Utilisateur user, String identifiant, String password, BusinessException exception) {
 		if (user == null || !password.equals(user.getMot_de_passe())) {
-			System.out.println("test 2");
 			exception.ajouterErreur(CodesErrorBLL.IDENTIFIANT_MDP_ERROR);
 		}
 	}
@@ -108,7 +104,6 @@ public class UtilisateurManager {
 		if (pseudo == null || pseudo.equals("") || prenom == null || prenom.equals("") || CP == null || CP.equals("")
 				|| psw == null || psw.equals("") || nom == null || nom.equals("") || email == null || email.equals("")
 				|| rue == null || rue.equals("") || ville == null || ville.equals("")) {
-			System.out.println("test verifNull");
 			exception.ajouterErreur(CodesErrorBLL.INPUT_EMPTY_ERROR);
 		}
 	}
@@ -117,7 +112,6 @@ public class UtilisateurManager {
 		String pseudoBDD = this.utilisateurDAO.selectPseudoByPseudo(pseudo);
 
 		if (pseudo.equals(pseudoBDD)) {
-			System.out.println("test CREATE_PSEUDO_ERROR");
 			exception.ajouterErreur(CodesErrorBLL.CREATE_PSEUDO_ERROR);
 		}
 
@@ -127,7 +121,6 @@ public class UtilisateurManager {
 		String emailBDD = this.utilisateurDAO.selectEmailByEmail(email);
 
 		if (email.equals(emailBDD)) {
-			System.out.println("test CREATE_EMAIL_ERROR");
 			exception.ajouterErreur(CodesErrorBLL.CREATE_EMAIL_ERROR);
 		}
 	}

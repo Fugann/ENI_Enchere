@@ -19,7 +19,6 @@
 	
 	<c:if test="${codesError != null }">
 		<p>Erreur : votre profil n'a pas pu être créé : </p>
-		<% System.out.println("test3"); %>
 	<c:forEach items="${codesError}" var="error">
 		<p>${LecteurMessage.getMessageErreur(error)}</p>
 	</c:forEach>
