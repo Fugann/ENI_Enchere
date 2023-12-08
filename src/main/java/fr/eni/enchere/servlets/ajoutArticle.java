@@ -6,9 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import fr.eni.enchere.bll.ArticleManager;
 import fr.eni.enchere.bll.CategorieManager;
 import fr.eni.enchere.bo.Article;
@@ -70,20 +68,11 @@ public class ajoutArticle extends HttpServlet {
 			Article article = am.insert(name, description, categorie, image, prix, rue, CP, ville, no_utilisateur, debut, fin);
 			
 			request.setAttribute("article", article);
-
 		} 
 		catch (BusinessException e) {
 			System.out.println("test2");
 			request.setAttribute("codesError", e.getListeCodesErreur());
-		} 
-//		catch(NumberFormatException e)
-//		{	
-//			System.out.println("test1");
-//			BusinessException exception = new BusinessException();
-//			exception.ajouterErreur(CodesErrorServlets.PRICE_EMPTY_ERROR);
-//			request.setAttribute("codesError", exception.getListeCodesErreur());
-//			
-//		}
+		}
 		
 
 		// Récupération de toutes les catégorie
