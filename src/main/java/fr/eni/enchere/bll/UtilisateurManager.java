@@ -1,8 +1,10 @@
 package fr.eni.enchere.bll;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.bo.UtilisateurAuthToken;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.utilisateur.UtilisateurDAO;
 import fr.eni.enchere.dal.utilisateur.UtilisateurDAOJDBC;
@@ -69,5 +71,21 @@ public class UtilisateurManager {
 			System.out.println("test 2");
 			exception.ajouterErreur(CodesErrorBLL.IDENTIFIANT_MDP_ERROR);
 		}
+	}
+
+	public void setTokenAuth(String selector, String hashedRawValidator, Integer no_utilisateur) {
+		
+		UtilisateurAuthToken authToken = new UtilisateurAuthToken(selector, hashedRawValidator, no_utilisateur);
+		utilisateurDAO.setTokenAuth(authToken);
+		
+	}
+	
+	public UtilisateurAuthToken findBySelector(String selector) {
+		List<UtilisateurAuthToken> list = utilisateurDAO.findBySelector(selector);
+		
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}	
+		return null;
 	}
 }

@@ -1,8 +1,10 @@
 package fr.eni.enchere.dal.utilisateur;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.bo.UtilisateurAuthToken;
 
 public interface UtilisateurDAO {
 	
@@ -21,5 +23,9 @@ public interface UtilisateurDAO {
 	public Utilisateur getUserById (String userId);
 
 	public void update(Utilisateur user);
+
+	public List<UtilisateurAuthToken> findBySelector(String selector);
+
+	public void setTokenAuth(UtilisateurAuthToken authToken);
 
 }
