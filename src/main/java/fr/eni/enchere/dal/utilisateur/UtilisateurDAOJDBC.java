@@ -123,7 +123,6 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 				return rs.getString("pseudo");
 
 			}
-			System.out.println("comparaison des pseudos = success");
 			conn.close();
 
 		} catch (Exception e) {

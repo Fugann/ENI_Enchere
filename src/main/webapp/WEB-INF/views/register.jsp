@@ -24,19 +24,6 @@
 		</c:forEach>
 		</c:if>
 	
-	<p>Mon profil</p>
-	
-	<c:if test="${not empty requestScope.error}">
-	    <p style="color: red;"><c:out value="${requestScope.error}" /></p>
-	</c:if>
-	
-	<c:if test="${codesError != null }">
-		<p>Erreur : votre profil n'a pas pu être créé : </p>
-	<c:forEach items="${codesError}" var="error">
-		<p>${LecteurMessage.getMessageErreur(error)}</p>
-	</c:forEach>
-	</c:if>
-	
 	<form method="post" action="">
 		<div>
 		<label for="pseudo">Pseudo : </label>

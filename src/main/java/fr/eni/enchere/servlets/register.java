@@ -52,8 +52,6 @@ public class register extends HttpServlet {
 		
 			UtilisateurManager um = new UtilisateurManager();
 			Utilisateur utilisateur = um.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, pswconfirm, credit, admin);
-      
-      request.getSession().setAttribute("successMessage", "Utilisateur créé avec succès !");
 			
 			request.setAttribute("utilisateur", utilisateur);
 			response.sendRedirect(request.getContextPath() + "/login");
@@ -61,7 +59,6 @@ public class register extends HttpServlet {
 		} catch (BusinessException e) {
 			request.setAttribute("codesError", e.getListeCodesErreur());
 			rd.forward(request, response);
-
 		}
 		
 	}

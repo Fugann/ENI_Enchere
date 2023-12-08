@@ -49,7 +49,7 @@
 		<input type="password" name="psw" id="psw" placeholder="Password" />
 		<br />
 		
-		<input type="checkbox" name="remember" id="remember" value="true" />
+		<input type="checkbox" name="remember" id="remember" value="true" checked />
 		<label for="checkbox">Se souvenir de moi</label>
 		<br />
 		
