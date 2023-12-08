@@ -70,7 +70,6 @@ public class ajoutArticle extends HttpServlet {
 			request.setAttribute("article", article);
 		} 
 		catch (BusinessException e) {
-			System.out.println("test2");
 			request.setAttribute("codesError", e.getListeCodesErreur());
 		}
 		

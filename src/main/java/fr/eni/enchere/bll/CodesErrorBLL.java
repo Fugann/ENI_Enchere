@@ -15,4 +15,21 @@ public abstract class CodesErrorBLL {
 	 * Echec quand le prix n'est pas en chiffre
 	 */
 	public static final int PRICE_EMPTY_ERROR = 20002;
+	
+	/**
+	 * Echec quand les 2 mots de passe saisis ne correspondent pas 
+	 */
+	public static final int SAME_PASSWORD_ERROR = 20004;
+	
+	/**
+	 * Echec quand le pseudo est déjà créé
+	 */
+	public static final int CREATE_PSEUDO_ERROR = 20005;
+	
+	/**
+	 * Echec quand l'email est déjà créé
+	 */
+	public static final int CREATE_EMAIL_ERROR = 20006;
+	
+	
 }

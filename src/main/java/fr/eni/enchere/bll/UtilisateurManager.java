@@ -6,6 +6,7 @@ import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.DAOFactory;
 import fr.eni.enchere.dal.utilisateur.UtilisateurDAO;
 import fr.eni.enchere.dal.utilisateur.UtilisateurDAOJDBC;
+import fr.eni.enchere.error.BusinessException;
 
 public class UtilisateurManager {
 
@@ -15,20 +16,49 @@ public class UtilisateurManager {
 		this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
 
-	public void ajouter(Utilisateur u) {
-		this.utilisateurDAO.insert(u);
+	public Utilisateur ajouter(String pseudo, String nom, String prenom, String email, String tel, String rue, String CP, String ville, String psw, String pswconfirm, int credit, byte admin) throws BusinessException {
+		BusinessException exception = new BusinessException();
+		this.VerifSamePassword(psw, pswconfirm, exception);
+		this.verifNull(pseudo, prenom, CP, psw, nom, email, rue, ville, exception);
+		this.selectPseudoByPseudo(pseudo, exception);
+		this.selectEmailByEmail(email, exception);
+		Utilisateur u = null;
+		
+		if (!exception.hasErreurs()) {
+			u = new Utilisateur(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, credit, admin);
+			this.utilisateurDAO.insert(u);
+			
+		}
+		if (exception.hasErreurs()) {
+			throw exception;
+		}
+		return u;
 	}
+
+
 
 	public Utilisateur getUserDetails(String userEmail) {
 		return this.utilisateurDAO.getUserByEmail(userEmail);
 	}
 	
-	public String selectPseudoByPseudo(String pseudo) {
-		return this.utilisateurDAO.selectPseudoByPseudo(pseudo);
+	public void selectPseudoByPseudo(String pseudo, BusinessException exception) {
+		String pseudoBDD = this.utilisateurDAO.selectPseudoByPseudo(pseudo);
+		
+		if (pseudo.equals(pseudoBDD)) {
+			System.out.println("test CREATE_PSEUDO_ERROR");
+			exception.ajouterErreur(CodesErrorBLL.CREATE_PSEUDO_ERROR);
+		}
+		
 	}
 	
-	public String selectEmailByEmail(String email) {
-		return this.utilisateurDAO.selectEmailByEmail(email);
+	public void selectEmailByEmail(String email, BusinessException exception) {
+		String emailBDD = this.utilisateurDAO.selectEmailByEmail(email);
+		
+		if (email.equals(emailBDD)) {
+			System.out.println("test CREATE_EMAIL_ERROR");
+			exception.ajouterErreur(CodesErrorBLL.CREATE_EMAIL_ERROR);
+		}
+		
 	}
 
 	public ArrayList<Utilisateur> selectAllSaufMDP() {
@@ -43,4 +73,21 @@ public class UtilisateurManager {
 		UtilisateurDAO utilisateurDAO = new UtilisateurDAOJDBC();
         utilisateurDAO.update(user);
 	}
+	
+	private void VerifSamePassword(String psw, String pswconfirm, BusinessException exception) {
+		if (psw == null || !psw.equals(pswconfirm)) {
+			exception.ajouterErreur(CodesErrorBLL.SAME_PASSWORD_ERROR);
+		}
+	}
+	
+	private void verifNull(String pseudo, String prenom, String CP, String psw, String nom, String email, String rue,
+			String ville, BusinessException exception) {
+		if (pseudo == null || pseudo.equals("") || prenom == null || prenom.equals("") || CP == null || CP.equals("")
+				|| psw == null || psw.equals("") || nom == null || nom.equals("") || email == null || email.equals("")
+				|| rue == null || rue.equals("") || ville == null || ville.equals("") ) {
+			System.out.println("test verifNull");
+			exception.ajouterErreur(CodesErrorBLL.INPUT_EMPTY_ERROR);
+		}		
+	}
+	
 }

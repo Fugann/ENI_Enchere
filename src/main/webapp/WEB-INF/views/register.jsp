@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import ="fr.eni.enchere.error.LecteurMessage" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +12,18 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
+<c:if test="${utilisateur != null }">
+		<p>Votre profil a été créé avec succès</p>
+	</c:if>
+	
+	<c:if test="${codesError != null }">
+		<p>Erreur : votre profil n'a pas pu être créé : </p>
+		<% System.out.println("test3"); %>
+	<c:forEach items="${codesError}" var="error">
+		<p>${LecteurMessage.getMessageErreur(error)}</p>
+	</c:forEach>
+	</c:if>
 
 <p>Mon profil</p>
 
