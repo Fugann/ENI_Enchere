@@ -43,10 +43,21 @@ public class login extends HttpServlet {
 			// add user object dans la session
 			session.setAttribute("user", user);
 
-			// Create a cookie with the user's ID
-			Cookie userIdCookie = new Cookie("no_utilisateur", String.valueOf(user.getNo_utilisateur()));
-			userIdCookie.setMaxAge(3600);
-			response.addCookie(userIdCookie);
+			if(remember) {
+				String selector = getRandomStr(12);
+				String rawValidator = getRandomStr(64);
+				
+				String hashedRawValidator = Utilisateur.hashPwd(rawValidator);
+				
+				userManager.setTokenAuth(selector, hashedRawValidator, user.getNo_utilisateur());
+				
+				Cookie selectorCookie = new Cookie("selector", selector);
+				Cookie validatorCookie = new Cookie("validator", rawValidator);
+				selectorCookie.setMaxAge(604800);
+				validatorCookie.setMaxAge(604800);
+				response.addCookie(selectorCookie);
+				response.addCookie(validatorCookie);
+			}
 
 			// Redirect to the home page
 			response.sendRedirect(request.getContextPath());
@@ -55,5 +66,18 @@ public class login extends HttpServlet {
 			rd.forward(request, response);
 		}
 
+	}
+
+	public static String getRandomStr(int n) {
+		// choisissez un caractére au hasard à partir de cette chaîne
+		String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvxyz" + "1234567890";
+
+		StringBuilder s = new StringBuilder(n);
+
+		for (int i = 0; i < n; i++) {
+			int index = (int) (str.length() * Math.random());
+			s.append(str.charAt(index));
+		}
+		return s.toString();
 	}
 }

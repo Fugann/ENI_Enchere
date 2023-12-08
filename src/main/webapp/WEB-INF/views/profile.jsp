@@ -78,10 +78,18 @@
     
 	    <div>
 	    	<div> <input type="submit" value="Enregistrer"></div>
-	    	<div><input type="submit" value="Supprimer mon compte"></div>
 	    </div>
    </div>
 </form>
+
+
+<div>
+    <form action="DeleteAccount" method="post" class="delete-account-form">
+        <!-- You can add a confirmation message here if needed -->
+        <input type="hidden" name="deleteConfirmation" value="true">
+        <input type="submit" value="Supprimer mon compte">
+    </form>
+</div>
 
 
 

@@ -2,6 +2,8 @@ package fr.eni.enchere.bo;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Utilisateur {
 
@@ -17,6 +19,10 @@ public class Utilisateur {
 	private String mot_de_passe;
 	private int credit;
 	private byte administrateur;
+	private Set<UtilisateurAuthToken> utilisateurAuthTokens = new HashSet<>(0);
+
+	public Utilisateur() {
+	}
 
 	public Integer getNo_utilisateur() {
 		return no_utilisateur;
@@ -114,7 +120,12 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 
-	public Utilisateur() {
+	public Set<UtilisateurAuthToken> getUtilisateurAuthTokens() {
+		return utilisateurAuthTokens;
+	}
+
+	public void setUtilisateurAuthTokens(Set<UtilisateurAuthToken> utilisateurAuthTokens) {
+		this.utilisateurAuthTokens = utilisateurAuthTokens;
 	}
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
