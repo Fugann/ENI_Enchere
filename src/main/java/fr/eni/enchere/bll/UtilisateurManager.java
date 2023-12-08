@@ -82,19 +82,21 @@ public class UtilisateurManager {
 	}
 
 	public void setTokenAuth(String selector, String hashedRawValidator, Integer no_utilisateur) {
-		
+
 		UtilisateurAuthToken authToken = new UtilisateurAuthToken(selector, hashedRawValidator, no_utilisateur);
 		utilisateurDAO.setTokenAuth(authToken);
-		
+
 	}
-	
+
 	public UtilisateurAuthToken findBySelector(String selector) {
 		List<UtilisateurAuthToken> list = utilisateurDAO.findBySelector(selector);
-		
+
 		if (!list.isEmpty()) {
 			return list.get(0);
-		}	
+		}
 		return null;
+	}
+
 	private void VerifSamePassword(String psw, String pswconfirm, BusinessException exception) {
 		if (psw == null || !psw.equals(pswconfirm)) {
 			exception.ajouterErreur(CodesErrorBLL.SAME_PASSWORD_ERROR);
