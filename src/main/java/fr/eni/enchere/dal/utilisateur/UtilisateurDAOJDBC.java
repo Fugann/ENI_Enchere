@@ -14,6 +14,7 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 
 	private static final String INSERT_UTILISATEUR = "INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 	private static final String GET_USER_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
+	private static final String GET_USER_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
 	private static final String SELECT_PSEUDO_BY_PSEUDO = "SELECT PSEUDO FROM UTILISATEURS WHERE PSEUDO = ?";
 	private static final String SELECT_EMAIL_BY_EMAIL = "SELECT EMAIL FROM UTILISATEURS WHERE EMAIL = ?";
 	private static final String SELECT_ALL_SAUF_MDP = "SELECT NO_UTILISATEUR, PSEUDO, NOM, PRENOM, EMAIL, TELEPHONE, RUE, CODE_POSTAL, VILLE FROM UTILISATEURS";
@@ -54,13 +55,13 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur getUserByEmail(String userEmail) {
+	public Utilisateur getUserByEmail(String identifiant) {
 		Utilisateur utilisateur = null;
 
 		try (Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(GET_USER_BY_EMAIL)) {
 
-			pstmt.setString(1, userEmail);
+			pstmt.setString(1, identifiant);
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
@@ -74,7 +75,33 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 			}
 
 		} catch (SQLException e) {
-			// Handle the exception or log it appropriately
+			e.printStackTrace();
+		}
+
+		return utilisateur;
+	}
+	
+	@Override
+	public Utilisateur getUserByPseudo(String identifiant) {
+		Utilisateur utilisateur = null;
+
+		try (Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(GET_USER_BY_PSEUDO)) {
+
+			pstmt.setString(1, identifiant);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					// Populate the Utilisateur object with data from the ResultSet
+					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
+							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
+							rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"),
+							rs.getByte("administrateur"));
+				}
+			}
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -185,7 +212,6 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	    return utilisateur;
 	}
 	
-	
 	@Override
 	public void update(Utilisateur utilisateur) {
 	    try (Connection conn = ConnectionProvider.getConnection()) {
@@ -262,4 +288,5 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	        e.printStackTrace(); // Handle the exception appropriately
 	    }
 	}
+
 }

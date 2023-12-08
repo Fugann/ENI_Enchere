@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.error.BusinessException;
 
 public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,36 +28,30 @@ public class login extends HttpServlet {
 		response.setContentType("text/html");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
 
-		String userEmail = request.getParameter("identifiant");
+		String identifiant = request.getParameter("identifiant");
 		String password = request.getParameter("psw");
-
-		Utilisateur requestUser = new Utilisateur(userEmail, password);
+		boolean remember = Boolean.parseBoolean(request.getParameter("remember"));
 
 		// Replace "UserManager" with your actual user management class
 		UtilisateurManager userManager = new UtilisateurManager();
 
-		// Retrieve user details from the database
-		Utilisateur userObject = userManager.getUserDetails(userEmail);
+		try {
+			Utilisateur user = userManager.getUserDetails(identifiant, password);
+			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(3600);
 
-		if (userObject != null) {
-			if (requestUser.getMot_de_passe().equals(userObject.getMot_de_passe())) {
-				HttpSession session = request.getSession();
-				session.setMaxInactiveInterval(3600);
-				
-				//add user object dans la session
-				session.setAttribute("user", userObject);
+			// add user object dans la session
+			session.setAttribute("user", user);
 
-				// Create a cookie with the user's ID
-				Cookie userIdCookie = new Cookie("no_utilisateur", String.valueOf(userObject.getNo_utilisateur()));
-				userIdCookie.setMaxAge(3600);
-				response.addCookie(userIdCookie);
-				
-				// Redirect to the home page
-				response.sendRedirect(request.getContextPath());
-			}
+			// Create a cookie with the user's ID
+			Cookie userIdCookie = new Cookie("no_utilisateur", String.valueOf(user.getNo_utilisateur()));
+			userIdCookie.setMaxAge(3600);
+			response.addCookie(userIdCookie);
 
-		} else {
-			request.setAttribute("error", "Email/pseudo incorrect  !");
+			// Redirect to the home page
+			response.sendRedirect(request.getContextPath());
+		} catch (BusinessException e) {
+			request.setAttribute("codesError", e.getListeCodesErreur());
 			rd.forward(request, response);
 		}
 

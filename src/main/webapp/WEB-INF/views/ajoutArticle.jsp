@@ -19,7 +19,6 @@
 	
 	<c:if test="${codesError != null }">
 		<p>Erreur : L'article n'a pas pu être ajouté : </p>
-		<% System.out.println("test3"); %>
 	<c:forEach items="${codesError}" var="error">
 		<p>${LecteurMessage.getMessageErreur(error)}</p>
 	</c:forEach>
