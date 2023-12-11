@@ -79,8 +79,6 @@ public class accueil extends HttpServlet {
 		ArticleManager am = new ArticleManager();
 
 		ArrayList<Article> articles = am.getAllArticlesByCategorie(search, categorie);
-		
-		System.out.println(articles.get(0).getDate_fin_encheres().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
 
 		// Récupération de tout les vendeur
 		UtilisateurManager um = new UtilisateurManager();
