@@ -81,9 +81,9 @@ public class UtilisateurManager {
         utilisateurDAO.delete(userId);
     }
 
-	public void setTokenAuth(String selector, String hashedRawValidator, Integer no_utilisateur) {
+	public void setTokenAuth(String selector, String hashedValidator, Integer no_utilisateur) {
 
-		UtilisateurAuthToken authToken = new UtilisateurAuthToken(selector, hashedRawValidator, no_utilisateur);
+		UtilisateurAuthToken authToken = new UtilisateurAuthToken(selector, hashedValidator, no_utilisateur);
 		utilisateurDAO.setTokenAuth(authToken);
 
 	}
@@ -127,5 +127,15 @@ public class UtilisateurManager {
 		if (email.equals(emailBDD)) {
 			exception.ajouterErreur(CodesErrorBLL.CREATE_EMAIL_ERROR);
 		}
+	}
+
+	public void updateAuth(UtilisateurAuthToken token) {
+		if(token != null) {
+			this.utilisateurDAO.updateAuth(token);
+		}
+	}
+
+	public void deleteAuth(int id) {
+		this.utilisateurDAO.deleteAuth(id);
 	}
 }

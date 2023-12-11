@@ -23,6 +23,9 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	private static final String GET_USER_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 	private static final String FIND_BY_SELECTOR = "SELECT * FROM UTILISATEURS_AUTH WHERE selector = ?";
 	private static final String INSERT_UTILISATEUR_AUTH = "INSERT INTO UTILISATEURS_AUTH (selector, validator, no_utilisateur) VALUES(?,?,?);";
+	private static final String UPDATE_UTILISATEUR_AUTH = "UPDATE UTILISATEURS_AUTH SET selector = ?, validator = ? WHERE no_utilisateur = ?;";
+	private static final String DELETE_UTILISATEUR_AUTH = "DELETE FROM UTILISATEURS_AUTH WHERE id = ?;";
+	
 	
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -292,7 +295,6 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 		}
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public List<UtilisateurAuthToken> findBySelector(String selectorQuery) {
 
@@ -302,14 +304,15 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			UtilisateurAuthToken authToken;
-			List<UtilisateurAuthToken> list = null;
+			List<UtilisateurAuthToken> list = new ArrayList<UtilisateurAuthToken>();
 			while (rs.next()) {
 				
+				int id = rs.getInt("id");
 				String selector = rs.getString("selector");
 				String validator = rs.getString("validator");
 				int no_utilisateur = rs.getInt("no_utilisateur");
 				
-				authToken = new UtilisateurAuthToken(selector, validator, no_utilisateur);
+				authToken = new UtilisateurAuthToken(id, selector, validator, no_utilisateur);
 				list.add(authToken);
 			}
 
@@ -343,7 +346,7 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 			pstmt.setString(2, authToken.getValidator());
 			pstmt.setInt(3, authToken.getNo_utilisateur());
 			pstmt.executeUpdate();
-			
+						
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				authToken.setId(rs.getInt(1));
@@ -354,6 +357,43 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 
 		} catch (Exception e) {
 			System.out.println("Ajout du token : echec");
+			e.printStackTrace();
+		}
+	}
+	
+
+	@Override
+	public void updateAuth(UtilisateurAuthToken token) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+
+			PreparedStatement pstmt = conn.prepareStatement(UPDATE_UTILISATEUR_AUTH);
+			pstmt.setString(1, token.getSelector());
+			pstmt.setString(2, token.getValidator());
+			pstmt.setInt(3, token.getNo_utilisateur());
+			pstmt.executeUpdate();
+
+			conn.close();
+			System.out.println("Update du token : succes");
+
+		} catch (Exception e) {
+			System.out.println("Update du token : echec");
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteAuth(int id) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+
+			PreparedStatement pstmt = conn.prepareStatement(DELETE_UTILISATEUR_AUTH);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+
+			conn.close();
+			System.out.println("Delete du token : succes");
+
+		} catch (Exception e) {
+			System.out.println("Delete du token : echec");
 			e.printStackTrace();
 		}
 	}

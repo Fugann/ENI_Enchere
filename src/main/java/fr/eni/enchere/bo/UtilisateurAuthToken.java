@@ -42,6 +42,13 @@ public class UtilisateurAuthToken {
 		this.no_utilisateur = no_utilisateur;
 	}
 
+	public UtilisateurAuthToken(int id, String selector, String validator, int no_utilisateur) {
+		this.id = id;
+		this.selector = selector;
+		this.validator = validator;
+		this.no_utilisateur = no_utilisateur;
+	}
+
 	public UtilisateurAuthToken(String selector, String validator, int no_utilisateur) {
 		this.selector = selector;
 		this.validator = validator;

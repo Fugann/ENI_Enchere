@@ -14,11 +14,14 @@
 <title>Accueil</title>
 </head>
 <body>
-
+	<p>Connected</p>
 	<nav>
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
-			<a href="<%=request.getContextPath()%>/login">Login/register</a>
+			<a href="<%=request.getContextPath()%>">Enchères</a>
+			<a href="<%=request.getContextPath()%>/ajoutArticle">Vendre un article</a>
+			<a href="<%=request.getContextPath()%>/Profile">Mon Profil</a>
+			<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 		</div>
 	</nav>
 	
@@ -39,6 +42,42 @@
 						</c:forEach>
 					</select>
 				</div>
+				<div>
+					<div>
+						<div>
+							<input type="radio" name="achat" id="achat" value="true" checked />
+							<label for="achat">Mes achats</label>
+						</div>
+						<div>
+							<input type="checkbox" name="open" id="open" value="true" checked />
+							<label for="open" >mes enchères ouvertes</label>
+							<br />
+							<input type="checkbox" name="cours" id="cours" />
+							<label for="cours" >mes enchères en cours</label>
+							<br />
+							<input type="checkbox" name="remporte" id="remporte"/>
+							<label for="remporte" >mes enchères remportées</label>
+							<br />
+						</div>
+					</div>
+					<div>
+						<div>
+							<input type="radio" name="vente" id="vente" />
+							<label for="vente">Mes ventes</label>
+						</div>
+						<div>
+							<input type="checkbox" name="cours" id="cours" />
+							<label for="cours" >mes ventes en cours</label>
+							<br />
+							<input type="checkbox" name="debut" id="debut"/>
+							<label for="debut" >mes ventes non débutées</label>
+							<br />
+							<input type="checkbox" name="temine" id="temine"/>
+							<label for="temine" >mes ventes terminées</label>
+							<br />
+						</div>
+					</div>
+				</div>
 			</div>
 			<div>
 				<input type="submit" value="Rechercher" />
@@ -51,7 +90,7 @@
 					<img src="https://cdn.cultura.com/cdn-cgi/image/width=450/media/pim/13_246980_17_110_FR.jpg" alt="Photo introuvable" />
 				</div>
 				<div>
-					<strong><c:out value="${article.getNom_article()}"/></strong>
+					<a href=""><strong><c:out value="${article.getNom_article()}"/></strong></a>
 					<p>Prix : 
 					<c:choose>
 						<c:when test="${article.getPrix_vente() != '0'}">
@@ -66,7 +105,7 @@
 					<p>Vendeur : 
 					<c:forEach items="${users}" var="user">
 						<c:if test="${article.getNo_utilisateur() == user.getNo_utilisateur()}">
-							<c:out value="${user.getPseudo()}"/>
+							<a href=""><c:out value="${user.getPseudo()}"/></a>
 						</c:if>
 					</c:forEach>
 					</p>
@@ -77,7 +116,5 @@
 			<c:if test="${articles.size() == '0'}"><p>Rien</p></c:if>
 		</div>
 	</main>
-
-
 </body>
 </html>
