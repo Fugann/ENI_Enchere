@@ -31,4 +31,8 @@ public interface UtilisateurDAO {
 
 	public void setTokenAuth(UtilisateurAuthToken authToken);
 
+	public void updateAuth(UtilisateurAuthToken token);
+
+	public void deleteAuth(int id);
+
 }

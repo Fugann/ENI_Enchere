@@ -44,12 +44,12 @@ public class login extends HttpServlet {
 			session.setAttribute("user", user);
 
 			if(remember) {
-				String selector = getRandomStr(12);
-				String rawValidator = getRandomStr(64);
+				String selector = Utilisateur.getRandomStr(12);
+				String rawValidator = Utilisateur.getRandomStr(64);
 				
-				String hashedRawValidator = Utilisateur.hashPwd(rawValidator);
+				String hashedValidator = Utilisateur.hashPwd(rawValidator);
 				
-				userManager.setTokenAuth(selector, hashedRawValidator, user.getNo_utilisateur());
+				userManager.setTokenAuth(selector, hashedValidator, user.getNo_utilisateur());
 				
 				Cookie selectorCookie = new Cookie("selector", selector);
 				Cookie validatorCookie = new Cookie("validator", rawValidator);
@@ -68,16 +68,4 @@ public class login extends HttpServlet {
 
 	}
 
-	public static String getRandomStr(int n) {
-		// choisissez un caractére au hasard à partir de cette chaîne
-		String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvxyz" + "1234567890";
-
-		StringBuilder s = new StringBuilder(n);
-
-		for (int i = 0; i < n; i++) {
-			int index = (int) (str.length() * Math.random());
-			s.append(str.charAt(index));
-		}
-		return s.toString();
-	}
 }
