@@ -8,59 +8,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>S'enregistrer</title>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/normalize.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.scss">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="register">
 
-	<c:if test="${utilisateur != null }">
-			<p>Votre profil a été créé avec succès</p>
+
+	<nav>
+		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
+		<div>
+			<c:choose>
+				<c:when test="${user != null}">
+					<a href="<%=request.getContextPath()%>">Enchères</a>
+					<a href="<%=request.getContextPath()%>/ajoutArticle">Vendre un article</a>
+					<a href="<%=request.getContextPath()%>/Profile">Mon Profil</a>
+					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
+				</c:when>
+				<c:otherwise>
+					<a href="<%=request.getContextPath()%>/login">Login/register</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</nav>
+
+	<div class="register-error-alerts">
+		<c:if test="${utilisateur != null }">
+				<p class="text-success">Votre profil a été créé avec succès</p>
 		</c:if>
-		
+			
 		<c:if test="${codesError != null }">
-			<p>Erreur : votre profil n'a pas pu être créé : </p>
-		<c:forEach items="${codesError}" var="error">
-			<p>${LecteurMessage.getMessageErreur(error)}</p>
-		</c:forEach>
+			<div class="error-control">
+				<p class="text-error">Erreur : votre profil n'a pas pu être créé : </p>
+				<c:forEach items="${codesError}" var="error">
+					<p class="text-error-2">${LecteurMessage.getMessageErreur(error)}</p>
+				</c:forEach>
+			</div>
 		</c:if>
+	</div>
 	
-	<form method="post" action="">
-		<div>
-		<label for="pseudo">Pseudo : </label>
-		<input type="text" name="pseudo" id="pseudo" value="<%= request.getAttribute("codesError") !=null?request.getParameter("pseudo"):""%>"/>
-		<br />
-		<label for="prenom">Prénom : </label>
-		<input type="text" name="prenom" id="prenom" value="<%= request.getAttribute("codesError") !=null?request.getParameter("prenom"):""%>"/>
-		<br />
-		<label for="tel">Téléphone : </label>
-		<input type="tel" name="tel" id="tel" value="<%= request.getAttribute("codesError") !=null?request.getParameter("tel"):""%>"/>
-		<br />
-		<label for="CP">Code Postal : </label>
-		<input type="text" name="CP" id="CP" value="<%= request.getAttribute("codesError") !=null?request.getParameter("CP"):""%>"/>
-		<br />
-		<label for="psw">Mot de passe : </label>
-		<input type="password" name="psw" id="psw" />
+		<div class="my_profil_text">
+			<h1>Mon Profil</h1>
 		</div>
-		<div>
-			<label for="nom">Nom : </label>
-		<input type="text" name="nom" id="nom" value="<%= request.getAttribute("codesError") !=null?request.getParameter("nom"):""%>"/>
-		<br />
-		<label for="email">Email : </label>
-		<input type="email" name="email" id="email" value="<%= request.getAttribute("codesError") !=null?request.getParameter("email"):""%>"/>
-		<br />
-		<label for="rue">Rue : </label>
-		<input type="text" name="rue" id="rue" value="<%= request.getAttribute("codesError") !=null?request.getParameter("rue"):""%>"/>
-		<br />
-		<label for="ville">Ville : </label>
-		<input type="text" name="ville" id="ville" value="<%= request.getAttribute("codesError") !=null?request.getParameter("ville"):""%>"/>
-		<br />
-		<label for="pswconfirm">Confirmation : </label>
-		<input type="password" name="pswconfirm" id="pswconfirm" />
+	
+	<form method="post" action="" class="register_form">
+	
+		<div class="align_inputs">
+			<div class="form_inputs_one">
+				<div class="div-control">
+					<label for="pseudo">Pseudo : </label>
+					<input type="text" name="pseudo" id="pseudo" value="<%= request.getAttribute("codesError") !=null?request.getParameter("pseudo"):""%>"/>
+				</div>
+				<div class="div-control">
+					<label for="prenom">Prénom : </label>
+					<input type="text" name="prenom" id="prenom" value="<%= request.getAttribute("codesError") !=null?request.getParameter("prenom"):""%>"/>
+				</div>
+				<div class="div-control">
+					<label for="tel">Téléphone : </label>
+					<input type="tel" name="tel" id="tel" value="<%= request.getAttribute("codesError") !=null?request.getParameter("tel"):""%>"/>
+				</div>
+				<div class="div-control">
+					<label for="CP">Code Postal : </label>
+					<input type="text" name="CP" id="CP" value="<%= request.getAttribute("codesError") !=null?request.getParameter("CP"):""%>"/>
+				</div>
+				<div class="div-control">
+					<label for="psw">Mot de passe : </label>
+					<input type="password" name="psw" id="psw" />
+				</div>
+			</div>
+			
+			<div class="form_inputs_two">
+				<div class="div-control">
+					<label for="nom">Nom : </label>
+					<input type="text" name="nom" id="nom" value="<%= request.getAttribute("codesError") !=null?request.getParameter("nom"):""%>"/>
+				</div>
+				<div class="div-control">
+					<label for="email">Email : </label>
+					<input type="email" name="email" id="email" value="<%= request.getAttribute("codesError") !=null?request.getParameter("email"):""%>"/>
+				</div>
+				<div class="div-control">
+					<label for="rue">Rue : </label>
+					<input type="text" name="rue" id="rue" value="<%= request.getAttribute("codesError") !=null?request.getParameter("rue"):""%>"/>
+				</div>
+				<div class="div-control">
+					<label for="ville">Ville : </label>
+					<input type="text" name="ville" id="ville" value="<%= request.getAttribute("codesError") !=null?request.getParameter("ville"):""%>"/>
+				</div>
+				<div class="div-control">
+					<label for="pswconfirm">Confirmation : </label>
+					<input type="password" name="pswconfirm" id="pswconfirm" />
+				</div>
+			</div>
 		</div>
-		
-		<input type="submit" value="Créer" />
-		<a href="<%=request.getContextPath()%>">Annuler</a>
+		<div class="control_buttons">
+				<input type="submit" value="Créer" class="button_create" />
+				<a href="<%=request.getContextPath()%>" class="button_cancel">Annuler</a>
+		</div>
 	</form>
-
 </body>
 </html>
