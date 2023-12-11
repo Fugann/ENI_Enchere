@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bll.ArticleManager;
@@ -33,8 +34,13 @@ public class accueil extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
+		HttpSession session = request.getSession();
+		boolean loggedIn = session != null && session.getAttribute("user") != null;
+		loggedIn = doFilter(request, response, session, loggedIn);
 
-		doFilter(request, response);
+		if(loggedIn) {
+			rd = request.getRequestDispatcher("/WEB-INF/views/accueilLogged.jsp");
+		}
 
 		// Récupération de toutes les catégorie
 		CategorieManager cm = new CategorieManager();
@@ -53,6 +59,13 @@ public class accueil extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
+		HttpSession session = request.getSession();
+		boolean loggedIn = session != null && session.getAttribute("user") != null;
+		loggedIn = doFilter(request, response, session, loggedIn);
+
+		if(loggedIn) {
+			rd = request.getRequestDispatcher("/WEB-INF/views/accueilLogged.jsp");
+		}
 
 		String search = request.getParameter("search");
 		String categorie = request.getParameter("categorie");
@@ -66,6 +79,8 @@ public class accueil extends HttpServlet {
 		ArticleManager am = new ArticleManager();
 
 		ArrayList<Article> articles = am.getAllArticlesByCategorie(search, categorie);
+		
+		System.out.println(articles.get(0).getDate_fin_encheres().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
 
 		// Récupération de tout les vendeur
 		UtilisateurManager um = new UtilisateurManager();
@@ -79,15 +94,11 @@ public class accueil extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	public void doFilter(HttpServletRequest request, HttpServletResponse response)
+	public boolean doFilter(HttpServletRequest request, HttpServletResponse response, HttpSession session, boolean loggedIn)
 			throws IOException, ServletException {
 
 		System.out.println("doFilter");
-
-		HttpSession session = request.getSession(false);
-
-		boolean loggedIn = session != null && session.getAttribute("user") != null;
-
+		
 		Cookie[] cookies = request.getCookies();
 
 		if (!loggedIn && cookies != null) {
@@ -120,7 +131,6 @@ public class accueil extends HttpServlet {
 
 						session = request.getSession();
 						session.setAttribute("user", user);
-						loggedIn = true;
 
 						// update new token in database
 						String newSelector = Utilisateur.getRandomStr(12);
@@ -140,9 +150,11 @@ public class accueil extends HttpServlet {
 
 						response.addCookie(cookieSelector);
 						response.addCookie(cookieValidator);
+						return true;
 					}
 				}
 			}
 		}
+		return loggedIn;
 	}
 }
