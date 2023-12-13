@@ -25,7 +25,7 @@
 					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 				</c:when>
 				<c:otherwise>
-					<a href="<%=request.getContextPath()%>/login">Login/register</a>
+					<a href="<%=request.getContextPath()%>/Login">Login/Register</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -57,7 +57,7 @@
 		<a href="">Mot de passe oublié</a>
 	</form>
 
-	<a href="<%=request.getContextPath()%>/register">Créer un compte</a>
+	<a href="<%=request.getContextPath()%>/Register">Créer un compte</a>
 
 </body>
 </html>

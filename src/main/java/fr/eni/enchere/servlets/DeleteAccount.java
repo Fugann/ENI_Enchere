@@ -12,6 +12,7 @@ import fr.eni.enchere.bo.Utilisateur;
 
 public class DeleteAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final UtilisateurManager um = new UtilisateurManager();
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,7 +25,7 @@ public class DeleteAccount extends HttpServlet {
 
         if (user.getNo_utilisateur() != null) {
             // Delete the user
-            UtilisateurManager um = new UtilisateurManager();
+            
             um.deleteUser(user.getNo_utilisateur());
 
             // End the session (log out)

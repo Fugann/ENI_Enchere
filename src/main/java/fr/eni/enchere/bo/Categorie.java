@@ -4,7 +4,17 @@ public class Categorie {
 
 	private Integer no_categorie;
 	private String libelle;
+	
+	// Constructor
+	public Categorie() {
+	}
 
+	public Categorie(Integer no_categorie, String libelle) {
+		this.no_categorie = no_categorie;
+		this.libelle = libelle;
+	}
+
+	// get/set
 	public Integer getNo_categorie() {
 		return no_categorie;
 	}
@@ -20,13 +30,4 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-
-	public Categorie() {
-	}
-
-	public Categorie(Integer no_categorie, String libelle) {
-		this.no_categorie = no_categorie;
-		this.libelle = libelle;
-	}
-
 }

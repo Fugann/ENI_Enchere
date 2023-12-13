@@ -9,6 +9,7 @@ public class Enchere {
 	LocalDateTime date_enchere;
 	int montant_enchere;
 	
+	// Constructor
 	public Enchere() {
 	}
 	
@@ -25,6 +26,7 @@ public class Enchere {
 		this.montant_enchere = montant_enchere;
 	}
 
+	// get/set
 	public int getNo_utilisateur() {
 		return no_utilisateur;
 	}

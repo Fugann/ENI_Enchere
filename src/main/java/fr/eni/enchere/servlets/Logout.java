@@ -13,6 +13,7 @@ import fr.eni.enchere.bo.UtilisateurAuthToken;
 
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final UtilisateurManager um = new UtilisateurManager();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -32,7 +33,6 @@ public class Logout extends HttpServlet {
 			
 			if (!selector.isEmpty()) {
 	            // delete token from database
-				UtilisateurManager um = new UtilisateurManager();
 				UtilisateurAuthToken token = um.findBySelector(selector);
 	             
 	            if (token != null) {
@@ -50,7 +50,7 @@ public class Logout extends HttpServlet {
 			
 		}
 
-		// Redirect vers la page d'accueil
+		// Redirect vers la page d'Accueil
 		response.sendRedirect(request.getContextPath());
 	}
 

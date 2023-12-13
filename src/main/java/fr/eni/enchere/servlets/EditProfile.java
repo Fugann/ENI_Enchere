@@ -11,9 +11,9 @@ import fr.eni.enchere.bo.Utilisateur;
 
 public class EditProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final UtilisateurManager userManager = new UtilisateurManager();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -53,7 +53,6 @@ public class EditProfile extends HttpServlet {
 	        }
 
 	        // Update user in the database
-	        UtilisateurManager userManager = new UtilisateurManager();
 	        userManager.updateUser(user);
 
 	        // Save the updated user object back to the session

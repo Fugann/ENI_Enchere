@@ -29,9 +29,55 @@ public class Utilisateur {
 	private byte administrateur;
 	private Set<UtilisateurAuthToken> utilisateurAuthTokens = new HashSet<>(0);
 
+	// Constructor
 	public Utilisateur() {
 	}
 
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String code_postal, String ville, String mot_de_passe, int credit, Byte admin) {
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.mot_de_passe = hashPwd(mot_de_passe);
+		this.credit = credit;
+		this.administrateur = admin;
+	}
+
+	public Utilisateur(Integer no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String code_postal, String ville, String mot_de_passe, int credit, byte administrateur) {
+		this.no_utilisateur = no_utilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.mot_de_passe = mot_de_passe;
+		this.credit = credit;
+		this.administrateur = administrateur;
+	}
+
+	public Utilisateur(Integer no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String code_postal, String ville) {
+		this.no_utilisateur = no_utilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+	}
+
+	// get/set
 	public Integer getNo_utilisateur() {
 		return no_utilisateur;
 	}
@@ -136,50 +182,6 @@ public class Utilisateur {
 		this.utilisateurAuthTokens = utilisateurAuthTokens;
 	}
 
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String code_postal, String ville, String mot_de_passe, int credit, Byte admin) {
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.mot_de_passe = hashPwd(mot_de_passe);
-		this.credit = credit;
-		this.administrateur = admin;
-	}
-
-	public Utilisateur(Integer no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String code_postal, String ville, String mot_de_passe, int credit, byte administrateur) {
-		this.no_utilisateur = no_utilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
-		this.mot_de_passe = mot_de_passe;
-		this.credit = credit;
-		this.administrateur = administrateur;
-	}
-
-	public Utilisateur(Integer no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String code_postal, String ville) {
-		this.no_utilisateur = no_utilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.code_postal = code_postal;
-		this.ville = ville;
-	}
-
 	public static String hashPwd(String motDePasse) {
 		MessageDigest md = null;
 		try {
@@ -200,7 +202,7 @@ public class Utilisateur {
 
 		return sb.toString();
 	}
-	
+
 	public static String getRandomStr(int n) {
 		// choisissez un caractére au hasard à partir de cette chaîne
 		String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvxyz" + "1234567890";
@@ -213,17 +215,17 @@ public class Utilisateur {
 		}
 		return s.toString();
 	}
-	
+
 	public static boolean doFilter(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		
+
 		HttpSession session = request.getSession();
 		boolean loggedIn = session != null && session.getAttribute("user") != null;
-		
+
 		Cookie[] cookies = request.getCookies();
 
 		if (!loggedIn && cookies != null) {
-			// process auto login for remember me feature
+			// process auto Login for remember me feature
 			String selector = "";
 			String rawValidator = "";
 

@@ -26,7 +26,7 @@
 					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 				</c:when>
 				<c:otherwise>
-					<a href="<%=request.getContextPath()%>/login">Login/register</a>
+					<a href="<%=request.getContextPath()%>/Login">Login/Register</a>
 				</c:otherwise>
 			</c:choose>
 		</div>

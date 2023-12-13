@@ -41,7 +41,7 @@ public class ArticleDAOJDBC implements ArticleDAO {
 			// récupération de ce que renvoi la bdd
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
-				// set le numéro de l'article pour la vérification dans le ajoutArticle.java
+				// set le numéro de l'article pour la vérification dans le AjoutArticle.java
 				article.setNo_article(rs.getInt(1));
 			}
 

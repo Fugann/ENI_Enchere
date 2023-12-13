@@ -12,10 +12,11 @@ import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.error.BusinessException;
 
 /**
- * Servlet implementation class register
+ * Servlet implementation class Register
  */
-public class register extends HttpServlet {
+public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final UtilisateurManager um = new UtilisateurManager();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -50,11 +51,10 @@ public class register extends HttpServlet {
 			int credit = 0;
 			Byte admin = 0;
 		
-			UtilisateurManager um = new UtilisateurManager();
 			Utilisateur utilisateur = um.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, pswconfirm, credit, admin);
 			
 			request.setAttribute("utilisateur", utilisateur);
-			response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(request.getContextPath() + "/Login");
 		
 		} catch (BusinessException e) {
 			request.setAttribute("codesError", e.getListeCodesErreur());

@@ -18,7 +18,7 @@
 	<nav>
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
-			<a href="<%=request.getContextPath()%>/login">Login/register</a>
+			<a href="<%=request.getContextPath()%>/Login">Login/Register</a>
 		</div>
 	</nav>
 	

@@ -13,8 +13,9 @@ import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.error.BusinessException;
 
-public class login extends HttpServlet {
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final UtilisateurManager userManager = new UtilisateurManager();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -33,8 +34,7 @@ public class login extends HttpServlet {
 		boolean remember = Boolean.parseBoolean(request.getParameter("remember"));
 
 		// Replace "UserManager" with your actual user management class
-		UtilisateurManager userManager = new UtilisateurManager();
-
+		
 		try {
 			Utilisateur user = userManager.getUserDetails(identifiant, password);
 			HttpSession session = request.getSession();
