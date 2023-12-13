@@ -124,7 +124,6 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 
 			if (rs.next()) {
 				return rs.getString("pseudo");
-
 			}
 			conn.close();
 

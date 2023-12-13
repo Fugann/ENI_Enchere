@@ -113,5 +113,4 @@ public class AjoutEnchere extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/Enchere?id=" + article.getNo_article());
 		}
 	}
-
 }
