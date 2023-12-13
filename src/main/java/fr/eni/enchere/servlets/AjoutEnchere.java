@@ -5,6 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import fr.eni.enchere.bll.ArticleManager;
@@ -35,7 +37,7 @@ public class AjoutEnchere extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/enchere.jsp");
 		
 		if(!Utilisateur.doFilter(request, response)) {
-			rd = request.getRequestDispatcher("/WEB-INF/views/Accueil.jsp");
+			response.sendRedirect(request.getContextPath());
 		} else {
 			
 			int id = Integer.parseInt(request.getParameter("id"));
@@ -53,9 +55,7 @@ public class AjoutEnchere extends HttpServlet {
 			request.setAttribute("user", user);
 			request.setAttribute("categorie", categorie);
 			request.setAttribute("enchere", enchere);
-			
-			System.out.println(article.getDate_debut_encheres());
-			
+
 			rd.forward(request, response);
 		}
 	}
@@ -65,6 +65,9 @@ public class AjoutEnchere extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/enchere.jsp");
+		HttpSession session = request.getSession();
 		
 		if(!Utilisateur.doFilter(request, response)) {
 			response.sendRedirect(request.getContextPath());
@@ -84,28 +87,33 @@ public class AjoutEnchere extends HttpServlet {
 			
 			String montant = request.getParameter("montant");
 			
+			Utilisateur buyer = (Utilisateur) session.getAttribute("user");
+			
 			try {
 				
 				Enchere montant_enchere = em.getEnchereById(article.getNo_article());
 				if(montant_enchere == null) {
-					montant_enchere = new Enchere(user.getNo_utilisateur(), article.getNo_article(), null, 0);
+					montant_enchere = new Enchere(buyer.getNo_utilisateur(), article.getNo_article(), null, 0);
 				}
 				System.out.println("enchere = " + montant_enchere.getMontant_enchere());
 				
-				Enchere enchere = em.insert(user.getNo_utilisateur(), article.getNo_article(), montant, article.getPrix_initial(), montant_enchere.getMontant_enchere());
+				Enchere enchere = em.getEnchereById(article.getNo_article());
+				request.setAttribute("enchere", enchere);
+				enchere = em.insert(buyer.getNo_utilisateur(), article.getNo_article(), montant, article.getPrix_initial(), montant_enchere.getMontant_enchere());
 				System.out.println(enchere.getDate_enchere());
 				if(enchere.getDate_enchere() != null) {
 					request.setAttribute("succes", "true");
 				}
 				
+				
 			} catch (BusinessException e) {
 				request.setAttribute("codesError", e.getListeCodesErreur());
+				rd.forward(request, response);
 			}
 			
-			Enchere enchere = em.getEnchereById(article.getNo_article());
-			
-			request.setAttribute("enchere", enchere);
-			response.sendRedirect(request.getContextPath() + "/Enchere?id=" + article.getNo_article());
+			if(request.getAttribute("codesError") == null) {
+				response.sendRedirect(request.getContextPath() + "/Enchere?id=" + article.getNo_article());
+			}
 		}
 	}
 }

@@ -22,7 +22,7 @@
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
 			<a href="<%=request.getContextPath()%>">Mes Enchères</a> <a
-				href="<%=request.getContextPath()%>/AjoutArticle">Vendre un
+				href="<%=request.getContextPath()%>/ajoutArticle">Vendre un
 				article</a> <a href="<%=request.getContextPath()%>/Profile">Mon
 				Profil</a> <a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 		</div>
@@ -58,14 +58,15 @@
 					<p>Prix initial : <c:out value="${article.getPrix_initial()}"/></p>
 				</c:otherwise>
 			</c:choose>
-			<p>Début de l'enchère le : <c:out value="${enchere.getMontant_enchere()}"/></p>
+			<p>Début de l'enchère le : <c:out value="${article.getDate_debut_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy HH:mm\")) }"/></p>
+			<p>Fin de l'enchère le : <c:out value="${article.getDate_fin_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy HH:mm\")) }"/></p>
 			<p>Retrait : <c:out value="${user.getRue()}"/>, <c:out value="${user.getCode_postal()}"/> <c:out value="${user.getVille()}"/></p>
 			<p>Vendeur : <c:out value="${user.getPseudo()}"/></p>
 
 			<form method="post" action="">
-				<label for="montant">Faire une enchère : </label> <input type="number"
-					name="montant" id="montant" /> <input type="submit"
-					value="Enchérir" />
+				<label for="montant">Faire une enchère : </label>
+				<input type="number" name="montant" id="montant" />
+				<input type="submit" value="Enchérir" />
 			</form>
 		</div>
 
