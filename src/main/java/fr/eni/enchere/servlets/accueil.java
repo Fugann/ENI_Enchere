@@ -2,11 +2,9 @@ package fr.eni.enchere.servlets;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import fr.eni.enchere.bll.UtilisateurManager;
 import fr.eni.enchere.bo.Article;
 import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.bo.Utilisateur;
-import fr.eni.enchere.bo.UtilisateurAuthToken;
 
 /**
  * Servlet implementation class encheres
@@ -33,11 +30,8 @@ public class accueil extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
-		HttpSession session = request.getSession();
-		boolean loggedIn = session != null && session.getAttribute("user") != null;
-		loggedIn = doFilter(request, response, session, loggedIn);
-
-		if(loggedIn) {
+		
+		if(Utilisateur.doFilter(request, response)) {
 			rd = request.getRequestDispatcher("/WEB-INF/views/accueilLogged.jsp");
 		}
 
@@ -58,11 +52,8 @@ public class accueil extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
-		HttpSession session = request.getSession();
-		boolean loggedIn = session != null && session.getAttribute("user") != null;
-		loggedIn = doFilter(request, response, session, loggedIn);
 
-		if(loggedIn) {
+		if(Utilisateur.doFilter(request, response)) {
 			rd = request.getRequestDispatcher("/WEB-INF/views/accueilLogged.jsp");
 		}
 
@@ -78,6 +69,8 @@ public class accueil extends HttpServlet {
 		ArticleManager am = new ArticleManager();
 
 		ArrayList<Article> articles = am.getAllArticlesByCategorie(search, categorie);
+		
+//		System.out.println(articles.get(0).getNo_article());
 
 		// Récupération de tout les vendeur
 		UtilisateurManager um = new UtilisateurManager();
@@ -89,69 +82,5 @@ public class accueil extends HttpServlet {
 		request.setAttribute("articles", articles);
 
 		rd.forward(request, response);
-	}
-
-	public boolean doFilter(HttpServletRequest request, HttpServletResponse response, HttpSession session, boolean loggedIn)
-			throws IOException, ServletException {
-
-		System.out.println("doFilter");
-		
-		Cookie[] cookies = request.getCookies();
-
-		if (!loggedIn && cookies != null) {
-			System.out.println("test 1");
-			// process auto login for remember me feature
-			String selector = "";
-			String rawValidator = "";
-
-			for (Cookie aCookie : cookies) {
-				if (aCookie.getName().equals("selector")) {
-					selector = aCookie.getValue();
-				} else if (aCookie.getName().equals("validator")) {
-					rawValidator = aCookie.getValue();
-				}
-			}
-
-			if (!"".equals(selector) && !"".equals(rawValidator)) {
-				System.out.println("test 2");
-				UtilisateurManager um = new UtilisateurManager();
-				UtilisateurAuthToken token = um.findBySelector(selector);
-
-				if (token != null) {
-					System.out.println("test 3");
-					String hashedValidatorDatabase = token.getValidator();
-					String hashedValidatorCookie = Utilisateur.hashPwd(rawValidator);
-
-					if (hashedValidatorCookie.equals(hashedValidatorDatabase)) {
-						System.out.println("test 4");
-						Utilisateur user = um.getUserById(String.valueOf(token.getNo_utilisateur()));
-
-						session = request.getSession();
-						session.setAttribute("user", user);
-
-						// update new token in database
-						String newSelector = Utilisateur.getRandomStr(12);
-						String newRawValidator = Utilisateur.getRandomStr(64);
-
-						String newHashedValidator = Utilisateur.hashPwd(newRawValidator);
-
-						token.setSelector(newSelector);
-						token.setValidator(newHashedValidator);
-						um.updateAuth(token);
-
-						// update cookie
-						Cookie cookieSelector = new Cookie("selector", newSelector);
-						Cookie cookieValidator = new Cookie("validator", newRawValidator);
-						cookieSelector.setMaxAge(604800);
-						cookieSelector.setMaxAge(604800);
-
-						response.addCookie(cookieSelector);
-						response.addCookie(cookieValidator);
-						return true;
-					}
-				}
-			}
-		}
-		return loggedIn;
 	}
 }

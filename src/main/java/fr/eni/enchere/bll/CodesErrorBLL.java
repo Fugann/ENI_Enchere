@@ -39,4 +39,9 @@ public abstract class CodesErrorBLL {
 	 */
 	public static final int CREATE_EMAIL_ERROR = 20006;
 	
+	/**
+	 * Echec le montant doit etre supérieur au montant initial et au montant de la plus haute enchère
+	 */
+	public static final int PRICE_ERROR = 20007;
+	
 }

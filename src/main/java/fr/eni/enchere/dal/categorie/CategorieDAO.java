@@ -8,4 +8,6 @@ public interface CategorieDAO {
 
 	ArrayList<Categorie> getAllCategories();
 
+	Categorie getCategorieById(int no_categorie);
+
 }

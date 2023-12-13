@@ -81,4 +81,24 @@
     <servlet-name>DeleteAccount</servlet-name>
     <url-pattern>/DeleteAccount</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Enchere</display-name>
+    <servlet-name>Enchere</servlet-name>
+    <servlet-class>fr.eni.enchere.servlets.AjoutEnchere</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Enchere</servlet-name>
+    <url-pattern>/Enchere</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MesEncheres</display-name>
+    <servlet-name>MesEncheres</servlet-name>
+    <servlet-class>fr.eni.enchere.servlets.MesEncheres</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MesEncheres</servlet-name>
+    <url-pattern>/MesEncheres</url-pattern>
+  </servlet-mapping>
 </web-app>

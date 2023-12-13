@@ -36,7 +36,7 @@ public class Logout extends HttpServlet {
 				UtilisateurAuthToken token = um.findBySelector(selector);
 	             
 	            if (token != null) {
-	                um.deleteAuth(token.getId());
+	                um.deleteAuth(token.getNo_utilisateur());
 	                 
 	                Cookie cookieSelector = new Cookie("selector", "");
 	                cookieSelector.setMaxAge(0);

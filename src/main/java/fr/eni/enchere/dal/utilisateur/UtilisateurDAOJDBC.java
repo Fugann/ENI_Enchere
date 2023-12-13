@@ -24,7 +24,7 @@ public class UtilisateurDAOJDBC implements UtilisateurDAO {
 	private static final String FIND_BY_SELECTOR = "SELECT * FROM UTILISATEURS_AUTH WHERE selector = ?";
 	private static final String INSERT_UTILISATEUR_AUTH = "INSERT INTO UTILISATEURS_AUTH (selector, validator, no_utilisateur) VALUES(?,?,?);";
 	private static final String UPDATE_UTILISATEUR_AUTH = "UPDATE UTILISATEURS_AUTH SET selector = ?, validator = ? WHERE no_utilisateur = ?;";
-	private static final String DELETE_UTILISATEUR_AUTH = "DELETE FROM UTILISATEURS_AUTH WHERE id = ?;";
+	private static final String DELETE_UTILISATEUR_AUTH = "DELETE FROM UTILISATEURS_AUTH WHERE no_utilisateur = ?;";
 	
 	
 	@Override
