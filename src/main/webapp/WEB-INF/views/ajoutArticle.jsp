@@ -21,7 +21,7 @@
 			<c:choose>
 				<c:when test="${user != null}">
 					<a href="<%=request.getContextPath()%>">Enchères</a>
-					<a href="<%=request.getContextPath()%>/ajoutArticle">Vendre un article</a>
+					<a href="<%=request.getContextPath()%>/AjoutArticle">Vendre un article</a>
 					<a href="<%=request.getContextPath()%>/Profile">Mon Profil</a>
 					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 				</c:when>
@@ -70,10 +70,10 @@
 			<input type="text" name="prix" id="prix" value="<%= request.getAttribute("codesError") !=null?request.getParameter("prix"):""%>"/>
 			<br /> 
 			<label for="debut">Début de l'enchère : </label> 
-			<input type="date" name="debut" id="debut" value="<%= request.getAttribute("codesError") !=null?request.getParameter("debut"):""%>"/>
+			<input type="datetime-local" name="debut" id="debut" value="<%= request.getAttribute("codesError") !=null?request.getParameter("debut"):""%>"/>
 			<br />
 			<label for="fin">Fin de l'enchère : </label> 
-			<input type="date" name="fin" id="fin" value="<%= request.getAttribute("codesError") !=null?request.getParameter("fin"):""%>" />
+			<input type="datetime-local" name="fin" id="fin" value="<%= request.getAttribute("codesError") !=null?request.getParameter("fin"):""%>" />
 			<br />
 			<fieldset>
 				<legend>Retrait : </legend>

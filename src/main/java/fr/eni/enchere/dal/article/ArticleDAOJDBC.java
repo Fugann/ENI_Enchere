@@ -1,10 +1,10 @@
 package fr.eni.enchere.dal.article;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import fr.eni.enchere.bo.Article;
@@ -32,8 +32,8 @@ public class ArticleDAOJDBC implements ArticleDAO {
 			pstmt.setString(1, article.getNom_article());
 			pstmt.setString(2, article.getDescription());
 			pstmt.setString(3, article.getImage());
-			pstmt.setDate(4, Date.valueOf(article.getDate_debut_encheres()));
-			pstmt.setDate(5, Date.valueOf(article.getDate_fin_encheres()));
+			pstmt.setTimestamp(4, Timestamp.valueOf(article.getDate_debut_encheres()));
+			pstmt.setTimestamp(5, Timestamp.valueOf(article.getDate_fin_encheres()));
 			pstmt.setInt(6, article.getPrix_initial());
 			pstmt.setInt(7, article.getNo_utilisateur());
 			pstmt.setInt(8, article.getNo_categorie());
@@ -74,8 +74,8 @@ public class ArticleDAOJDBC implements ArticleDAO {
 				String nom_article = rs.getString("nom_article");
 				String description = rs.getString("description");
 				String image = rs.getString("image");
-				LocalDate date_debut_encheres = rs.getDate("date_debut_encheres").toLocalDate();
-				LocalDate date_fin_encheres = rs.getDate("date_fin_encheres").toLocalDate();
+				LocalDateTime date_debut_encheres = rs.getTimestamp("date_debut_encheres").toLocalDateTime();
+				LocalDateTime date_fin_encheres = rs.getTimestamp("date_fin_encheres").toLocalDateTime();
 				int prix_initial = rs.getInt("prix_initial");
 				int prix_vente = rs.getInt("prix_vente");
 				int no_utilisateur = rs.getInt("no_utilisateur");
@@ -108,8 +108,8 @@ public class ArticleDAOJDBC implements ArticleDAO {
 				String nom_article = rs.getString("nom_article");
 				String description = rs.getString("description");
 				String image = rs.getString("image");
-				LocalDate date_debut_encheres = rs.getDate("date_debut_encheres").toLocalDate();
-				LocalDate date_fin_encheres = rs.getDate("date_fin_encheres").toLocalDate();
+				LocalDateTime date_debut_encheres = rs.getTimestamp("date_debut_encheres").toLocalDateTime();
+				LocalDateTime date_fin_encheres = rs.getTimestamp("date_fin_encheres").toLocalDateTime();
 				int prix_initial = rs.getInt("prix_initial");
 				int prix_vente = rs.getInt("prix_vente");
 				int no_utilisateur = rs.getInt("no_utilisateur");

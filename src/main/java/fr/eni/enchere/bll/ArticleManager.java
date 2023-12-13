@@ -1,6 +1,6 @@
 package fr.eni.enchere.bll;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.mysql.cj.util.StringUtils;
@@ -27,8 +27,8 @@ public class ArticleManager {
 
 		Article a = null;
 		if (!exception.hasErreurs()) {
-			LocalDate debut = LocalDate.parse(debutTest);
-			LocalDate fin = LocalDate.parse(finTest);
+			LocalDateTime debut = LocalDateTime.parse(debutTest);
+			LocalDateTime fin = LocalDateTime.parse(finTest);
 			// Création de l'article
 			a = new Article(name, description, image, debut, fin, Integer.parseInt(prix), no_utilisateur,
 					Integer.parseInt(categorie));
@@ -43,8 +43,8 @@ public class ArticleManager {
 
 	private void verifDate(String debut, String fin, BusinessException exception) {
 		if (!debut.equals("") || !fin.equals("")) {
-			LocalDate debutTest = LocalDate.parse(debut);
-			LocalDate finTest = LocalDate.parse(fin);
+			LocalDateTime debutTest = LocalDateTime.parse(debut);
+			LocalDateTime finTest = LocalDateTime.parse(fin);
 			if (debutTest.isAfter(finTest)) {
 				exception.ajouterErreur(CodesErrorBLL.DATE_ERROR);
 			}
