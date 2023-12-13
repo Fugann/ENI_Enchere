@@ -68,4 +68,8 @@ public class ArticleManager {
 			exception.ajouterErreur(CodesErrorBLL.PRICE_EMPTY_ERROR);
 		}
 	}
+
+	public Article getArticleById(int id) {
+		return this.articleDAO.getArticleById(id);
+	}
 }

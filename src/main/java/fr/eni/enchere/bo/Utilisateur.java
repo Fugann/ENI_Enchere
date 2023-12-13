@@ -1,9 +1,17 @@
 package fr.eni.enchere.bo;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
+
+import fr.eni.enchere.bll.UtilisateurManager;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class Utilisateur {
 
@@ -204,5 +212,66 @@ public class Utilisateur {
 			s.append(str.charAt(index));
 		}
 		return s.toString();
+	}
+	
+	public static boolean doFilter(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		
+		HttpSession session = request.getSession();
+		boolean loggedIn = session != null && session.getAttribute("user") != null;
+		
+		Cookie[] cookies = request.getCookies();
+
+		if (!loggedIn && cookies != null) {
+			// process auto login for remember me feature
+			String selector = "";
+			String rawValidator = "";
+
+			for (Cookie aCookie : cookies) {
+				if (aCookie.getName().equals("selector")) {
+					selector = aCookie.getValue();
+				} else if (aCookie.getName().equals("validator")) {
+					rawValidator = aCookie.getValue();
+				}
+			}
+
+			if (!"".equals(selector) && !"".equals(rawValidator)) {
+				UtilisateurManager um = new UtilisateurManager();
+				UtilisateurAuthToken token = um.findBySelector(selector);
+
+				if (token != null) {
+					String hashedValidatorDatabase = token.getValidator();
+					String hashedValidatorCookie = Utilisateur.hashPwd(rawValidator);
+
+					if (hashedValidatorCookie.equals(hashedValidatorDatabase)) {
+						Utilisateur user = um.getUserById(String.valueOf(token.getNo_utilisateur()));
+
+						session = request.getSession();
+						session.setAttribute("user", user);
+
+						// update new token in database
+						String newSelector = Utilisateur.getRandomStr(12);
+						String newRawValidator = Utilisateur.getRandomStr(64);
+
+						String newHashedValidator = Utilisateur.hashPwd(newRawValidator);
+
+						token.setSelector(newSelector);
+						token.setValidator(newHashedValidator);
+						um.updateAuth(token);
+
+						// update cookie
+						Cookie cookieSelector = new Cookie("selector", newSelector);
+						Cookie cookieValidator = new Cookie("validator", newRawValidator);
+						cookieSelector.setMaxAge(604800);
+						cookieSelector.setMaxAge(604800);
+
+						response.addCookie(cookieSelector);
+						response.addCookie(cookieValidator);
+						return true;
+					}
+				}
+			}
+		}
+		return loggedIn;
 	}
 }

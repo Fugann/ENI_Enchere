@@ -18,7 +18,7 @@
 	<nav>
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
-			<a href="<%=request.getContextPath()%>">Enchères</a>
+			<a href="<%=request.getContextPath()%>">Mes Enchères</a>
 			<a href="<%=request.getContextPath()%>/ajoutArticle">Vendre un article</a>
 			<a href="<%=request.getContextPath()%>/Profile">Mon Profil</a>
 			<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
@@ -90,7 +90,7 @@
 					<img src="https://cdn.cultura.com/cdn-cgi/image/width=450/media/pim/13_246980_17_110_FR.jpg" alt="Photo introuvable" />
 				</div>
 				<div>
-					<a href=""><strong><c:out value="${article.getNom_article()}"/></strong></a>
+					<a href="<%=request.getContextPath()%>/Enchere?id=${article.getNo_article()}"><strong><c:out value="${article.getNom_article()}"/></strong></a>
 					<p>Prix : 
 					<c:choose>
 						<c:when test="${article.getPrix_vente() != '0'}">

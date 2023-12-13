@@ -16,6 +16,7 @@ public class ArticleDAOJDBC implements ArticleDAO {
 
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article, description, image, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?,?);";
 	private static final String SELECT_ALL_ARTICLES_BY_CATEGORIES = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ? AND NOM_ARTICLE LIKE ?";
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
 	
 	@Override
 	public void insert(Article article) throws BusinessException {
@@ -88,6 +89,40 @@ public class ArticleDAOJDBC implements ArticleDAO {
 			return articles;
 		} catch (Exception e) {
 			System.out.println("Select des articles : echec");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Article getArticleById(int id) {
+		try (Connection conn = ConnectionProvider.getConnection()) {
+
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_ARTICLE_BY_ID);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+
+			Article article = null;
+			if(rs.next()) {
+				int no_article = id;
+				String nom_article = rs.getString("nom_article");
+				String description = rs.getString("description");
+				String image = rs.getString("image");
+				LocalDate date_debut_encheres = rs.getDate("date_debut_encheres").toLocalDate();
+				LocalDate date_fin_encheres = rs.getDate("date_fin_encheres").toLocalDate();
+				int prix_initial = rs.getInt("prix_initial");
+				int prix_vente = rs.getInt("prix_vente");
+				int no_utilisateur = rs.getInt("no_utilisateur");
+				int no_categorie = rs.getInt("no_categorie");
+				
+				article = new Article(no_article, nom_article, description, image, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie);
+			}
+			
+			System.out.println("Select de l'article : succes");
+			conn.close();
+			return article;
+		} catch (Exception e) {
+			System.out.println("Select de l'article : echec");
 			e.printStackTrace();
 		}
 		return null;

@@ -18,5 +18,9 @@ public class CategorieManager {
 		
 		return this.categorieDAO.getAllCategories();
 	}
+
+	public Categorie getCategorieById(int no_categorie) {
+		return this.categorieDAO.getCategorieById(no_categorie);
+	}
 	
 }
