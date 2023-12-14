@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/normalize.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.scss">
 <script src="https://cdn.tailwindcss.com"></script>
 <title>Accueil</title>
 </head>
@@ -25,7 +25,6 @@
 	<main class="accueil">
 		<h2>Liste des enchère</h2>
 		<form method="post" action="">
-			<div>
 				<label for="search">Filtres :</label>
 				<div class="search">
 					<input type="text" name="search" id="search" placeholder="Que rechercher vous ?" />
@@ -39,42 +38,44 @@
 						</c:forEach>
 					</select>
 				</div>
-			</div>
-			<div>
 				<input type="submit" value="Rechercher" />
-			</div>
 		</form>
-		<div class="container">
-			
+		<div class="container off_login_articles">
 			<c:forEach items="${articles}" var="article">
-					<c:if test="${not empty article.image}">
-					    <img src="<%=request.getContextPath()%>/imageServlet?imagePath=${article.image}" alt="Article Image">
-					</c:if>
+				<div class="card">
+   					 <img src="https://icancycling.com/cdn/shop/articles/1602491866_1602491862_1601025617_1601025614_SN04_fatbike_b8d050ba-fad4-44b6-89a8-50d66f56930d.jpg?v=1640662944" alt="Article Image">
 
-					<strong><c:out value="${article.getNom_article()}"/></strong>
-					<p>Prix : 
-					<c:choose>
-						<c:when test="${article.getPrix_vente() != '0'}">
-							<c:out value="${article.getPrix_vente()}"/>
-						</c:when>
-						<c:otherwise>
-							<c:out value="${article.getPrix_initial()}"/> (Prix initial)
-						</c:otherwise>
-					</c:choose>
-					 Points</p>
-					<p>Fin de l'enchère : <c:out value="${article.getDate_fin_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy\"))}"/></p>
-					<p>Vendeur : 
-					<c:forEach items="${users}" var="user">
-						<c:if test="${article.getNo_utilisateur() == user.getNo_utilisateur()}">
-							<c:out value="${user.getPseudo()}"/>
-						</c:if>
-					</c:forEach>
-					</p>
+					<h3><c:out value="${article.getNom_article()}"/></h3>
+					<div class="control_card_info">
+						<p><b>Prix : </b>
+						<c:choose>
+							<c:when test="${article.getPrix_vente() != '0'}">
+								<c:out value="${article.getPrix_vente()}"/>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${article.getPrix_initial()}"/> (Prix initial)
+							</c:otherwise>
+						</c:choose>
+						 Points</p>
+						<p><b>Fin de l'enchère : </b><c:out value="${article.getDate_fin_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy\"))}"/></p>
+						<p><b>Vendeur : </b>
+						<c:forEach items="${users}" var="user">
+							<c:if test="${article.getNo_utilisateur() == user.getNo_utilisateur()}">
+								<c:out value="${user.getPseudo()}"/>
+							</c:if>
+						</c:forEach>
+						</p>
+					</div>
 				</div>
 			</c:forEach>
 		
 			<!-- Contenu de toute la recherche -->
-			<c:if test="${articles.size() == '0'}"><p>Rien</p></c:if>
+			<c:if test="${articles.size() == '0'}">
+			<div class="article_not_found">
+				<p>Rien n'a été trouvé, vérifiez si le champ catégorie est sélectionné !</p>
+				<img src="https://cdn-icons-png.flaticon.com/512/6134/6134065.png" alt="Article Image not found">
+			</div>
+			</c:if>
 		</div>
 	</main>
 

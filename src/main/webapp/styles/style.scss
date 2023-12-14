@@ -44,46 +44,124 @@ html,body{
     width: 100%;
     height: 100%;
 }
-
-.accueil {	
-	h2 {
-		text-align: center;
-		font-size: 1.5rem;
+.accueil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h2{
+		font-weight: bold;
+		margin-top: 10px;
 	}
 
-	form {
-		margin-top: 20px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		position: relative;
+    .off_login_articles {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        width: 80%;
 
-		label {
-			font-weight: bold;
-		}
+        .card {
+            width: calc(28% - 10px); // Approximately 300px with margin
+            border: 1px solid black;
+            margin: 0 5px;
+            box-shadow: 3px 3px 3px;
+            margin-top: 15px;
+            
+            &:hover {
+                border: 2px solid gray;
+                cursor: pointer;
+            }
 
-		.search {
-			margin: 10px 0;
+            img {
+                width: 100%;
+            }
 
-			input {
-				width: 100%;
+            h3 {
+                text-align: center;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            
+            .control_card_info{
+				text-align: center;
+			}
+        }
+        
+        .article_not_found{
+			display: flex;
+			flex-direction: column;
+			p{
+				margin-bottom: 50px;
+				font-weight: bold;
+				font-size: 25px;
+			}
+			img{
+				margin-left: -100px;
 			}
 		}
+    }
 
-		.categories {
-			label {
-				margin-right: 10px;
+    h2 {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    form {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border: 30px solid black;
+        width: 65%;
+
+        label {
+            font-weight: bold;
+        }
+
+        .search {
+            margin: 10px 0;
+            margin-left: 10px;
+            margin-right: 50px;
+            width: 40%;
+
+            input {
+                width: 100%;
+            }
+        }
+
+        .categories {
+			margin-right: 50px;
+            label {
+                margin-right: 10px;
+            }
+        }
+
+        input[type=submit] {
+            display: block;
+            border: solid 1px black;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+            padding: 5px;
+            
+            &:hover{
+				background-color: rgba(000, 000, 000, 0.5);
+				color: white;
 			}
-		}
+        }
+    }
 
-		input[type=submit] {
-			display: block;
-			border: solid 1px black;
-			border-radius: 5px;
-			margin-left: 10px;
-			cursor: pointer;
-		}
-	}
+    @media screen and (min-width: 600px) {
+        .off_login_articles {
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: calc(45% - 10px); // Approximately 300px with margin
+            margin: 0 5px;
+        }
+    }
 }
 
 .register{
