@@ -363,3 +363,125 @@ html,body{
 		}
 	}
 }
+
+.nouvele-vente-page{
+	.my_vente_text{
+		text-align: center;
+		margin-top: 1%;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 22px;
+	}
+	
+	.div-control{
+		label{
+			font-weight: bold;
+		}
+		input{
+			padding: 5px;
+		}
+	}
+	
+	form{
+		.article_name_and_categorie,
+		.start_date_end_date_div{
+			display: flex;
+			justify-content: center;
+			
+			.start_date,
+			.end_date{
+				width: 15%;
+				margin-bottom: 10px;
+			}
+			
+		
+			
+			.article_name{
+				width: 15%;
+			}
+			
+			.article_name,
+			.start_date,
+			.end_date{
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+			}
+		}
+		
+		.categorie_name{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-bottom: -20px;
+			margin-top: 10px;
+			
+		}
+		.price-div{
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			align-items: center;
+			margin-top: 40px;
+			margin-bottom: 20px;
+			
+			input{
+				width: 10%;
+			}
+		}
+		.retrait_div_control{
+			display: flex;
+			justify-content: center;
+			fieldset{
+				width: 30%;
+				padding: 20px;
+				margin-top: 20px;
+
+				.retrait_text{
+					text-align: center;
+					font-weight: bold;
+				}
+				
+				.div-control{
+					input{
+						width: 100%;
+					}
+				}
+			}
+		}
+		.description-control{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 20px;
+			
+			textarea{
+				width: 30%;
+				border: 1px solid rgba(000, 000, 000, 0.5);
+				padding: 10px;
+				outline: none;
+			}
+		}
+		
+		.enregisrer_div_control{
+			display: flex;
+			justify-content: center;
+			a,
+			input{
+				margin-top: 10px;
+				padding: 10px 119px 10px 119px;
+				border: 1px solid black;
+			}
+		
+			a:hover{
+				background-color: black;
+				color: white;
+			}
+			input:hover{
+				background-color: limegreen;
+				cursor: pointer;
+			}
+		}
+	}
+}

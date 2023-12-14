@@ -72,7 +72,7 @@
 
 	
 	<div class="button_create_account" >
-		<a href="<%=request.getContextPath()%>/register">Créer un compte</a>
+		<a href="<%=request.getContextPath()%>/Register">Créer un compte</a>
 	</div>
 </body>
 </html>
