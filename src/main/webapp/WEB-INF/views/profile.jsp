@@ -34,10 +34,11 @@
 
 
 
-	<h2>Here is your profile MTFKER :)</h2>
+	<h2>Mon profil</h2>
 	<p>userId: ${user.no_utilisateur}</p>
     <p>Pseudo: ${user.pseudo}</p>
     <p>Email: ${user.email}</p>
+ 	<p>Crédit de points : ${user.credit}</p>
     
     
 <h1>Edit Profile</h1>

@@ -2,7 +2,6 @@ package fr.eni.enchere.dal.utilisateur;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.bo.UtilisateurAuthToken;
 

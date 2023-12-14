@@ -44,4 +44,9 @@ public abstract class CodesErrorBLL {
 	 */
 	public static final int PRICE_ERROR = 20007;
 	
+	/**
+	 * Echec quand le pseudo n'est pas alphanumérique
+	 */
+	public static final int PSEUDO_ERROR_ALPHA = 20008;
+	
 }

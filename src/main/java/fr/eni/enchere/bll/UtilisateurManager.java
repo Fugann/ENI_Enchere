@@ -2,6 +2,8 @@ package fr.eni.enchere.bll;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.bo.UtilisateurAuthToken;
@@ -25,6 +27,7 @@ public class UtilisateurManager {
 		this.verifNull(pseudo, prenom, CP, psw, nom, email, rue, ville, exception);
 		this.selectPseudoByPseudo(pseudo, exception);
 		this.selectEmailByEmail(email, exception);
+		this.verifRegexPseudo(pseudo, exception);
 		Utilisateur u = null;
 
 		if (!exception.hasErreurs()) {
@@ -137,5 +140,14 @@ public class UtilisateurManager {
 
 	public void deleteAuth(int id) {
 		this.utilisateurDAO.deleteAuth(id);
+	}
+	
+	private void verifRegexPseudo(String pseudo, BusinessException exception) {
+		Pattern pattern = Pattern.compile(("^[a-zA-Z0-9]*$"));
+		Matcher matcher = pattern.matcher(pseudo);
+		
+		if(!matcher.matches()) {
+			exception.ajouterErreur(CodesErrorBLL.PSEUDO_ERROR_ALPHA);
+		}		
 	}
 }
