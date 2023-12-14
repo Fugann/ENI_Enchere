@@ -9,11 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/normalize.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.scss">
 <script src="https://cdn.tailwindcss.com"></script>
 <title>Document</title>
 </head>
-<body>
+<body class="login_page">
 	<nav>
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
@@ -25,39 +25,54 @@
 					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 				</c:when>
 				<c:otherwise>
-					<a href="<%=request.getContextPath()%>/Login">Login/Register</a>
+					<a href="<%=request.getContextPath()%>/Login">Login/register</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</nav>
 
 
+	<div class="error-alerts">
+		<c:if test="${codesError != null }">
+			<c:forEach items="${codesError}" var="error">
+				<p class="text-error">${LecteurMessage.getMessageErreur(error)}</p>
+			</c:forEach>
+		</c:if>
+	</div>
 
 
-	<c:if test="${codesError != null }">
-		<c:forEach items="${codesError}" var="error">
-			<p>${LecteurMessage.getMessageErreur(error)}</p>
-		</c:forEach>
-	</c:if>
+	<div class="div_control_form_login">
+	
+		<form method="post" action="">
+			<div class="div-control">
+				<label for="identifiant">Identifiant : </label>
+				<input type="text" name="identifiant" id="identifiant" placeholder="Email / Pseudo" />
+			</div>
+			<br />
+			
+			<div class="div-control">
+				<label for="psw">Mot de passe</label>
+				<input type="password" name="psw" id="psw" placeholder="Password" />
+			</div>
+				<br />
+			
+			<div class="div-control">
+				<input type="checkbox" name="remember" id="remember" value="true" checked />
+				<label for="checkbox">Se souvenir de moi</label>
+			</div>
+				<br />
+			
+			<div class="buttons_connection">
+				<input type="submit" value="Connexion" />
+				<a href="">Mot de passe oublié</a>
+			</div>
+		</form>
+	
+	</div>
 
-	<form method="post" action="">
-		<label for="identifiant">Identifiant : </label>
-		<input type="text" name="identifiant" id="identifiant" placeholder="Email / Pseudo" />
-		<br />
-		
-		<label for="psw">Mot de passe</label>
-		<input type="password" name="psw" id="psw" placeholder="Password" />
-		<br />
-		
-		<input type="checkbox" name="remember" id="remember" value="true" checked />
-		<label for="checkbox">Se souvenir de moi</label>
-		<br />
-		
-		<input type="submit" value="Connexion" />
-		<a href="">Mot de passe oublié</a>
-	</form>
-
-	<a href="<%=request.getContextPath()%>/Register">Créer un compte</a>
-
+	
+	<div class="button_create_account" >
+		<a href="<%=request.getContextPath()%>/register">Créer un compte</a>
+	</div>
 </body>
 </html>

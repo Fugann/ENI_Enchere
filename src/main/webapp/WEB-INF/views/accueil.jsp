@@ -18,7 +18,7 @@
 	<nav>
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
-			<a href="<%=request.getContextPath()%>/Login">Login/Register</a>
+			<a href="<%=request.getContextPath()%>/Login">Login/register</a>
 		</div>
 	</nav>
 	
@@ -47,10 +47,10 @@
 		<div class="container">
 			
 			<c:forEach items="${articles}" var="article">
-				<div>
-					<img src="https://cdn.cultura.com/cdn-cgi/image/width=450/media/pim/13_246980_17_110_FR.jpg" alt="Photo introuvable" />
-				</div>
-				<div>
+					<c:if test="${not empty article.image}">
+					    <img src="<%=request.getContextPath()%>/imageServlet?imagePath=${article.image}" alt="Article Image">
+					</c:if>
+
 					<strong><c:out value="${article.getNom_article()}"/></strong>
 					<p>Prix : 
 					<c:choose>

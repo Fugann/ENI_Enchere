@@ -90,7 +90,7 @@ html,body{
 	
 	width: 100%;
 	
-	.register-error-alerts{
+	.error-alerts{
 		.text-success{
 			padding-right: 20px;
 			background-color: lightgreen;
@@ -186,6 +186,180 @@ html,body{
 				margin-left: 3%;
 			    box-shadow: 10px 5px 5px;
 			}
+		}
+	}
+}
+
+.edit-profile-page{
+
+	.my_profil_text{
+		text-align: center;
+		margin-top: 3%;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 22px;
+	}
+	.user_info_text{
+		text-align: center;
+		margin-top: 50px;
+		font-weight: bold;
+	}
+	.user_info{
+		display: flex;
+		justify-content: space-evenly;
+		text-align: center;
+		
+		
+		.control_1_user_info{
+			margin-right: 40px;
+		}
+		
+		.control_2_user_info{
+			margin-left: 40px;
+		}
+	}
+	
+	.profile_edit_form{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		
+		.align_inputs{
+			display: flex;
+			margin-top: 3%;
+			width: 50%;
+			justify-content: center;
+			
+			.left_side{
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				margin-right: 3%;
+				
+				.div-control{
+					margin-top: 20px;
+					
+					label{
+						margin-right: 20px;
+						font-weight: bold;
+					}
+					input{
+						padding: 5px;
+					}
+				}
+			}
+			.right_side{
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				margin-left: 3%;
+				
+				.div-control{
+					margin-top: 20px;
+					
+					label{
+						margin-right: 20px;
+						font-weight: bold;
+					}
+					input{
+						padding: 5px;
+					}
+				}
+				.btn-enregistrer{
+					border: 1px solid black;
+					width: 100%;
+					text-align: center;
+					background-color: rgba(234, 242, 215, 1);
+					font-weight: bold;
+				}
+				.btn-enregistrer:hover,
+				.input_btn_enregistrer:hover{
+					cursor: pointer;
+					background-color: rgba(178, 222, 39, 1);
+				}
+			}
+		}
+	}
+	.adjust_form_delete_account{
+		display: flex;
+		justify-content: center;
+		
+		.delete-account-form{
+			width: fit-content;
+			text-align: center;
+			margin-top: 20px;
+			border: 1px solid black;
+			padding: 20px;
+		 	box-shadow: 7px 5px 5px;
+		}
+	}
+	
+	.adjust_form_delete_account:hover
+	.btn_control_delete_account:hover{
+		cursor: pointer;
+	}
+	
+}
+
+
+.login_page{
+	width: 100%;
+	text-align: center;
+	
+	.error-alerts{
+		.text-error{
+			padding-left: 10px;
+			background-color: rgba(255, 128, 128, 0.5);
+			
+		}
+	}
+	
+	.div_control_form_login{
+		display: flex;
+		justify-content: center;
+		margin-top: 10%;
+		
+		form{
+			border: 1px solid black;
+			padding: 30px;
+			
+			.buttons_connection{
+				
+				input{
+					border: 1px solid black;
+					padding: 10px;
+					border-radius: 0;
+				}
+				input:hover{
+					cursor: pointer;
+				}
+				a{
+					border: 1px solid black;
+					padding: 10px;
+				}
+			}
+			.div-control{
+				label{
+					font-weight: bold;
+				}
+				input{
+					padding: 5px;
+				}
+			}
+		}
+	}
+	.button_create_account{
+		text-align: center;
+		margin-top: 15px;
+		
+		a{
+			margin-top: 10px;
+			padding: 10px 119px 10px 119px;
+			border: 1px solid black;
+		}
+		
+		a:hover{
+			background-color: greenyellow;
 		}
 	}
 }

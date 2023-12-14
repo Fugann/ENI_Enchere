@@ -26,7 +26,7 @@
 					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 				</c:when>
 				<c:otherwise>
-					<a href="<%=request.getContextPath()%>/Login">Login/Register</a>
+					<a href="<%=request.getContextPath()%>/Login">Login/register</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -45,7 +45,7 @@
 	
 	<h1>Nouvelle Vente</h1>
 	<img src="" alt="photoUploader" />
-	<form method="post" action="">
+	<form method="post" action="" enctype="multipart/form-data">
 		<div>
 			<label for="article">Article : </label> 
 			<input type="text" name="article" id="article" value="<%= request.getAttribute("codesError") !=null?request.getParameter("article"):""%>" /> 
@@ -62,18 +62,16 @@
 				</c:forEach>
 			</select> <br />
 			<label for="image">Photo de l'article </label>
-			<button style="display: block; width: 120px; height: 30px;"
-				onclick="document.getElementById('image').click()">UPLOADER</button>
-			<input type='file' name="image" id="image" style="display: none">
+			<input type='file' name="image" id=image>
 			<br />
 			<label for="prix">Mise à prix : </label>
 			<input type="text" name="prix" id="prix" value="<%= request.getAttribute("codesError") !=null?request.getParameter("prix"):""%>"/>
 			<br /> 
 			<label for="debut">Début de l'enchère : </label> 
-			<input type="datetime-local" name="debut" id="debut" value="<%= request.getAttribute("codesError") !=null?request.getParameter("debut"):""%>"/>
+			<input type="date" name="debut" id="debut" value="<%= request.getAttribute("codesError") !=null?request.getParameter("debut"):""%>"/>
 			<br />
 			<label for="fin">Fin de l'enchère : </label> 
-			<input type="datetime-local" name="fin" id="fin" value="<%= request.getAttribute("codesError") !=null?request.getParameter("fin"):""%>" />
+			<input type="date" name="fin" id="fin" value="<%= request.getAttribute("codesError") !=null?request.getParameter("fin"):""%>" />
 			<br />
 			<fieldset>
 				<legend>Retrait : </legend>

@@ -5,12 +5,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import fr.eni.enchere.bll.ArticleManager;
 import fr.eni.enchere.bll.CategorieManager;
 import fr.eni.enchere.bo.Article;
 import fr.eni.enchere.bo.Categorie;
+import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.error.BusinessException;
 
 /**
@@ -47,6 +50,10 @@ public class AjoutArticle extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ajoutArticle.jsp");
 
 		try {
+	        HttpSession session = request.getSession();
+            Utilisateur user = (Utilisateur) session.getAttribute("user");
+            
+            int no_utilisateur = user.getNo_utilisateur();
 			// Récupération de toutes les données en param
 			String name = request.getParameter("article");
 			String description = request.getParameter("description");
@@ -56,7 +63,6 @@ public class AjoutArticle extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String CP = request.getParameter("CP");
 			String ville = request.getParameter("ville");
-			int no_utilisateur = 1;
 			String debut = request.getParameter("debut");
 			String fin = request.getParameter("fin");
 

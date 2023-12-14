@@ -22,7 +22,7 @@
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
 			<a href="<%=request.getContextPath()%>">Mes Enchères</a> <a
-				href="<%=request.getContextPath()%>/ajoutArticle">Vendre un
+				href="<%=request.getContextPath()%>/AjoutArticle">Vendre un
 				article</a> <a href="<%=request.getContextPath()%>/Profile">Mon
 				Profil</a> <a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 		</div>
