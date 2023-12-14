@@ -60,6 +60,7 @@
 			</c:choose>
 			<p>Début de l'enchère le : <c:out value="${article.getDate_debut_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy HH:mm\")) }"/></p>
 			<p>Fin de l'enchère le : <c:out value="${article.getDate_fin_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy HH:mm\")) }"/></p>
+			<p>Il reste <strong id="timer"><c:out value="${duration }"/></strong> avant la fin de l'enchère</p>
 			<p>Retrait : <c:out value="${user.getRue()}"/>, <c:out value="${user.getCode_postal()}"/> <c:out value="${user.getVille()}"/></p>
 			<p>Vendeur : <c:out value="${user.getPseudo()}"/></p>
 

@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 import fr.eni.enchere.bll.ArticleManager;
 import fr.eni.enchere.bll.CategorieManager;
@@ -51,10 +53,18 @@ public class AjoutEnchere extends HttpServlet {
 			
 			enchere = em.getEnchereById(article.getNo_article());
 			
+			String duration = null;
+			if(article.getDate_debut_encheres() != null && article.getDate_fin_encheres() != null) {
+				LocalDateTime now = LocalDateTime.now();
+				duration = formatDuration(Duration.between(now, article.getDate_fin_encheres()));
+			}
+			
 			request.setAttribute("article", article);
 			request.setAttribute("user", user);
 			request.setAttribute("categorie", categorie);
 			request.setAttribute("enchere", enchere);
+			request.setAttribute("duration", duration);
+			
 
 			rd.forward(request, response);
 		}
@@ -115,5 +125,15 @@ public class AjoutEnchere extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/Enchere?id=" + article.getNo_article());
 			}
 		}
+	}
+	public static String formatDuration(Duration duration) {
+	    long seconds = duration.getSeconds();
+	    long absSeconds = Math.abs(seconds);
+	    String positive = String.format(
+	        "%d:%02d:%02d",
+	        absSeconds / 3600,
+	        (absSeconds % 3600) / 60,
+	        absSeconds % 60);
+	    return seconds < 0 ? "-" + positive : positive;
 	}
 }
