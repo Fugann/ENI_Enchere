@@ -107,13 +107,13 @@
 			    </div>
 		   </div>
 		</form>
-
-		<div class="adjust_form_delete_account">
-			<form action="DeleteAccount" method="post" class="delete-account-form">
-			    <!-- You can add a confirmation message here if needed -->
-			    <input type="hidden" name="deleteConfirmation" value="true">
-			    <input type="submit" class="btn_control_delete_account" value="Supprimer mon compte">
-			</form>
-		</div>
+		<!--<div class="adjust_form_delete_account">
+		        <form action="DeleteAccount" method="post" class="delete-account-form">
+		            <!-- You can add a confirmation message here if needed 
+		            <input type="hidden" name="deleteConfirmation" value="true">
+		            <input type="submit" class="btn_control_delete_account" value="Supprimer mon compte">
+		        </form>
+		    </div>-->
+	    
 	</body>
 </html>
