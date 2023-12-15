@@ -18,8 +18,8 @@ public class ArticleManager {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 
-	public Article insert(String name, String description, String categorie, String image, String prix, String rue,
-			String CP, String ville, int no_utilisateur, String debutTest, String finTest) throws BusinessException {
+	public Article insert(String name, String description, String categorie, String ville, String rue, String prix,
+			String CP, int no_utilisateur, String debutTest, String finTest) throws BusinessException {
 		BusinessException exception = new BusinessException();
 		this.verifNull(name, description, categorie, prix, rue, CP, ville, no_utilisateur, debutTest, finTest,
 				exception);
@@ -29,6 +29,7 @@ public class ArticleManager {
 		if (!exception.hasErreurs()) {
 			LocalDateTime debut = LocalDateTime.parse(debutTest);
 			LocalDateTime fin = LocalDateTime.parse(finTest);
+			String image = null;
 			// Création de l'article
 			a = new Article(name, description, image, debut, fin, Integer.parseInt(prix), no_utilisateur,
 					Integer.parseInt(categorie));
