@@ -39,7 +39,7 @@ public class AjoutEnchere extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/enchere.jsp");
 		
 		if(!Utilisateur.doFilter(request, response)) {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+ "/Login");
 		} else {
 			
 			int id = Integer.parseInt(request.getParameter("id"));
@@ -65,7 +65,6 @@ public class AjoutEnchere extends HttpServlet {
 			request.setAttribute("enchere", enchere);
 			request.setAttribute("duration", duration);
 			
-
 			rd.forward(request, response);
 		}
 	}
@@ -80,7 +79,7 @@ public class AjoutEnchere extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(!Utilisateur.doFilter(request, response)) {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+ "/Login");
 		} else {
 			
 			int id = Integer.parseInt(request.getParameter("id"));
@@ -114,7 +113,6 @@ public class AjoutEnchere extends HttpServlet {
 				if(enchere.getDate_enchere() != null) {
 					request.setAttribute("succes", "true");
 				}
-				
 				
 			} catch (BusinessException e) {
 				request.setAttribute("codesError", e.getListeCodesErreur());

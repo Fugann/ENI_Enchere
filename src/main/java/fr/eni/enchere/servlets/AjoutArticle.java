@@ -31,12 +31,17 @@ public class AjoutArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/ajoutArticle.jsp");
+		
+		if(!Utilisateur.doFilter(request, response)) {
+			response.sendRedirect(request.getContextPath()+ "/Login");
+		} else {
+			// Récupération de toutes les catégorie
+			ArrayList<Categorie> categories = cm.getAllCategories();
+			
+			request.setAttribute("categories", categories);
+			rd.forward(request, response);
+		}
 
-		// Récupération de toutes les catégorie
-		ArrayList<Categorie> categories = cm.getAllCategories();
-
-		request.setAttribute("categories", categories);
-		rd.forward(request, response);
 	}
 
 	/**

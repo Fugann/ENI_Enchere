@@ -24,7 +24,7 @@ public class Accueil extends HttpServlet {
 	private final CategorieManager cm = new CategorieManager();
 	private final ArticleManager am = new ArticleManager();
 	private final UtilisateurManager um = new UtilisateurManager();
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -33,16 +33,16 @@ public class Accueil extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
-		
-		if(Utilisateur.doFilter(request, response)) {
+
+		if (Utilisateur.doFilter(request, response)) {
 			rd = request.getRequestDispatcher("/WEB-INF/views/accueilLogged.jsp");
 		}
-
 		// Récupération de toutes les catégorie
 		ArrayList<Categorie> categories = cm.getAllCategories();
 
 		request.setAttribute("categories", categories);
 		rd.forward(request, response);
+		
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class Accueil extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/accueil.jsp");
 
-		if(Utilisateur.doFilter(request, response)) {
+		if (Utilisateur.doFilter(request, response)) {
 			rd = request.getRequestDispatcher("/WEB-INF/views/accueilLogged.jsp");
 		}
 
@@ -66,8 +66,6 @@ public class Accueil extends HttpServlet {
 
 		// Recupération des articles en fonction du nom et de la catégorie
 		ArrayList<Article> articles = am.getAllArticlesByCategorie(search, categorie);
-		
-//		System.out.println(articles.get(0).getNo_article());
 
 		// Récupération de tout les vendeur
 		ArrayList<Utilisateur> users = um.selectAllSaufMDP();

@@ -19,7 +19,6 @@
 		<div>
 			<c:choose>
 				<c:when test="${user != null}">
-					<a href="<%=request.getContextPath()%>">Enchères</a>
 					<a href="<%=request.getContextPath()%>/AjoutArticle">Vendre un article</a>
 					<a href="<%=request.getContextPath()%>/Profile">Mon Profil</a>
 					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
