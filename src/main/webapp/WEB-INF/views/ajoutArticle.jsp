@@ -42,7 +42,6 @@
 		<p>${LecteurMessage.getMessageErreur(error)}</p>
 	</c:forEach>
 	</c:if>
-	
 	<div class="my_vente_text">
 			<h1>Nouvelle Vente</h1>
 	</div>

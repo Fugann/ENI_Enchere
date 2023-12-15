@@ -21,7 +21,7 @@ public class ArticleManager {
 	public Article insert(String name, String description, String categorie, String image, String prix, String rue,
 			String CP, String ville, int no_utilisateur, String debutTest, String finTest) throws BusinessException {
 		BusinessException exception = new BusinessException();
-		this.verifNull(name, description, categorie, image, prix, rue, CP, ville, no_utilisateur, debutTest, finTest,
+		this.verifNull(name, description, categorie, prix, rue, CP, ville, no_utilisateur, debutTest, finTest,
 				exception);
 		this.verifDate(debutTest, finTest, exception);
 
@@ -56,7 +56,7 @@ public class ArticleManager {
 		return this.articleDAO.getAllCategories(search, categorie);
 	}
 
-	private void verifNull(String name, String description, String categorie, String image, String prix, String rue,
+	private void verifNull(String name, String description, String categorie, String prix, String rue,
 			String CP, String ville, int no_utilisateur, String debut, String fin, BusinessException exception) {
 		if (name == null || name.equals("") || description == null || description.equals("") || categorie == null
 				|| categorie.equals("") || rue == null || rue.equals("") || CP == null || CP.equals("") || ville == null
