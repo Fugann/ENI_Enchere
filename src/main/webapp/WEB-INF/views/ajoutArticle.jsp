@@ -46,11 +46,11 @@
 	</div>
 	
 	
-	<form method="post" action="" enctype="multipart/form-data">
+	<form method="post" action="">
 		<div class="article_name_and_categorie">
 			<div class="div-control article_name">
 				<label for="article">Article : </label> 
-				<input type="text" name="article" id="article" value="<%= request.getAttribute("codesError") !=null?request.getParameter("article"):""%>" /> 
+				<input type="text" name="article" id="article" value="<%= request.getAttribute("codesError")!=null?request.getParameter("article"):""%>" /> 
 			</div>
 		</div>
 		<div class="div-control categorie_name">
