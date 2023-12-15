@@ -54,7 +54,7 @@ public class Register extends HttpServlet {
 			Utilisateur utilisateur = um.ajouter(pseudo, nom, prenom, email, tel, rue, CP, ville, psw, pswconfirm, credit, admin);
 			
 			request.setAttribute("utilisateur", utilisateur);
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/Login");
 		
 		} catch (BusinessException e) {
 			request.setAttribute("codesError", e.getListeCodesErreur());
