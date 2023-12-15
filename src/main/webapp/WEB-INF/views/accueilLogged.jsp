@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.time.format.DateTimeFormatter"%>
+<%@ page import="java.io.File"%>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -87,7 +88,8 @@
 			
 			<c:forEach items="${articles}" var="article">
 				<div>
-					<img src="https://cdn.cultura.com/cdn-cgi/image/width=450/media/pim/13_246980_17_110_FR.jpg" alt="Photo introuvable" />
+					C:/Users/Zac fixe/Desktop/git/ENI_Enchere/src/main/webapp/upload/<c:out value="${article.getImage()}"/>
+					<img src="../../upload/<c:out value="${article.getImage()}"/>" alt="Photo" />
 				</div>
 				<div>
 					<a href="<%=request.getContextPath()%>/Enchere?id=${article.getNo_article()}"><strong><c:out value="${article.getNom_article()}"/></strong></a>
