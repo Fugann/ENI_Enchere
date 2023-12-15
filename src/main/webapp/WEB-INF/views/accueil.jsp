@@ -45,7 +45,8 @@
 				<div class="card">
    					 <img src="https://icancycling.com/cdn/shop/articles/1602491866_1602491862_1601025617_1601025614_SN04_fatbike_b8d050ba-fad4-44b6-89a8-50d66f56930d.jpg?v=1640662944" alt="Article Image">
 
-					<h3><c:out value="${article.getNom_article()}"/></h3>
+					<h3><a href="<%=request.getContextPath()%>/Enchere?id=${article.getNo_article()}"><strong><c:out value="${article.getNom_article()}"/></strong></a></h3>
+					
 					<div class="control_card_info">
 						<p><b>Prix : </b>
 						<c:choose>
