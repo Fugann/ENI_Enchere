@@ -44,53 +44,131 @@ html,body{
     width: 100%;
     height: 100%;
 }
-
-.accueil {	
-	h2 {
-		text-align: center;
-		font-size: 1.5rem;
+.accueil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h2{
+		font-weight: bold;
+		margin-top: 10px;
 	}
 
-	form {
-		margin-top: 20px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		position: relative;
+    .off_login_articles {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        width: 80%;
 
-		label {
-			font-weight: bold;
-		}
+        .card {
+            width: calc(28% - 10px); // Approximately 300px with margin
+            border: 1px solid black;
+            margin: 0 5px;
+            box-shadow: 3px 3px 3px;
+            margin-top: 15px;
+            
+            &:hover {
+                border: 2px solid gray;
+                cursor: pointer;
+            }
 
-		.search {
-			margin: 10px 0;
+            img {
+                width: 100%;
+            }
 
-			input {
-				width: 100%;
+            h3 {
+                text-align: center;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            
+            .control_card_info{
+				text-align: center;
+			}
+        }
+        
+        .article_not_found{
+			display: flex;
+			flex-direction: column;
+			p{
+				margin-bottom: 50px;
+				font-weight: bold;
+				font-size: 25px;
+			}
+			img{
+				margin-left: -100px;
 			}
 		}
+    }
 
-		.categories {
-			label {
-				margin-right: 10px;
+    h2 {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    form {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border: 30px solid black;
+        width: 65%;
+
+        label {
+            font-weight: bold;
+        }
+
+        .search {
+            margin: 10px 0;
+            margin-left: 10px;
+            margin-right: 50px;
+            width: 40%;
+
+            input {
+                width: 100%;
+            }
+        }
+
+        .categories {
+			margin-right: 50px;
+            label {
+                margin-right: 10px;
+            }
+        }
+
+        input[type=submit] {
+            display: block;
+            border: solid 1px black;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+            padding: 5px;
+            
+            &:hover{
+				background-color: rgba(000, 000, 000, 0.5);
+				color: white;
 			}
-		}
+        }
+    }
 
-		input[type=submit] {
-			display: block;
-			border: solid 1px black;
-			border-radius: 5px;
-			margin-left: 10px;
-			cursor: pointer;
-		}
-	}
+    @media screen and (min-width: 600px) {
+        .off_login_articles {
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: calc(45% - 10px); // Approximately 300px with margin
+            margin: 0 5px;
+        }
+    }
 }
 
 .register{
 	
 	width: 100%;
 	
-	.register-error-alerts{
+	.error-alerts{
 		.text-success{
 			padding-right: 20px;
 			background-color: lightgreen;
@@ -185,6 +263,302 @@ html,body{
 				width: 15rem;
 				margin-left: 3%;
 			    box-shadow: 10px 5px 5px;
+			}
+		}
+	}
+}
+
+.edit-profile-page{
+
+	.my_profil_text{
+		text-align: center;
+		margin-top: 3%;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 22px;
+	}
+	.user_info_text{
+		text-align: center;
+		margin-top: 50px;
+		font-weight: bold;
+	}
+	.user_info{
+		display: flex;
+		justify-content: space-evenly;
+		text-align: center;
+		
+		
+		.control_1_user_info{
+			margin-right: 40px;
+		}
+		
+		.control_2_user_info{
+			margin-left: 40px;
+		}
+	}
+	
+	.profile_edit_form{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		
+		.align_inputs{
+			display: flex;
+			margin-top: 3%;
+			width: 50%;
+			justify-content: center;
+			
+			.left_side{
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				margin-right: 3%;
+				
+				.div-control{
+					margin-top: 20px;
+					
+					label{
+						margin-right: 20px;
+						font-weight: bold;
+					}
+					input{
+						padding: 5px;
+					}
+				}
+			}
+			.right_side{
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				margin-left: 3%;
+				
+				.div-control{
+					margin-top: 20px;
+					
+					label{
+						margin-right: 20px;
+						font-weight: bold;
+					}
+					input{
+						padding: 5px;
+					}
+				}
+				.btn-enregistrer{
+					border: 1px solid black;
+					width: 100%;
+					text-align: center;
+					background-color: rgba(234, 242, 215, 1);
+					font-weight: bold;
+				}
+				.btn-enregistrer:hover,
+				.input_btn_enregistrer:hover{
+					cursor: pointer;
+					background-color: rgba(178, 222, 39, 1);
+				}
+			}
+		}
+	}
+	.adjust_form_delete_account{
+		display: flex;
+		justify-content: center;
+		
+		.delete-account-form{
+			width: fit-content;
+			text-align: center;
+			margin-top: 20px;
+			border: 1px solid black;
+			padding: 20px;
+		 	box-shadow: 7px 5px 5px;
+		}
+	}
+	
+	.adjust_form_delete_account:hover
+	.btn_control_delete_account:hover{
+		cursor: pointer;
+	}
+	
+}
+
+
+.login_page{
+	width: 100%;
+	text-align: center;
+	
+	.error-alerts{
+		.text-error{
+			padding-left: 10px;
+			background-color: rgba(255, 128, 128, 0.5);
+			
+		}
+	}
+	
+	.div_control_form_login{
+		display: flex;
+		justify-content: center;
+		margin-top: 10%;
+		
+		form{
+			border: 1px solid black;
+			padding: 30px;
+			
+			.buttons_connection{
+				
+				input{
+					border: 1px solid black;
+					padding: 10px;
+					border-radius: 0;
+				}
+				input:hover{
+					cursor: pointer;
+				}
+				a{
+					border: 1px solid black;
+					padding: 10px;
+				}
+			}
+			.div-control{
+				label{
+					font-weight: bold;
+				}
+				input{
+					padding: 5px;
+				}
+			}
+		}
+	}
+	.button_create_account{
+		text-align: center;
+		margin-top: 15px;
+		
+		a{
+			margin-top: 10px;
+			padding: 10px 119px 10px 119px;
+			border: 1px solid black;
+		}
+		
+		a:hover{
+			background-color: greenyellow;
+		}
+	}
+}
+
+.nouvele-vente-page{
+	.my_vente_text{
+		text-align: center;
+		margin-top: 1%;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 22px;
+	}
+	
+	.div-control{
+		label{
+			font-weight: bold;
+		}
+		input{
+			padding: 5px;
+		}
+	}
+	
+	form{
+		.article_name_and_categorie,
+		.start_date_end_date_div{
+			display: flex;
+			justify-content: center;
+			
+			.start_date,
+			.end_date{
+				width: 15%;
+				margin-bottom: 10px;
+			}
+			
+		
+			
+			.article_name{
+				width: 15%;
+			}
+			
+			.article_name,
+			.start_date,
+			.end_date{
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+			}
+		}
+		
+		.categorie_name{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-bottom: -20px;
+			margin-top: 10px;
+			
+		}
+		.price-div{
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			align-items: center;
+			margin-top: 40px;
+			margin-bottom: 20px;
+			
+			input{
+				width: 10%;
+			}
+		}
+		.retrait_div_control{
+			display: flex;
+			justify-content: center;
+			fieldset{
+				width: 30%;
+				padding: 20px;
+				margin-top: 20px;
+
+				.retrait_text{
+					text-align: center;
+					font-weight: bold;
+				}
+				
+				.div-control{
+					input{
+						width: 100%;
+					}
+				}
+			}
+		}
+		.description-control{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 20px;
+			
+			textarea{
+				width: 30%;
+				border: 1px solid rgba(000, 000, 000, 0.5);
+				padding: 10px;
+				outline: none;
+			}
+		}
+		
+		.enregisrer_div_control{
+			display: flex;
+			justify-content: center;
+			a,
+			input{
+				margin-top: 10px;
+				padding: 10px 119px 10px 119px;
+				border: 1px solid black;
+			}
+		
+			a:hover{
+				background-color: black;
+				color: white;
+			}
+			input:hover{
+				background-color: limegreen;
+				cursor: pointer;
 			}
 		}
 	}

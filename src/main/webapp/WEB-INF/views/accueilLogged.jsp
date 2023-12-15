@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.time.format.DateTimeFormatter"%>
+<%@ page import="java.io.File"%>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,16 +10,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/normalize.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.scss">
 <script src="https://cdn.tailwindcss.com"></script>
-<title>Accueil</title>
+<title>AccueilLogged</title>
 </head>
 <body>
-	<p>Connected</p>
 	<nav>
 		<a href="<%=request.getContextPath()%>" class="logo">ENI-Encheres</a>
 		<div>
-			<a href="<%=request.getContextPath()%>">Mes Enchères</a>
 			<a href="<%=request.getContextPath()%>/AjoutArticle">Vendre un article</a>
 			<a href="<%=request.getContextPath()%>/Profile">Mon Profil</a>
 			<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
@@ -42,78 +41,43 @@
 						</c:forEach>
 					</select>
 				</div>
-				<div>
-					<div>
-						<div>
-							<input type="radio" name="achat" id="achat" value="true" checked />
-							<label for="achat">Mes achats</label>
-						</div>
-						<div>
-							<input type="checkbox" name="open" id="open" value="true" checked />
-							<label for="open" >mes enchères ouvertes</label>
-							<br />
-							<input type="checkbox" name="cours" id="cours" />
-							<label for="cours" >mes enchères en cours</label>
-							<br />
-							<input type="checkbox" name="remporte" id="remporte"/>
-							<label for="remporte" >mes enchères remportées</label>
-							<br />
-						</div>
-					</div>
-					<div>
-						<div>
-							<input type="radio" name="vente" id="vente" />
-							<label for="vente">Mes ventes</label>
-						</div>
-						<div>
-							<input type="checkbox" name="cours" id="cours" />
-							<label for="cours" >mes ventes en cours</label>
-							<br />
-							<input type="checkbox" name="debut" id="debut"/>
-							<label for="debut" >mes ventes non débutées</label>
-							<br />
-							<input type="checkbox" name="temine" id="temine"/>
-							<label for="temine" >mes ventes terminées</label>
-							<br />
-						</div>
-					</div>
-				</div>
-			</div>
 			<div>
 				<input type="submit" value="Rechercher" />
 			</div>
 		</form>
-		<div class="container">
+		<div class="container off_login_articles">
 			
 			<c:forEach items="${articles}" var="article">
-				<div>
-					<img src="https://cdn.cultura.com/cdn-cgi/image/width=450/media/pim/13_246980_17_110_FR.jpg" alt="Photo introuvable" />
-				</div>
-				<div>
-					<a href="<%=request.getContextPath()%>/Enchere?id=${article.getNo_article()}"><strong><c:out value="${article.getNom_article()}"/></strong></a>
-					<p>Prix : 
-					<c:choose>
-						<c:when test="${article.getPrix_vente() != '0'}">
-							<c:out value="${article.getPrix_vente()}"/>
-						</c:when>
-						<c:otherwise>
-							<c:out value="${article.getPrix_initial()}"/> (Prix initial)
-						</c:otherwise>
-					</c:choose>
-					 Points</p>
-					<p>Fin de l'enchère : <c:out value="${article.getDate_fin_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy\"))}"/></p>
-					<p>Vendeur : 
-					<c:forEach items="${users}" var="user">
-						<c:if test="${article.getNo_utilisateur() == user.getNo_utilisateur()}">
-							<a href=""><c:out value="${user.getPseudo()}"/></a>
-						</c:if>
-					</c:forEach>
-					</p>
+				<div class="card">
+					<div>
+						<img src="${article.image}" alt="photoUploader" />
+					</div>
+					<div class="control_card_info">
+						<a href="<%=request.getContextPath()%>/Enchere?id=${article.getNo_article()}"><strong><c:out value="${article.getNom_article()}"/></strong></a>
+						<p>Prix : 
+						<c:choose>
+							<c:when test="${article.getPrix_vente() != '0'}">
+								<c:out value="${article.getPrix_vente()}"/>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${article.getPrix_initial()}"/> (Prix initial)
+							</c:otherwise>
+						</c:choose>
+						 Points</p>
+						<p>Fin de l'enchère : <c:out value="${article.getDate_fin_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy\"))}"/></p>
+						<p>Vendeur : 
+						<c:forEach items="${users}" var="user">
+							<c:if test="${article.getNo_utilisateur() == user.getNo_utilisateur()}">
+								<a href=""><c:out value="${user.getPseudo()}"/></a>
+							</c:if>
+						</c:forEach>
+						</p>
+					</div>
 				</div>
 			</c:forEach>
 		
 			<!-- Contenu de toute la recherche -->
-			<c:if test="${articles.size() == '0'}"><p>Rien</p></c:if>
+			<c:if test="${articles.size() == '0'}"><p class="article_not_found">Rien</p></c:if>
 		</div>
 	</main>
 </body>

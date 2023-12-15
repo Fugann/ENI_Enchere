@@ -8,7 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>S'enregistrer</title>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/normalize.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.scss">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.scss">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/styles/style.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="register">
@@ -19,19 +20,18 @@
 		<div>
 			<c:choose>
 				<c:when test="${user != null}">
-					<a href="<%=request.getContextPath()%>">Enchères</a>
 					<a href="<%=request.getContextPath()%>/AjoutArticle">Vendre un article</a>
 					<a href="<%=request.getContextPath()%>/Profile">Mon Profil</a>
 					<a href="<%=request.getContextPath()%>/Logout">Déconnexion</a>
 				</c:when>
 				<c:otherwise>
-					<a href="<%=request.getContextPath()%>/Login">Login/Register</a>
+					<a href="<%=request.getContextPath()%>/Login">Login/register</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</nav>
 
-	<div class="register-error-alerts">
+	<div class="error-alerts">
 		<c:if test="${utilisateur != null }">
 				<p class="text-success">Votre profil a été créé avec succès</p>
 		</c:if>
@@ -47,7 +47,7 @@
 	</div>
 	
 		<div class="my_profil_text">
-			<h1>Mon Profil</h1>
+			<h1>créer un compte</h1>
 		</div>
 	
 	<form method="post" action="" class="register_form">

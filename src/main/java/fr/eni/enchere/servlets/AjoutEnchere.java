@@ -5,7 +5,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 import fr.eni.enchere.bll.ArticleManager;
 import fr.eni.enchere.bll.CategorieManager;
@@ -35,7 +39,7 @@ public class AjoutEnchere extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/enchere.jsp");
 		
 		if(!Utilisateur.doFilter(request, response)) {
-			rd = request.getRequestDispatcher("/WEB-INF/views/Accueil.jsp");
+			response.sendRedirect(request.getContextPath()+ "/Login");
 		} else {
 			
 			int id = Integer.parseInt(request.getParameter("id"));
@@ -49,12 +53,17 @@ public class AjoutEnchere extends HttpServlet {
 			
 			enchere = em.getEnchereById(article.getNo_article());
 			
+			String duration = null;
+			if(article.getDate_debut_encheres() != null && article.getDate_fin_encheres() != null) {
+				LocalDateTime now = LocalDateTime.now();
+				duration = formatDuration(Duration.between(now, article.getDate_fin_encheres()));
+			}
+			
 			request.setAttribute("article", article);
 			request.setAttribute("user", user);
 			request.setAttribute("categorie", categorie);
 			request.setAttribute("enchere", enchere);
-			
-			System.out.println(article.getDate_debut_encheres());
+			request.setAttribute("duration", duration);
 			
 			rd.forward(request, response);
 		}
@@ -66,8 +75,11 @@ public class AjoutEnchere extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/enchere.jsp");
+		HttpSession session = request.getSession();
+		
 		if(!Utilisateur.doFilter(request, response)) {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+ "/Login");
 		} else {
 			
 			int id = Integer.parseInt(request.getParameter("id"));
@@ -84,15 +96,19 @@ public class AjoutEnchere extends HttpServlet {
 			
 			String montant = request.getParameter("montant");
 			
+			Utilisateur buyer = (Utilisateur) session.getAttribute("user");
+			
 			try {
 				
 				Enchere montant_enchere = em.getEnchereById(article.getNo_article());
 				if(montant_enchere == null) {
-					montant_enchere = new Enchere(user.getNo_utilisateur(), article.getNo_article(), null, 0);
+					montant_enchere = new Enchere(buyer.getNo_utilisateur(), article.getNo_article(), null, 0);
 				}
 				System.out.println("enchere = " + montant_enchere.getMontant_enchere());
 				
-				Enchere enchere = em.insert(user.getNo_utilisateur(), article.getNo_article(), montant, article.getPrix_initial(), montant_enchere.getMontant_enchere());
+				Enchere enchere = em.getEnchereById(article.getNo_article());
+				request.setAttribute("enchere", enchere);
+				enchere = em.insert(buyer.getNo_utilisateur(), article.getNo_article(), montant, article.getPrix_initial(), montant_enchere.getMontant_enchere());
 				System.out.println(enchere.getDate_enchere());
 				if(enchere.getDate_enchere() != null) {
 					request.setAttribute("succes", "true");
@@ -100,12 +116,22 @@ public class AjoutEnchere extends HttpServlet {
 				
 			} catch (BusinessException e) {
 				request.setAttribute("codesError", e.getListeCodesErreur());
+				rd.forward(request, response);
 			}
 			
-			Enchere enchere = em.getEnchereById(article.getNo_article());
-			
-			request.setAttribute("enchere", enchere);
-			response.sendRedirect(request.getContextPath() + "/Enchere?id=" + article.getNo_article());
+			if(request.getAttribute("codesError") == null) {
+				response.sendRedirect(request.getContextPath() + "/Enchere?id=" + article.getNo_article());
+			}
 		}
+	}
+	public static String formatDuration(Duration duration) {
+	    long seconds = duration.getSeconds();
+	    long absSeconds = Math.abs(seconds);
+	    String positive = String.format(
+	        "%d:%02d:%02d",
+	        absSeconds / 3600,
+	        (absSeconds % 3600) / 60,
+	        absSeconds % 60);
+	    return seconds < 0 ? "-" + positive : positive;
 	}
 }
