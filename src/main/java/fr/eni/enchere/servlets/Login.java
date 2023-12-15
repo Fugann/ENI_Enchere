@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
 		try {
 			Utilisateur user = userManager.getUserDetails(identifiant, password);
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(300);
+			session.setMaxInactiveInterval(3600);
 
 			// add user object dans la session
 			session.setAttribute("user", user);
