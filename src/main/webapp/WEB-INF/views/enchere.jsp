@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/styles/normalize.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/styles/style.css">
+	href="<%=request.getContextPath()%>/styles/style.scss">
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -40,72 +40,71 @@
 			</c:forEach>
 		</c:if>
 
-		<h1>Détail vente</h1>
-		<img
-			src="https://cdn.cultura.com/cdn-cgi/image/width=450/media/pim/13_246980_17_110_FR.jpg"
-			alt="img" />
-		<div>
-			<p>
-				<c:out value="${article.getNom_article()}" />
-			</p>
-			<p>
-				Description :
-				<c:out value="${article.getDescription()}" />
-			</p>
-			<p>
-				Catégorie :
-				<c:out value="${categorie.getLibelle()}" />
-			</p>
-			<c:choose>
-				<c:when
-					test="${enchere.getMontant_enchere() != '0' && enchere != null}">
-					<p>
-						Prix initial :
-						<c:out value="${article.getPrix_initial()}" />
-					</p>
-					<p>
-						Meilleure offre :
-						<c:out value="${enchere.getMontant_enchere()}" />
-					</p>
-				</c:when>
-				<c:otherwise>
-					<p>
-						Prix initial :
-						<c:out value="${article.getPrix_initial()}" />
-					</p>
-				</c:otherwise>
-			</c:choose>
-			<p>
-				Début de l'enchère le :
-				<c:out
-					value="${article.getDate_debut_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy HH:mm\")) }" />
-			</p>
-			<p>
-				Fin de l'enchère le :
-				<c:out
-					value="${article.getDate_fin_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy HH:mm\")) }" />
-			</p>
-			<p>
-				Il reste <strong id="timer"><c:out value="${duration }" /></strong>
-				avant la fin de l'enchère
-			</p>
-			<p>
-				Retrait :
-				<c:out value="${user.getRue()}" />
-				,
-				<c:out value="${user.getCode_postal()}" />
-				<c:out value="${user.getVille()}" />
-			</p>
-			<p>
-				Vendeur :
-				<c:out value="${user.getPseudo()}" />
-			</p>
-
-			<form method="post" action="">
-				<label for="montant">Faire une enchère : </label> <input
-					type="number" name="montant" id="montant" /> <input type="submit"
-					value="Enchérir" />
-			</form>
+		<h1><b>Détail vente</b></h1>
+		<div class="article_control_data">
+			<div class="info_article_fk">
+				<h1>
+					<b><c:out value="${article.getNom_article()}" /></b>
+				</h1>
+				<p>
+					<b>Description :</b>
+					<c:out value="${article.getDescription()}" />
+				</p>
+				<p>
+					<b>Catégorie :</b>
+					<c:out value="${categorie.getLibelle()}" />
+				</p>
+				<c:choose>
+					<c:when
+						test="${enchere.getMontant_enchere() != '0' && enchere != null}">
+						<p>
+							<b>Prix initial :</b>
+							<c:out value="${article.getPrix_initial()}" />
+						</p>
+						<p>
+							<b>Meilleure offre :</b>
+							<c:out value="${enchere.getMontant_enchere()}" />
+						</p>
+					</c:when>
+					<c:otherwise>
+						<p>
+							<b>Prix initial :</b>
+							<c:out value="${article.getPrix_initial()}" />
+						</p>
+					</c:otherwise>
+				</c:choose>
+				<p>
+					<b>Début de l'enchère le :</b>
+					<c:out
+						value="${article.getDate_debut_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy HH:mm\")) }" />
+				</p>
+				<p>
+					<b>Fin de l'enchère le :</b>
+					<c:out
+						value="${article.getDate_fin_encheres().format(DateTimeFormatter.ofPattern(\"dd MMMM yyyy HH:mm\")) }" />
+				</p>
+				<p>
+					<b>Il reste </b><strong id="timer"><c:out value="${duration }" /></strong>
+					avant la fin de l'enchère
+				</p>
+				<p>
+					<b>Retrait :</b>
+					<c:out value="${user.getRue()}" />
+					,
+					<c:out value="${user.getCode_postal()}" />
+					<c:out value="${user.getVille()}" />
+				</p>
+				<p>
+					<b>Vendeur :</b>
+					<c:out value="${user.getPseudo()}" />
+				</p>
+	
+				<form method="post" action="">
+					<label for="montant">Faire une enchère : </label> 
+					<input type="number" name="montant" id="montant" /> <input class="fucking_button" type="submit" value="Enchérir" />
+				</form>
+			</div>
+				<img src="https://icancycling.com/cdn/shop/articles/1602491866_1602491862_1601025617_1601025614_SN04_fatbike_b8d050ba-fad4-44b6-89a8-50d66f56930d.jpg?v=1640662944" alt="Article Image">
 		</div>
 
 	</main>

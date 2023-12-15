@@ -563,3 +563,50 @@ html,body{
 		}
 	}
 }
+
+.enchere{
+	h1{
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		text-transform: uppercase;
+	}
+	.article_control_data{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		padding: 100px;
+		
+		.info_article_fk{
+			width: 100%;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			
+			p{
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+		}
+		
+		form{
+			.fucking_button{
+				border: 1px solid black;
+				padding: 10px;
+				box-shadow: 3px 3px 3px;
+				
+				&:hover{
+					cursor: pointer;
+					background-color: lightgray;
+				}
+			}
+		}
+		
+	
+			img{
+				width: 40%;
+				margin-right: 80px;
+			}
+	}
+}
